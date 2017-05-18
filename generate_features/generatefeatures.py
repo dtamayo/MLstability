@@ -116,22 +116,22 @@ def system(row):
     par = np.polyfit(timesavg, np.log10(e2diff), 1, full=True)
     features['Lyapunov_time'] = 1/par[0][0]
     
-    return pd.Series(features, index=list(features.keys()))
+    return pd.Series(features, index=list(features.keys()), name=row.name)
 
 from rebound import InterruptiblePool
 def dorows(params):
     start, end, df = params
-    df = df.iloc[start:end]
-    return pd.concat([df, df.apply(system, axis=1)], axis=1)
+    first = pd.concat([df.iloc[start], system(df.iloc[start])])
+    df_full = pd.DataFrame([first])
+    for i in range(start+1,end):
+        df_full = df_full.append(pd.concat([df.iloc[i], system(df.iloc[i])]))
+        df_full.to_csv('../csvs/tmp/short_integration_features'+str(start)+'.csv', encoding='ascii')
 
-simIDmax = 13
-Nnodes = 4
-Npernode = simIDmax // Nnodes
-params = [[i*Npernode, (i+1)*Npernode, df] for i in range(Nnodes)]
+simIDmax = 15000
+Ncores = 10
+Npernode = simIDmax // Ncores
+params = [[i*Npernode, (i+1)*Npernode, df] for i in range(Ncores)]
 params[-1][1] = simIDmax
 
-df = pd.read_csv(path+'random/random.csv', index_col=0)
-pool = InterruptiblePool(Nnodes)
-res = pool.map(dorows, params)
-df = pd.concat(res)
-df.to_csv('../csvs/short_integration_features.csv', encoding='ascii')
+pool = InterruptiblePool(Ncores)
+pool.map(dorows, params)
