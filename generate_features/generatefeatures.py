@@ -124,14 +124,24 @@ def dorows(params):
     first = pd.concat([df.iloc[start], system(df.iloc[start])])
     df_full = pd.DataFrame([first])
     for i in range(start+1,end):
+        if i == 11003:
+            continue
         df_full = df_full.append(pd.concat([df.iloc[i], system(df.iloc[i])]))
         df_full.to_csv('../csvs/tmp/short_integration_features'+str(start)+'.csv', encoding='ascii')
 
 simIDmax = 15000
 Ncores = 10
-Npernode = simIDmax // Ncores
-params = [[i*Npernode, (i+1)*Npernode, df] for i in range(Ncores)]
+Npercore = simIDmax // Ncores
+params = [[i*Npercore, (i+1)*Npercore, df] for i in range(Ncores)]
 params[-1][1] = simIDmax
 
 pool = InterruptiblePool(Ncores)
 pool.map(dorows, params)
+
+starts = [i*Npercore for i in range(Ncores)]
+dfs = []
+for start in starts:
+    dfs.append(pd.read_csv('../csvs/tmp/short_integration_features'+str(start)+'.csv', index_col=0))
+df = pd.concat(dfs)
+df.to_csv('../csvs/short_integration_features.csv', encoding='ascii')
+
