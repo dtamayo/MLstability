@@ -1,0 +1,11 @@
+PDP_Working
+Generate dependency plot for any model between any two features
+
+PDP_MC
+Generate dependency plot any model between any two features such that you are prediciting features that do not appear in the original dataset
+
+XGB_tuning 
+Works with 10% of the original dataset. 5 fold crossvalidation with that small set to determine ideal parameters. Retry with original parameters with full dataset, train on 40%, test on 60%, gives an ROC score of 96.5%, and a AUC of 94%. To get a 90% precision score, we have a recall of ~80% with a probability threshold of ~54%
+
+TrainOnOrbitalElements
+Dan's original notebook-- did not modify.
