@@ -1,11 +1,30 @@
+Experimenting_with_Hyperopt
+Donloaded a smart sampler package to do smart fits to quickly find the optimal parameter space. With this, we were able to get a crossvalidated score of ~96% AUC. This notebook also has some graphs showing the changing parameter space over time. 
+
+
+PDP_2DProjection
+This works by first using the random sampler to generate a set number of testing samples. The model trains on the entire initial orbital features dataset. Then it generates a large set of probability predictions, which is then binned and averaged out to create a well defined grid, and then plotted. This method is significantly faster than trying to implement a inverse distance weighting algorithm for the interpolation to create the well defined grid. 
+
+
 PDP_Working
-Generate dependency plot for any model between any two features
+Generate dependency plot for any model between any two features. This just trains and tests the original dataset. The two features are used to create a well defined grid, and then varies the other values based on what is found in the dataset.
+
 
 PDP_MC
-Generate dependency plot any model between any two features such that you are prediciting features that do not appear in the original dataset
+Generate dependency plot any model between any two features such that you are prediciting features that do not appear in the original dataset. This holds two parameters fixed, makes a well defined grid between them, and then uses randomly generated values for the other parameters that may not be in the original dataset to test the dependencies.
 
-XGB_tuning 
+SaveAndLoadXGB
+This is just an example showing how to train a model, and then save and load it using python's pickle package.
+
+XGB_Tuning 
 Works with 10% of the original dataset. 5 fold crossvalidation with that small set to determine ideal parameters. Retry with original parameters with full dataset, train on 40%, test on 60%, gives an ROC score of 96.5%, and a AUC of 94%. To get a 90% precision score, we have a recall of ~80% with a probability threshold of ~54%
 
-TrainOnOrbitalElements
+XGBTuningOnNewDataset
+This is now training with the short integration features. Its grid searches is able to get similar scores to the the optimal model found by hyperopt, though this grid search is significantly slower to run. This again had a ~96% AUC score, 
+
+
+
 Dan's original notebook-- did not modify.
+exploredataset
+TrainOnOrbitalElements
+XGBoostNewFeatures2PR
