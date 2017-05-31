@@ -8,6 +8,9 @@ from hyperopt import hp, fmin, tpe, STATUS_OK, Trials
 import pickle
 import sys
 from functools import partial
+import xgboost as xgb
+from xgboost import DMatrix
+
 
 ##################################################
 #Need to edit hyperopt hp.quinform method in docs
@@ -43,11 +46,14 @@ def objective(space, trainX, trainY):
                             colsample_bytree =space['colsample_bytree'],
                             learning_rate = space['learning_rate'])
 
-    score = cross_val_score(clf, trainX,trainY, cv = 5, scoring="average_precision")
-    avg_score = score.mean()
-    print "SCORE:", score.mean()
+    xgtrain = DMatrix(trainX.values, label = trainY.values)
+    cv_result = xgb.cv(clf.get_params(), xgtrain, num_boost_round = 10, nfold = 5, metrics ='auc', early_stopping_rounds = 5) 
 
-    return{'loss':1-avg_score, 'status': STATUS_OK, "cv_score":avg_score  }
+    score = cv_result.iloc[-1]["test-auc-mean"]
+    score_std = cv_result.iloc[-1]["test-auc-std"]
+    print "SCORE:", score
+
+    return{'loss':1-score, 'status': STATUS_OK, "cv_score":score, "cv_avg":score_std  }
 
 
 
