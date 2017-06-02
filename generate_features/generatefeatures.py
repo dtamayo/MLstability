@@ -18,9 +18,8 @@ Navg = 10
 def collision(reb_sim, col):
     reb_sim.contents._status = 5 # causes simulation to stop running and have flag for whether sim stopped due to collision
     return 0
-    
-def system(row):
-    sim = rebound.Simulation.from_file(icpath+row['runstring'])
+
+def generate_features(sim):
     ps = sim.particles
     
     sim2 = rebound.Simulation()
@@ -61,12 +60,6 @@ def system(row):
         sim2.integrate(t)
     
     features = OrderedDict()
-    
-    simf = rebound.Simulation.from_file(fcpath+row['runstring'])
-    features['Stable'] = 1 if np.isclose(simf.t, 1.e9) else 0
-    features['instability_time'] = simf.t
-    features['Rel_Eerr'] = abs((simf.calculate_energy()-E0)/E0)
-        
     features['t_final_short'] = sim.t/P0
     Ef = sim.calculate_energy()
     features['Rel_Eerr_short'] = abs((Ef-E0)/E0)
@@ -116,7 +109,18 @@ def system(row):
     par = np.polyfit(timesavg, np.log10(e2diff), 1, full=True)
     features['Lyapunov_time'] = 1/par[0][0]
     
-    return pd.Series(features, index=list(features.keys()), name=row.name)
+    return pd.Series(features, index=list(features.keys()))
+
+def system(row):
+    sim = rebound.Simulation.from_file(icpath+row['runstring'])
+    E0 = sim.calculate_energy()
+    features = generate_features(sim)
+    simf = rebound.Simulation.from_file(fcpath+row['runstring'])
+    features['Stable'] = 1 if np.isclose(simf.t, 1.e9) else 0
+    features['instability_time'] = simf.t
+    features['Rel_Eerr'] = abs((simf.calculate_energy()-E0)/E0)
+    features.name = row.name
+    return features    
 
 from rebound import InterruptiblePool
 def dorows(params):
