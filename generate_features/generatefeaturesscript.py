@@ -3,6 +3,7 @@ import numpy as np
 import os
 import sys
 import rebound
+import time
 from collections import OrderedDict
 
 path = '/scratch/dtamayo/'
@@ -21,6 +22,7 @@ def collision(reb_sim, col):
     return 0
 
 def generate_features(sim):
+    t0 = time.time()
     ps = sim.particles
     
     sim2 = rebound.Simulation()
@@ -109,7 +111,8 @@ def generate_features(sim):
     e2diff = np.abs(e2avg - e2shadowavg)
     par = np.polyfit(timesavg, np.log10(e2diff), 1, full=True)
     features['Lyapunov_time'] = 1/par[0][0]
-    
+    t = time.time()
+    features['wall_time'] = t-t0
     return pd.Series(features, index=list(features.keys()))
 
 def system(row):
