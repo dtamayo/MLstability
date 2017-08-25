@@ -1,0 +1,17 @@
+(dp0
+S'x_min_child'
+p1
+F2.0
+sS'x_tree_colsample'
+p2
+F0.9336564189559078
+sS'x_max_depth'
+p3
+F9.0
+sS'x_subsample'
+p4
+F0.9276742929596428
+sS'x_learning_rate'
+p5
+F0.08425790221190567
+s.
