@@ -1,0 +1,3188 @@
+booster[0]:
+0:[std_beta12<0.152237] yes=1,no=2,missing=1
+	1:[std_beta23<0.0269198] yes=3,no=4,missing=3
+		3:[max_ecross1<0.375108] yes=7,no=8,missing=7
+			7:[min_ecross2<0.553545] yes=15,no=16,missing=15
+				15:[std_beta12<0.0197297] yes=31,no=32,missing=31
+					31:[avg_ecross2<1.27579] yes=49,no=50,missing=49
+						49:[std_beta23<0.0199795] yes=77,no=78,missing=77
+							77:[avg_ecross2<0.472345] yes=111,no=112,missing=111
+								111:[max_ecross1<0.109393] yes=141,no=142,missing=141
+									141:[avg_ecross3<1.15988] yes=171,no=172,missing=171
+										171:leaf=0.392735
+										172:leaf=0.26402
+									142:[norm_std_window10_a2<2.87538e-05] yes=173,no=174,missing=173
+										173:leaf=0.390472
+										174:[max_ecross3<0.422892] yes=217,no=218,missing=217
+											217:[avg_ecross1<0.475498] yes=257,no=258,missing=257
+												257:leaf=0.375113
+												258:leaf=0.268269
+											218:[avg_iH2<0.733143] yes=259,no=260,missing=259
+												259:leaf=0.338688
+												260:leaf=0.0822807
+								112:[max_ecross1<0.0509703] yes=143,no=144,missing=143
+									143:[norm_a2_slope<-5.76624e-11] yes=175,no=176,missing=175
+										175:leaf=0.250621
+										176:leaf=0.379548
+									144:[std_beta23<0.010912] yes=177,no=178,missing=177
+										177:[norm_std_window10_a2<2.3448e-05] yes=219,no=220,missing=219
+											219:leaf=0.378413
+											220:[norm_max_window10_a1<0.000111966] yes=261,no=262,missing=261
+												261:leaf=0.316962
+												262:leaf=0.0720043
+										178:leaf=0.0720043
+							78:[avg_ecross2<0.649205] yes=113,no=114,missing=113
+								113:[std_ecross2<0.0707805] yes=145,no=146,missing=145
+									145:[min_ecross1<0.155437] yes=179,no=180,missing=179
+										179:[avg_ecross3<0.662709] yes=221,no=222,missing=221
+											221:[min_ecross2<0.309655] yes=263,no=264,missing=263
+												263:leaf=0.378321
+												264:leaf=0.273086
+											222:leaf=0.225392
+										180:leaf=0.203065
+									146:[max_ecross3<0.213699] yes=181,no=182,missing=181
+										181:[norm_max_a2<0.000220137] yes=223,no=224,missing=223
+											223:leaf=0.116014
+											224:[norm_a1_slope<-5.98678e-13] yes=265,no=266,missing=265
+												265:leaf=0.213502
+												266:leaf=0.357629
+										182:leaf=0.0266125
+								114:leaf=0.0527237
+						50:leaf=0.0930193
+					32:[avg_ecross1<0.585533] yes=51,no=52,missing=51
+						51:[min_ecross2<0.39141] yes=79,no=80,missing=79
+							79:[max_ecross3<0.455792] yes=115,no=116,missing=115
+								115:[std_ecross2<0.0588829] yes=147,no=148,missing=147
+									147:[norm_a2_slope<-1.75797e-10] yes=183,no=184,missing=183
+										183:leaf=0.141281
+										184:[min_beta12<4.33733] yes=225,no=226,missing=225
+											225:[norm_max_a2<3.13849e-05] yes=267,no=268,missing=267
+												267:leaf=0.340324
+												268:leaf=0.141281
+											226:[norm_a2_slope<1.56502e-10] yes=269,no=270,missing=269
+												269:leaf=0.377157
+												270:leaf=0.250621
+									148:[norm_a1_slope<-7.6451e-11] yes=185,no=186,missing=185
+										185:leaf=-0.116173
+										186:[max_ecross3<0.118902] yes=227,no=228,missing=227
+											227:[min_beta12<16.9096] yes=271,no=272,missing=271
+												271:leaf=0.28706
+												272:leaf=0.375116
+											228:[min_beta23<16.6623] yes=273,no=274,missing=273
+												273:leaf=-0.0174309
+												274:leaf=0.280349
+								116:leaf=0.0436681
+							80:leaf=0.0185724
+						52:[std_beta23<0.00864602] yes=81,no=82,missing=81
+							81:[min_beta12<6.07216] yes=117,no=118,missing=117
+								117:leaf=0.0185724
+								118:[avg_iH1<6.84618] yes=149,no=150,missing=149
+									149:leaf=0.365795
+									150:[min_beta12<15.0871] yes=187,no=188,missing=187
+										187:leaf=0.0266125
+										188:leaf=0.360682
+							82:leaf=-0.36972
+				16:leaf=-0.14058
+			8:[std_ecross2<0.0876347] yes=17,no=18,missing=17
+				17:[std_beta23<0.0123284] yes=33,no=34,missing=33
+					33:[max_ecross1<0.842877] yes=53,no=54,missing=53
+						53:[avg_ecross1<0.613302] yes=83,no=84,missing=83
+							83:[avg_ecross2<0.568949] yes=119,no=120,missing=119
+								119:[max_beta12<7.47163] yes=151,no=152,missing=151
+									151:[norm_a3_slope<2.78577e-12] yes=189,no=190,missing=189
+										189:leaf=0.0621609
+										190:[min_ecross3<0.00226339] yes=229,no=230,missing=229
+											229:leaf=0.366438
+											230:leaf=0.237755
+									152:[max_ecross3<0.299093] yes=191,no=192,missing=191
+										191:[std_ecross2<0.0262941] yes=231,no=232,missing=231
+											231:[max_ecross1<0.581631] yes=275,no=276,missing=275
+												275:leaf=0.383559
+												276:leaf=0.34296
+											232:[std_beta23<0.00832886] yes=277,no=278,missing=277
+												277:leaf=0.325058
+												278:leaf=0.128343
+										192:[norm_max_window10_a1<9.56949e-05] yes=233,no=234,missing=233
+											233:leaf=0.326995
+											234:leaf=0.0720043
+								120:leaf=0.116014
+							84:leaf=0.0822807
+						54:[avg_iH2<0.292269] yes=85,no=86,missing=85
+							85:leaf=0.141281
+							86:leaf=-0.122703
+					34:[min_ecross3<0.252015] yes=55,no=56,missing=55
+						55:[norm_a2_slope<-5.38653e-11] yes=87,no=88,missing=87
+							87:leaf=-0.170113
+							88:[norm_max_window10_a1<0.000113902] yes=121,no=122,missing=121
+								121:leaf=-0.0476705
+								122:[norm_a2_slope<2.75124e-11] yes=153,no=154,missing=153
+									153:[norm_a2_slope<-6.51951e-12] yes=193,no=194,missing=193
+										193:[min_beta23<21.9292] yes=235,no=236,missing=235
+											235:leaf=-0.128935
+											236:leaf=0.313819
+										194:[max_ecross1<0.627707] yes=237,no=238,missing=237
+											237:[min_ecross2<0.0356028] yes=279,no=280,missing=279
+												279:leaf=0.375222
+												280:leaf=0.289509
+											238:[avg_iH1<0.37004] yes=281,no=282,missing=281
+												281:leaf=0.340324
+												282:leaf=0.0822807
+									154:leaf=-0.0107403
+						56:leaf=-0.200261
+				18:[min_beta23<21.4587] yes=35,no=36,missing=35
+					35:leaf=-0.377845
+					36:[avg_ecross1<0.245846] yes=57,no=58,missing=57
+						57:leaf=0.31474
+						58:leaf=-0.116173
+		4:[avg_ecross3<0.735332] yes=9,no=10,missing=9
+			9:[std_beta12<0.0373641] yes=19,no=20,missing=19
+				19:[min_ecross2<0.380314] yes=37,no=38,missing=37
+					37:[std_ecross2<0.0212474] yes=59,no=60,missing=59
+						59:[max_ecross1<0.144902] yes=89,no=90,missing=89
+							89:[norm_a2_slope<2.2288e-10] yes=123,no=124,missing=123
+								123:[norm_a2_slope<-7.3488e-11] yes=155,no=156,missing=155
+									155:[max_ecross1<0.0524725] yes=195,no=196,missing=195
+										195:[min_ecross2<0.044199] yes=239,no=240,missing=239
+											239:leaf=0.367294
+											240:leaf=0.0822807
+										196:leaf=0.0436681
+									156:[avg_ecross2<0.481899] yes=197,no=198,missing=197
+										197:[avg_ecross3<0.395037] yes=241,no=242,missing=241
+											241:leaf=0.375246
+											242:[max_ecross3<0.350056] yes=283,no=284,missing=283
+												283:leaf=0.36563
+												284:leaf=0.123982
+										198:leaf=0.225392
+								124:leaf=0.18643
+							90:[norm_max_a2<0.000463064] yes=125,no=126,missing=125
+								125:[max_ecross3<0.623492] yes=157,no=158,missing=157
+									157:[norm_std_a3<0.000409566] yes=199,no=200,missing=199
+										199:leaf=0.116014
+										200:[std_ecross2<0.0105658] yes=243,no=244,missing=243
+											243:leaf=0.370381
+											244:leaf=0.250621
+									158:[std_beta23<0.116201] yes=201,no=202,missing=201
+										201:leaf=-0.14058
+										202:[std_ecross3<0.00582288] yes=245,no=246,missing=245
+											245:leaf=0.360682
+											246:leaf=0.141281
+								126:[norm_a1_slope<2.82176e-11] yes=159,no=160,missing=159
+									159:leaf=-0.21532
+									160:leaf=0.237755
+						60:[max_ecross3<0.586035] yes=91,no=92,missing=91
+							91:[avg_ecross2<0.780637] yes=127,no=128,missing=127
+								127:[max_ecross3<0.17125] yes=161,no=162,missing=161
+									161:[avg_ecross1<0.390162] yes=203,no=204,missing=203
+										203:[norm_std_a3<1.33561e-05] yes=247,no=248,missing=247
+											247:leaf=0.116014
+											248:[min_beta23<14.9249] yes=285,no=286,missing=285
+												285:leaf=0.288472
+												286:leaf=0.37595
+										204:leaf=0.0930193
+									162:[std_beta12<0.0175644] yes=205,no=206,missing=205
+										205:[avg_ecross2<0.412932] yes=249,no=250,missing=249
+											249:[std_beta23<0.0547796] yes=287,no=288,missing=287
+												287:leaf=0.320138
+												288:leaf=0.128215
+											250:leaf=0.0997197
+										206:[min_beta12<24.6048] yes=251,no=252,missing=251
+											251:[min_ecross3<0.114959] yes=289,no=290,missing=289
+												289:leaf=-0.377046
+												290:leaf=0.126263
+											252:[norm_max_a2<0.00101502] yes=291,no=292,missing=291
+												291:leaf=0.141281
+												292:leaf=0.339023
+								128:leaf=-0.170113
+							92:[std_beta12<0.0194068] yes=129,no=130,missing=129
+								129:[norm_std_window10_a2<0.000161967] yes=163,no=164,missing=163
+									163:[norm_max_a2<0.000167089] yes=207,no=208,missing=207
+										207:leaf=0.141281
+										208:leaf=-0.360851
+									164:[avg_iH1<3.1446] yes=209,no=210,missing=209
+										209:leaf=0.104252
+										210:leaf=0.340324
+								130:leaf=-0.372306
+					38:[std_ecross2<0.00597682] yes=61,no=62,missing=61
+						61:[min_ecross3<0.0183671] yes=93,no=94,missing=93
+							93:[norm_max_a2<1.99548e-05] yes=131,no=132,missing=131
+								131:leaf=0.357754
+								132:leaf=0.191039
+							94:leaf=-0.0107403
+						62:[avg_ecross2<0.312018] yes=95,no=96,missing=95
+							95:leaf=-0.372952
+							96:leaf=0.0436681
+				20:[max_ecross3<0.352049] yes=39,no=40,missing=39
+					39:[avg_ecross2<0.471735] yes=63,no=64,missing=63
+						63:[std_ecross3<0.0628622] yes=97,no=98,missing=97
+							97:[norm_a2_slope<1.31787e-09] yes=133,no=134,missing=133
+								133:[norm_a2_slope<-3.425e-10] yes=165,no=166,missing=165
+									165:[max_ecross3<0.0764236] yes=211,no=212,missing=211
+										211:leaf=0.121748
+										212:leaf=-0.365942
+									166:[max_ecross1<0.312118] yes=213,no=214,missing=213
+										213:[avg_ecross1<0.31633] yes=253,no=254,missing=253
+											253:[min_beta12<4.73346] yes=293,no=294,missing=293
+												293:leaf=0.0448777
+												294:leaf=0.295324
+											254:leaf=-0.0107403
+										214:[norm_std_a1<0.00013575] yes=255,no=256,missing=255
+											255:leaf=-0.364816
+											256:[norm_a2_slope<9.12654e-11] yes=295,no=296,missing=295
+												295:leaf=0.238608
+												296:leaf=-0.146029
+								134:leaf=-0.35666
+							98:[avg_iH1<1.2451] yes=135,no=136,missing=135
+								135:leaf=-0.109323
+								136:leaf=-0.368423
+						64:[min_beta12<25.1852] yes=99,no=100,missing=99
+							99:leaf=-0.385275
+							100:leaf=0.250621
+					40:[norm_max_a2<7.29912e-05] yes=65,no=66,missing=65
+						65:[std_beta12<0.0676202] yes=101,no=102,missing=101
+							101:leaf=0.250621
+							102:leaf=0.375554
+						66:[min_beta12<26.3844] yes=103,no=104,missing=103
+							103:[norm_max_a1<0.00445749] yes=137,no=138,missing=137
+								137:[max_beta23<6.95955] yes=167,no=168,missing=167
+									167:[std_beta12<0.0454933] yes=215,no=216,missing=215
+										215:leaf=0.250621
+										216:leaf=-0.364816
+									168:leaf=-0.39191
+								138:leaf=0.123982
+							104:[norm_std_a1<4.1612e-05] yes=139,no=140,missing=139
+								139:[norm_max_a2<0.00130572] yes=169,no=170,missing=169
+									169:leaf=0.339023
+									170:leaf=0.0621609
+								140:leaf=-0.359289
+			10:[norm_max_a2<5.62409e-05] yes=21,no=22,missing=21
+				21:leaf=0.26402
+				22:[avg_iH2<7.18684] yes=41,no=42,missing=41
+					41:[min_ecross2<0.00204883] yes=67,no=68,missing=67
+						67:leaf=-0.109323
+						68:leaf=-0.391633
+					42:leaf=-0.109323
+	2:[std_beta23<0.0508533] yes=5,no=6,missing=5
+		5:[max_ecross1<0.816824] yes=11,no=12,missing=11
+			11:[std_ecross2<0.0269234] yes=23,no=24,missing=23
+				23:[max_ecross3<0.186527] yes=43,no=44,missing=43
+					43:[norm_a1_slope<7.50995e-10] yes=69,no=70,missing=69
+						69:[avg_ecross2<0.157539] yes=105,no=106,missing=105
+							105:leaf=0.363942
+							106:leaf=0.239363
+						70:leaf=0.0930193
+					44:leaf=0.0436681
+				24:leaf=-0.178491
+			12:[std_beta12<0.270986] yes=25,no=26,missing=25
+				25:leaf=-0.0420162
+				26:leaf=-0.385337
+		6:[norm_max_a2<0.00505942] yes=13,no=14,missing=13
+			13:[max_ecross1<0.202701] yes=27,no=28,missing=27
+				27:[norm_std_a3<0.00173155] yes=45,no=46,missing=45
+					45:[avg_ecross2<0.0586459] yes=71,no=72,missing=71
+						71:[norm_std_a1<5.03706e-05] yes=107,no=108,missing=107
+							107:leaf=0.357754
+							108:leaf=0.225392
+						72:[norm_max_window10_a3<0.000240676] yes=109,no=110,missing=109
+							109:leaf=-0.365942
+							110:leaf=0.194631
+					46:leaf=-0.370896
+				28:[min_ecross2<0.00694028] yes=47,no=48,missing=47
+					47:[min_beta23<22.0207] yes=73,no=74,missing=73
+						73:leaf=-0.377455
+						74:leaf=0.170695
+					48:[avg_iH2<21.4114] yes=75,no=76,missing=75
+						75:leaf=-0.392496
+						76:leaf=-0.109323
+			14:[avg_iH2<0.0944279] yes=29,no=30,missing=29
+				29:leaf=-0.109323
+				30:leaf=-0.394913
+booster[1]:
+0:[std_beta12<0.152237] yes=1,no=2,missing=1
+	1:[max_ecross2<0.514873] yes=3,no=4,missing=3
+		3:[std_beta12<0.0239702] yes=7,no=8,missing=7
+			7:[avg_ecross3<1.46353] yes=15,no=16,missing=15
+				15:[max_ecross3<0.311177] yes=31,no=32,missing=31
+					31:[avg_ecross2<0.601476] yes=51,no=52,missing=51
+						51:[max_ecross2<0.234708] yes=81,no=82,missing=81
+							81:[min_beta23<7.77732] yes=109,no=110,missing=109
+								109:[std_ecross2<0.0499841] yes=143,no=144,missing=143
+									143:[max_ecross2<0.113717] yes=181,no=182,missing=181
+										181:leaf=0.323881
+										182:[avg_beta12<19.0029] yes=213,no=214,missing=213
+											213:leaf=0.162215
+											214:leaf=0.30188
+									144:[avg_beta12<12.998] yes=183,no=184,missing=183
+										183:leaf=0.0338133
+										184:[norm_max_a2<0.000202965] yes=215,no=216,missing=215
+											215:leaf=0.0164068
+											216:[norm_a3_slope<-4.24533e-11] yes=255,no=256,missing=255
+												255:leaf=0.147606
+												256:leaf=0.299845
+								110:[min_ecross1<0.521525] yes=145,no=146,missing=145
+									145:[max_ecross2<0.0807188] yes=185,no=186,missing=185
+										185:[avg_ecross1<1.21629] yes=217,no=218,missing=217
+											217:leaf=0.330176
+											218:leaf=0.217021
+										186:[std_ecross3<0.158627] yes=219,no=220,missing=219
+											219:[avg_ecross1<0.633189] yes=257,no=258,missing=257
+												257:leaf=0.322883
+												258:leaf=0.218224
+											220:leaf=0.181199
+									146:leaf=0.209864
+							82:[std_ecross3<0.0674332] yes=111,no=112,missing=111
+								111:[min_ecross1<0.330809] yes=147,no=148,missing=147
+									147:[norm_max_a3<0.000756191] yes=187,no=188,missing=187
+										187:[avg_ecross2<0.527876] yes=221,no=222,missing=221
+											221:[avg_ecross3<0.380741] yes=259,no=260,missing=259
+												259:leaf=0.312921
+												260:leaf=0.215672
+											222:leaf=0.0906877
+										188:leaf=0.101295
+									148:leaf=0.109997
+								112:[norm_max_window10_a2<0.000232687] yes=149,no=150,missing=149
+									149:leaf=0.0367996
+									150:leaf=0.0868109
+						52:[norm_max_a3<0.000329883] yes=83,no=84,missing=83
+							83:[max_ecross2<0.244126] yes=113,no=114,missing=113
+								113:[min_beta23<8.22768] yes=151,no=152,missing=151
+									151:leaf=0.0789968
+									152:[avg_beta12<6.69468] yes=189,no=190,missing=189
+										189:leaf=0.130886
+										190:[min_ecross1<0.218935] yes=223,no=224,missing=223
+											223:[avg_iH2<2.66976] yes=261,no=262,missing=261
+												261:leaf=0.181396
+												262:leaf=0.312287
+											224:leaf=0.169978
+								114:[norm_max_window10_a2<5.67457e-05] yes=153,no=154,missing=153
+									153:leaf=0.276727
+									154:leaf=-0.17768
+							84:[min_ecross3<0.00424474] yes=115,no=116,missing=115
+								115:leaf=0.253838
+								116:leaf=-0.189789
+					32:[avg_ecross2<0.588318] yes=53,no=54,missing=53
+						53:[max_ecross2<0.397214] yes=85,no=86,missing=85
+							85:[avg_ecross3<0.440577] yes=117,no=118,missing=117
+								117:[std_beta12<0.00933039] yes=155,no=156,missing=155
+									155:[max_ecross2<0.245226] yes=191,no=192,missing=191
+										191:[std_ecross2<0.089562] yes=225,no=226,missing=225
+											225:[min_ecross1<0.127229] yes=263,no=264,missing=263
+												263:leaf=0.322525
+												264:leaf=0.264774
+											226:leaf=0.15619
+										192:[max_ecross3<0.599098] yes=227,no=228,missing=227
+											227:[avg_ecross2<0.145858] yes=265,no=266,missing=265
+												265:leaf=0.282075
+												266:leaf=0.158484
+											228:leaf=0.0781174
+									156:[avg_ecross2<0.134834] yes=193,no=194,missing=193
+										193:[norm_a2_slope<-2.04319e-10] yes=229,no=230,missing=229
+											229:leaf=0.0972056
+											230:[min_ecross1<0.300814] yes=267,no=268,missing=267
+												267:leaf=0.283054
+												268:leaf=0.0746872
+										194:[min_ecross3<0.178341] yes=231,no=232,missing=231
+											231:leaf=-0.162137
+											232:[avg_ecross3<0.149788] yes=269,no=270,missing=269
+												269:leaf=0.0043732
+												270:leaf=0.25084
+								118:[max_ecross3<0.581523] yes=157,no=158,missing=157
+									157:[max_ecross2<0.128373] yes=195,no=196,missing=195
+										195:[avg_beta12<19.9213] yes=233,no=234,missing=233
+											233:leaf=0.171723
+											234:leaf=0.320234
+										196:[min_ecross1<0.00684289] yes=235,no=236,missing=235
+											235:leaf=0.113302
+											236:leaf=0.0406943
+									158:leaf=-0.342949
+							86:[std_ecross3<0.00913983] yes=119,no=120,missing=119
+								119:[min_beta23<20.1299] yes=159,no=160,missing=159
+									159:leaf=0.295984
+									160:leaf=0.00669627
+								120:[norm_max_a2<0.000164888] yes=161,no=162,missing=161
+									161:leaf=0.18328
+									162:leaf=-0.372721
+						54:leaf=-0.235632
+				16:leaf=-0.328154
+			8:[avg_ecross3<0.355293] yes=17,no=18,missing=17
+				17:[max_ecross3<0.520979] yes=33,no=34,missing=33
+					33:[max_ecross2<0.194831] yes=55,no=56,missing=55
+						55:[std_ecross2<0.0860255] yes=87,no=88,missing=87
+							87:[norm_a3_slope<8.6123e-11] yes=121,no=122,missing=121
+								121:[avg_beta12<4.2403] yes=163,no=164,missing=163
+									163:leaf=0.118874
+									164:[avg_ecross2<0.668879] yes=197,no=198,missing=197
+										197:[min_ecross1<0.769934] yes=237,no=238,missing=237
+											237:[avg_ecross1<0.388699] yes=271,no=272,missing=271
+												271:leaf=0.312593
+												272:leaf=0.266177
+											238:leaf=0.141693
+										198:leaf=0.10535
+								122:[std_ecross1<0.0152585] yes=165,no=166,missing=165
+									165:[avg_beta12<17.2759] yes=199,no=200,missing=199
+										199:leaf=0.17112
+										200:[min_beta23<8.15345] yes=239,no=240,missing=239
+											239:leaf=0.220593
+											240:leaf=0.362322
+									166:leaf=-0.033339
+							88:[norm_a3_slope<5.32089e-12] yes=123,no=124,missing=123
+								123:[avg_ecross2<0.55467] yes=167,no=168,missing=167
+									167:[avg_iH2<1.23471] yes=201,no=202,missing=201
+										201:leaf=0.0762404
+										202:[std_ecross2<0.131424] yes=241,no=242,missing=241
+											241:[std_ecross1<0.0259099] yes=273,no=274,missing=273
+												273:leaf=0.22627
+												274:leaf=0.331344
+											242:[norm_std_a1<8.78831e-05] yes=275,no=276,missing=275
+												275:leaf=0.279598
+												276:leaf=0.0705596
+									168:[min_ecross2<0.0543555] yes=203,no=204,missing=203
+										203:leaf=-0.170534
+										204:leaf=0.261012
+								124:leaf=-0.13879
+						56:[avg_ecross1<0.32413] yes=89,no=90,missing=89
+							89:[norm_a2_slope<-3.32517e-10] yes=125,no=126,missing=125
+								125:[max_ecross3<0.0394949] yes=169,no=170,missing=169
+									169:leaf=0.12459
+									170:leaf=-0.330464
+								126:[norm_a3_slope<-4.59372e-11] yes=171,no=172,missing=171
+									171:[norm_max_a1<0.000200314] yes=205,no=206,missing=205
+										205:[avg_ecross3<0.104892] yes=243,no=244,missing=243
+											243:[avg_beta12<24.1594] yes=277,no=278,missing=277
+												277:leaf=0.213238
+												278:leaf=0.317562
+											244:leaf=0.000314078
+										206:[norm_max_a1<0.00121971] yes=245,no=246,missing=245
+											245:leaf=-0.369537
+											246:leaf=0.0308722
+									172:[min_ecross1<0.416007] yes=207,no=208,missing=207
+										207:[avg_beta12<8.19567] yes=247,no=248,missing=247
+											247:[min_beta23<14.5923] yes=279,no=280,missing=279
+												279:leaf=-0.226449
+												280:leaf=0.204499
+											248:[max_beta23<7.12135] yes=281,no=282,missing=281
+												281:leaf=0.112733
+												282:leaf=0.272788
+										208:[avg_beta12<15.721] yes=249,no=250,missing=249
+											249:leaf=0.22294
+											250:leaf=-0.197383
+							90:[min_ecross2<0.1789] yes=127,no=128,missing=127
+								127:[norm_a3_slope<-5.12638e-12] yes=173,no=174,missing=173
+									173:leaf=-0.104382
+									174:leaf=-0.362313
+								128:[max_ecross2<0.308633] yes=175,no=176,missing=175
+									175:[norm_a1_slope<5.72817e-12] yes=209,no=210,missing=209
+										209:leaf=0.19863
+										210:leaf=0.32017
+									176:leaf=-0.153135
+					34:[std_ecross2<0.00260364] yes=57,no=58,missing=57
+						57:[std_beta12<0.0567493] yes=91,no=92,missing=91
+							91:[avg_iH1<0.25094] yes=129,no=130,missing=129
+								129:leaf=0.0955989
+								130:leaf=0.337405
+							92:leaf=0.0446091
+						58:[avg_beta12<27.9531] yes=93,no=94,missing=93
+							93:[norm_std_window10_a1<0.000775363] yes=131,no=132,missing=131
+								131:leaf=-0.347409
+								132:leaf=-0.0820144
+							94:leaf=0.143089
+				18:[max_ecross2<0.166725] yes=35,no=36,missing=35
+					35:[max_ecross3<0.161319] yes=59,no=60,missing=59
+						59:[norm_max_a3<0.000356778] yes=95,no=96,missing=95
+							95:[min_ecross2<0.0406215] yes=133,no=134,missing=133
+								133:[max_ecross2<0.0538992] yes=177,no=178,missing=177
+									177:leaf=0.242215
+									178:leaf=-0.375495
+								134:leaf=0.317633
+							96:[avg_ecross2<0.72951] yes=135,no=136,missing=135
+								135:leaf=0.234514
+								136:leaf=0.358623
+						60:[min_ecross2<0.00242762] yes=97,no=98,missing=97
+							97:leaf=0.116151
+							98:leaf=-0.328551
+					36:[norm_std_window10_a3<9.19727e-06] yes=61,no=62,missing=61
+						61:leaf=0.101203
+						62:[max_beta12<25.6388] yes=99,no=100,missing=99
+							99:leaf=-0.343398
+							100:leaf=-0.13744
+		4:[max_ecross2<0.624413] yes=9,no=10,missing=9
+			9:[norm_a2_slope<-1.47823e-10] yes=19,no=20,missing=19
+				19:leaf=-0.334593
+				20:[norm_a2_slope<9.38106e-11] yes=37,no=38,missing=37
+					37:[std_ecross1<0.0442218] yes=63,no=64,missing=63
+						63:[norm_a3_slope<7.65416e-11] yes=101,no=102,missing=101
+							101:[min_ecross2<0.00945658] yes=137,no=138,missing=137
+								137:leaf=-0.0139964
+								138:[avg_ecross2<0.396461] yes=179,no=180,missing=179
+									179:[max_beta23<11.6749] yes=211,no=212,missing=211
+										211:[max_ecross2<0.549727] yes=251,no=252,missing=251
+											251:leaf=0.228855
+											252:leaf=0.337718
+										212:[std_ecross1<0.001879] yes=253,no=254,missing=253
+											253:leaf=-0.162107
+											254:[std_ecross3<0.00543021] yes=283,no=284,missing=283
+												283:leaf=0.27421
+												284:leaf=0.00240532
+									180:leaf=0.0599024
+							102:leaf=-0.120457
+						64:leaf=-0.190534
+					38:[norm_max_a3<0.00150279] yes=65,no=66,missing=65
+						65:leaf=-0.357694
+						66:leaf=-0.0993267
+			10:[norm_max_a3<0.000146758] yes=21,no=22,missing=21
+				21:[norm_std_window10_a3<2.76861e-05] yes=39,no=40,missing=39
+					39:[std_ecross2<0.0146058] yes=67,no=68,missing=67
+						67:leaf=-0.00720539
+						68:leaf=-0.36251
+					40:[avg_ecross2<0.125443] yes=69,no=70,missing=69
+						69:[norm_max_window10_a3<8.16812e-05] yes=103,no=104,missing=103
+							103:[std_ecross2<0.0133626] yes=139,no=140,missing=139
+								139:leaf=0.324627
+								140:leaf=0.191437
+							104:leaf=0.0970401
+						70:leaf=-0.142667
+				22:[min_ecross3<0.0371768] yes=41,no=42,missing=41
+					41:[min_ecross3<0.030103] yes=71,no=72,missing=71
+						71:[max_beta12<6.99106] yes=105,no=106,missing=105
+							105:leaf=0.0918589
+							106:[norm_max_window10_a2<0.00228626] yes=141,no=142,missing=141
+								141:leaf=-0.357055
+								142:leaf=-0.110047
+						72:leaf=0.132927
+					42:leaf=-0.344138
+	2:[max_ecross2<0.18192] yes=5,no=6,missing=5
+		5:[avg_ecross1<0.188426] yes=11,no=12,missing=11
+			11:[norm_std_window10_a3<0.000400377] yes=23,no=24,missing=23
+				23:[norm_a2_slope<-1.08577e-10] yes=43,no=44,missing=43
+					43:leaf=0.0785775
+					44:[min_ecross1<0.658621] yes=73,no=74,missing=73
+						73:leaf=0.319543
+						74:leaf=0.153855
+				24:leaf=-0.135982
+			12:[min_ecross2<0.00032629] yes=25,no=26,missing=25
+				25:leaf=0.113807
+				26:leaf=-0.338163
+		6:[std_beta12<0.28122] yes=13,no=14,missing=13
+			13:[std_ecross2<0.0212639] yes=27,no=28,missing=27
+				27:[max_ecross3<0.180778] yes=45,no=46,missing=45
+					45:[max_ecross2<0.488204] yes=75,no=76,missing=75
+						75:[min_ecross1<0.0328812] yes=107,no=108,missing=107
+							107:leaf=0.305118
+							108:leaf=0.16462
+						76:leaf=0.0197767
+					46:[std_ecross2<0.0125261] yes=77,no=78,missing=77
+						77:leaf=-0.331306
+						78:leaf=-0.0946665
+				28:[norm_std_a1<0.0016085] yes=47,no=48,missing=47
+					47:leaf=-0.333345
+					48:[std_beta12<0.248948] yes=79,no=80,missing=79
+						79:leaf=-0.317983
+						80:leaf=0.148404
+			14:[avg_beta12<-166.59] yes=29,no=30,missing=29
+				29:[norm_max_window10_a1<0.000945899] yes=49,no=50,missing=49
+					49:leaf=0.146706
+					50:leaf=-0.313624
+				30:leaf=-0.331345
+booster[2]:
+0:[max_ecross2<0.517285] yes=1,no=2,missing=1
+	1:[norm_max_a2<0.00185824] yes=3,no=4,missing=3
+		3:[std_beta23<0.0200276] yes=7,no=8,missing=7
+			7:[max_ecross1<0.901291] yes=15,no=16,missing=15
+				15:[std_beta12<0.0232287] yes=31,no=32,missing=31
+					31:[avg_ecross1<1.23389] yes=51,no=52,missing=51
+						51:[max_ecross2<0.225375] yes=73,no=74,missing=73
+							73:[min_ecross1<0.524135] yes=105,no=106,missing=105
+								105:[avg_ecross3<1.31841] yes=141,no=142,missing=141
+									141:[std_ecross2<0.0752006] yes=177,no=178,missing=177
+										177:[max_ecross2<0.0851391] yes=217,no=218,missing=217
+											217:leaf=0.292667
+											218:[min_ecross1<0.339225] yes=251,no=252,missing=251
+												251:leaf=0.286852
+												252:leaf=0.234141
+										178:[max_ecross3<0.294738] yes=219,no=220,missing=219
+											219:[max_ecross1<0.215154] yes=253,no=254,missing=253
+												253:leaf=0.28107
+												254:leaf=0.20413
+											220:leaf=0.134815
+									142:leaf=0.145025
+								106:leaf=0.123591
+							74:[avg_ecross1<0.335187] yes=107,no=108,missing=107
+								107:[min_ecross1<0.330809] yes=143,no=144,missing=143
+									143:[max_ecross3<0.081089] yes=179,no=180,missing=179
+										179:[norm_a1_slope<-2.28213e-11] yes=221,no=222,missing=221
+											221:leaf=0.194327
+											222:leaf=0.288661
+										180:[avg_ecross3<0.561846] yes=223,no=224,missing=223
+											223:[std_beta23<0.0170008] yes=255,no=256,missing=255
+												255:leaf=0.26418
+												256:leaf=0.192491
+											224:leaf=0.0869398
+									144:[max_ecross3<0.0533956] yes=181,no=182,missing=181
+										181:leaf=0.273619
+										182:leaf=-0.0456624
+								108:[max_ecross2<0.290338] yes=145,no=146,missing=145
+									145:[norm_a1_slope<6.7317e-13] yes=183,no=184,missing=183
+										183:leaf=0.278436
+										184:leaf=0.117972
+									146:leaf=0.0211846
+						52:leaf=-0.00504305
+					32:[avg_ecross1<0.479273] yes=53,no=54,missing=53
+						53:[max_ecross2<0.134059] yes=75,no=76,missing=75
+							75:[std_ecross2<0.0120138] yes=109,no=110,missing=109
+								109:leaf=0.290249
+								110:[max_ecross1<0.460422] yes=147,no=148,missing=147
+									147:[avg_ecross1<0.38231] yes=185,no=186,missing=185
+										185:[avg_ecross3<0.311589] yes=225,no=226,missing=225
+											225:[norm_max_a1<0.00304282] yes=257,no=258,missing=257
+												257:leaf=0.285346
+												258:leaf=0.166681
+											226:leaf=0.127433
+										186:leaf=0.109708
+									148:[std_ecross1<0.0392156] yes=187,no=188,missing=187
+										187:[norm_a1_slope<1.29728e-12] yes=227,no=228,missing=227
+											227:leaf=0.239051
+											228:leaf=0.134857
+										188:leaf=-0.191524
+							76:[norm_max_a1<0.00231118] yes=111,no=112,missing=111
+								111:[max_ecross1<0.653618] yes=149,no=150,missing=149
+									149:[norm_max_a2<0.000935739] yes=189,no=190,missing=189
+										189:[max_ecross3<0.155517] yes=229,no=230,missing=229
+											229:[max_beta12<12.0193] yes=259,no=260,missing=259
+												259:leaf=0.203383
+												260:leaf=0.278104
+											230:[norm_std_a1<0.000403288] yes=261,no=262,missing=261
+												261:leaf=-0.195829
+												262:leaf=0.243734
+										190:leaf=0.0404378
+									150:leaf=0.00398338
+								112:[norm_a3_slope<2.7671e-11] yes=151,no=152,missing=151
+									151:leaf=-0.402859
+									152:leaf=0.186836
+						54:[std_ecross2<0.107609] yes=77,no=78,missing=77
+							77:[min_ecross3<0.00393097] yes=113,no=114,missing=113
+								113:[min_ecross1<0.00762777] yes=153,no=154,missing=153
+									153:leaf=0.283206
+									154:[max_ecross1<0.537198] yes=191,no=192,missing=191
+										191:leaf=-0.0101964
+										192:leaf=0.273125
+								114:[avg_beta23<22.7393] yes=155,no=156,missing=155
+									155:leaf=-0.121273
+									156:[min_ecross2<0.00259347] yes=193,no=194,missing=193
+										193:leaf=0.286202
+										194:leaf=0.101522
+							78:[min_ecross3<0.000301537] yes=115,no=116,missing=115
+								115:leaf=0.175629
+								116:leaf=-0.320218
+				16:[avg_ecross3<0.128543] yes=33,no=34,missing=33
+					33:leaf=-0.31351
+					34:leaf=0.084009
+			8:[avg_ecross3<0.898338] yes=17,no=18,missing=17
+				17:[avg_ecross1<0.397661] yes=35,no=36,missing=35
+					35:[norm_a2_slope<-1.27426e-10] yes=55,no=56,missing=55
+						55:[std_ecross1<0.00615182] yes=79,no=80,missing=79
+							79:[max_ecross3<0.0535005] yes=117,no=118,missing=117
+								117:leaf=0.286435
+								118:[norm_max_window10_a2<0.000748686] yes=157,no=158,missing=157
+									157:[std_ecross2<0.00408348] yes=195,no=196,missing=195
+										195:leaf=0.158064
+										196:leaf=-0.358301
+									158:[max_ecross2<0.166134] yes=197,no=198,missing=197
+										197:leaf=0.255588
+										198:leaf=0.0940333
+							80:[max_ecross2<0.180716] yes=119,no=120,missing=119
+								119:[min_ecross2<0.0400814] yes=159,no=160,missing=159
+									159:leaf=-0.081691
+									160:leaf=0.245861
+								120:[norm_max_a2<0.00135025] yes=161,no=162,missing=161
+									161:leaf=-0.36845
+									162:leaf=-0.134569
+						56:[max_ecross2<0.350164] yes=81,no=82,missing=81
+							81:[max_ecross1<0.348072] yes=121,no=122,missing=121
+								121:[std_ecross2<0.0500654] yes=163,no=164,missing=163
+									163:[max_beta12<5.84725] yes=199,no=200,missing=199
+										199:leaf=0.035782
+										200:[norm_a2_slope<2.17222e-10] yes=231,no=232,missing=231
+											231:[std_ecross2<0.00446569] yes=263,no=264,missing=263
+												263:leaf=0.284056
+												264:leaf=0.25319
+											232:[avg_ecross3<0.0487864] yes=265,no=266,missing=265
+												265:leaf=0.258398
+												266:leaf=-0.0305391
+									164:[norm_a3_slope<-8.34671e-11] yes=201,no=202,missing=201
+										201:[norm_std_a2<4.5997e-05] yes=233,no=234,missing=233
+											233:leaf=0.24302
+											234:leaf=-0.218505
+										202:[max_ecross3<0.458728] yes=235,no=236,missing=235
+											235:[avg_beta23<19.2488] yes=267,no=268,missing=267
+												267:leaf=0.18534
+												268:leaf=0.265749
+											236:leaf=-0.134095
+								122:[norm_max_a1<0.000390079] yes=165,no=166,missing=165
+									165:leaf=-0.216528
+									166:[norm_max_a2<0.00093073] yes=203,no=204,missing=203
+										203:[max_ecross3<0.509066] yes=237,no=238,missing=237
+											237:[max_ecross1<0.61913] yes=269,no=270,missing=269
+												269:leaf=0.255721
+												270:leaf=0.117433
+											238:leaf=-0.0485717
+										204:leaf=-0.177662
+							82:[norm_a3_slope<-4.4085e-11] yes=123,no=124,missing=123
+								123:[min_ecross3<0.00597371] yes=167,no=168,missing=167
+									167:leaf=0.127847
+									168:leaf=-0.339648
+								124:[max_ecross3<0.0645777] yes=169,no=170,missing=169
+									169:[avg_beta23<17.9961] yes=205,no=206,missing=205
+										205:[norm_max_a2<0.00137719] yes=239,no=240,missing=239
+											239:leaf=0.00773686
+											240:leaf=0.259104
+										206:[min_ecross3<0.000225592] yes=241,no=242,missing=241
+											241:leaf=0.178499
+											242:leaf=0.281138
+									170:[std_ecross2<0.0581657] yes=207,no=208,missing=207
+										207:[avg_ecross1<0.0157256] yes=243,no=244,missing=243
+											243:[norm_std_window10_a2<0.000133067] yes=271,no=272,missing=271
+												271:leaf=0.0812578
+												272:leaf=-0.205518
+											244:[avg_iH1<0.62031] yes=273,no=274,missing=273
+												273:leaf=0.234697
+												274:leaf=0.103194
+										208:[std_ecross2<0.215275] yes=245,no=246,missing=245
+											245:leaf=-0.350219
+											246:leaf=0.10304
+					36:[max_ecross2<0.0993464] yes=57,no=58,missing=57
+						57:[avg_ecross1<0.622086] yes=83,no=84,missing=83
+							83:[std_beta12<0.0240842] yes=125,no=126,missing=125
+								125:leaf=0.283064
+								126:leaf=0.070949
+							84:leaf=-0.13611
+						58:[min_ecross1<0.252885] yes=85,no=86,missing=85
+							85:[norm_a1_slope<-5.52458e-10] yes=127,no=128,missing=127
+								127:leaf=-0.0996096
+								128:leaf=-0.34144
+							86:leaf=0.0226719
+				18:[norm_a2_slope<-8.48291e-10] yes=37,no=38,missing=37
+					37:leaf=-0.0539114
+					38:leaf=-0.317677
+		4:[max_ecross1<0.201045] yes=9,no=10,missing=9
+			9:[std_beta23<0.251725] yes=19,no=20,missing=19
+				19:[std_ecross1<0.0291342] yes=39,no=40,missing=39
+					39:[min_ecross3<0.0981731] yes=59,no=60,missing=59
+						59:[avg_ecross3<0.347341] yes=87,no=88,missing=87
+							87:[norm_a2_slope<-3.74173e-10] yes=129,no=130,missing=129
+								129:leaf=-0.128552
+								130:[norm_a3_slope<-1.51488e-11] yes=171,no=172,missing=171
+									171:[norm_std_a3<0.00054964] yes=209,no=210,missing=209
+										209:leaf=-0.0550036
+										210:leaf=0.229003
+									172:[min_beta12<21.6083] yes=211,no=212,missing=211
+										211:[avg_beta23<10.5433] yes=247,no=248,missing=247
+											247:leaf=-0.0311612
+											248:[avg_ecross1<0.128055] yes=275,no=276,missing=275
+												275:leaf=0.271648
+												276:leaf=0.130905
+										212:leaf=0.29758
+							88:leaf=-0.120116
+						60:[norm_max_a1<0.000147687] yes=89,no=90,missing=89
+							89:leaf=-0.348111
+							90:leaf=0.0751884
+					40:[norm_std_window10_a3<2.74173e-05] yes=61,no=62,missing=61
+						61:[max_ecross3<0.0272602] yes=91,no=92,missing=91
+							91:leaf=-0.148116
+							92:leaf=0.193627
+						62:leaf=-0.315019
+				20:[min_beta12<26.5018] yes=41,no=42,missing=41
+					41:leaf=-0.298343
+					42:leaf=0.0560866
+			10:[min_ecross2<0.00690278] yes=21,no=22,missing=21
+				21:[avg_iH1<1.61843] yes=43,no=44,missing=43
+					43:[max_ecross3<0.0580626] yes=63,no=64,missing=63
+						63:leaf=0.191388
+						64:leaf=-0.166416
+					44:leaf=-0.29333
+				22:leaf=-0.305671
+	2:[std_beta12<0.121574] yes=5,no=6,missing=5
+		5:[max_ecross2<0.624781] yes=11,no=12,missing=11
+			11:[norm_a3_slope<1.512e-10] yes=23,no=24,missing=23
+				23:[std_ecross1<0.0619358] yes=45,no=46,missing=45
+					45:[norm_a2_slope<3.54782e-11] yes=65,no=66,missing=65
+						65:[norm_a2_slope<-2.1999e-11] yes=93,no=94,missing=93
+							93:[norm_a1_slope<6.79562e-12] yes=131,no=132,missing=131
+								131:[max_beta12<16.7283] yes=173,no=174,missing=173
+									173:leaf=0.243195
+									174:leaf=-5.1532e-05
+								132:leaf=-0.190469
+							94:[std_ecross2<0.0470269] yes=133,no=134,missing=133
+								133:[norm_max_a1<0.000304766] yes=175,no=176,missing=175
+									175:[std_beta12<0.0193314] yes=213,no=214,missing=213
+										213:[avg_iH1<0.323007] yes=249,no=250,missing=249
+											249:leaf=0.158093
+											250:leaf=0.274184
+										214:leaf=0.0658886
+									176:[std_ecross2<0.00785876] yes=215,no=216,missing=215
+										215:leaf=0.307304
+										216:leaf=0.192121
+								134:leaf=0.0570181
+						66:[avg_beta23<13.6098] yes=95,no=96,missing=95
+							95:leaf=0.0857531
+							96:leaf=-0.336813
+					46:leaf=-0.308882
+				24:leaf=-0.300465
+			12:[std_ecross2<0.0567601] yes=25,no=26,missing=25
+				25:[norm_std_a3<8.2109e-05] yes=47,no=48,missing=47
+					47:[norm_std_window10_a3<2.76861e-05] yes=67,no=68,missing=67
+						67:[norm_std_window10_a2<0.000218247] yes=97,no=98,missing=97
+							97:leaf=-0.344849
+							98:leaf=0.0575103
+						68:[max_ecross1<0.220563] yes=99,no=100,missing=99
+							99:[norm_std_window10_a3<7.60251e-05] yes=135,no=136,missing=135
+								135:leaf=0.175645
+								136:leaf=0.324105
+							100:[norm_std_a3<3.27594e-05] yes=137,no=138,missing=137
+								137:leaf=0.271674
+								138:leaf=-0.19886
+					48:[norm_std_window10_a2<0.00123607] yes=69,no=70,missing=69
+						69:[std_ecross2<0.0412141] yes=101,no=102,missing=101
+							101:leaf=-0.31047
+							102:leaf=0.0124636
+						70:leaf=0.0859245
+				26:leaf=-0.307938
+		6:[norm_max_a2<-1.26525] yes=13,no=14,missing=13
+			13:[std_ecross1<0.00790167] yes=27,no=28,missing=27
+				27:leaf=0.140735
+				28:leaf=-0.290645
+			14:[min_beta12<28.9687] yes=29,no=30,missing=29
+				29:[max_ecross2<0.525735] yes=49,no=50,missing=49
+					49:leaf=-0.0857872
+					50:[std_ecross2<0.00201382] yes=71,no=72,missing=71
+						71:leaf=-0.0834345
+						72:[min_beta12<26.3411] yes=103,no=104,missing=103
+							103:leaf=-0.29497
+							104:[min_beta12<26.7583] yes=139,no=140,missing=139
+								139:leaf=-0.0787799
+								140:leaf=-0.289668
+				30:leaf=-0.0792613
+booster[3]:
+0:[max_ecross2<0.51329] yes=1,no=2,missing=1
+	1:[std_beta12<0.0459785] yes=3,no=4,missing=3
+		3:[std_beta23<0.0204743] yes=7,no=8,missing=7
+			7:[max_ecross2<0.103135] yes=15,no=16,missing=15
+				15:[avg_beta12<5.60667] yes=29,no=30,missing=29
+					29:[max_ecross2<0.040196] yes=51,no=52,missing=51
+						51:leaf=0.25132
+						52:leaf=-0.090038
+					30:[avg_ecross3<1.25248] yes=53,no=54,missing=53
+						53:[avg_ecross1<0.881737] yes=77,no=78,missing=77
+							77:[std_ecross2<0.139736] yes=111,no=112,missing=111
+								111:leaf=0.267232
+								112:[norm_max_a3<0.000145777] yes=147,no=148,missing=147
+									147:[avg_beta23<10.0524] yes=183,no=184,missing=183
+										183:[norm_std_window10_a2<0.000123416] yes=215,no=216,missing=215
+											215:leaf=0.0946914
+											216:leaf=0.26137
+										184:leaf=0.262872
+									148:[max_ecross2<0.0356141] yes=185,no=186,missing=185
+										185:leaf=0.220179
+										186:leaf=0.0638813
+							78:[std_beta23<0.00398775] yes=113,no=114,missing=113
+								113:[max_ecross1<0.123267] yes=149,no=150,missing=149
+									149:leaf=0.266672
+									150:leaf=0.169919
+								114:leaf=0.0605399
+						54:leaf=0.13381
+				16:[avg_ecross1<0.629936] yes=31,no=32,missing=31
+					31:[min_ecross1<0.361858] yes=55,no=56,missing=55
+						55:[std_ecross2<0.282565] yes=79,no=80,missing=79
+							79:[avg_beta23<7.63304] yes=115,no=116,missing=115
+								115:[min_ecross2<0.0127562] yes=151,no=152,missing=151
+									151:leaf=0.163085
+									152:leaf=0.0460721
+								116:[avg_beta12<5.75024] yes=153,no=154,missing=153
+									153:leaf=0.0478492
+									154:[max_ecross3<0.0973462] yes=187,no=188,missing=187
+										187:[avg_beta12<11.7669] yes=217,no=218,missing=217
+											217:[avg_beta23<14.8827] yes=251,no=252,missing=251
+												251:leaf=0.125463
+												252:leaf=0.24919
+											218:[norm_a3_slope<3.04559e-11] yes=253,no=254,missing=253
+												253:leaf=0.263704
+												254:leaf=0.17695
+										188:[avg_ecross1<0.314591] yes=219,no=220,missing=219
+											219:[max_ecross2<0.346297] yes=255,no=256,missing=255
+												255:leaf=0.247914
+												256:leaf=0.208937
+											220:[max_ecross2<0.196659] yes=257,no=258,missing=257
+												257:leaf=0.218901
+												258:leaf=0.0140452
+							80:leaf=0.0316054
+						56:[max_ecross3<0.0589487] yes=81,no=82,missing=81
+							81:[avg_iH1<3.30479] yes=117,no=118,missing=117
+								117:[std_beta23<0.0114335] yes=155,no=156,missing=155
+									155:leaf=0.262398
+									156:leaf=0.162322
+								118:leaf=0.0695657
+							82:[min_ecross3<0.23925] yes=119,no=120,missing=119
+								119:leaf=-0.140261
+								120:leaf=0.215968
+					32:[std_beta12<0.0147793] yes=57,no=58,missing=57
+						57:[min_ecross1<0.0119787] yes=83,no=84,missing=83
+							83:leaf=0.266804
+							84:leaf=0.143323
+						58:[max_ecross3<0.002622] yes=85,no=86,missing=85
+							85:leaf=0.169251
+							86:leaf=-0.362101
+			8:[avg_ecross3<0.898338] yes=17,no=18,missing=17
+				17:[max_ecross2<0.174213] yes=33,no=34,missing=33
+					33:[std_ecross2<0.0242603] yes=59,no=60,missing=59
+						59:[norm_max_window10_a3<0.019522] yes=87,no=88,missing=87
+							87:[avg_iH2<4.76588] yes=121,no=122,missing=121
+								121:[max_ecross3<0.303215] yes=157,no=158,missing=157
+									157:[avg_ecross3<0.643065] yes=189,no=190,missing=189
+										189:leaf=0.265816
+										190:leaf=0.194739
+									158:[norm_max_a2<0.000318477] yes=191,no=192,missing=191
+										191:[std_beta12<0.0302737] yes=221,no=222,missing=221
+											221:[avg_ecross3<0.394874] yes=259,no=260,missing=259
+												259:leaf=0.256823
+												260:leaf=0.178241
+											222:leaf=0.119171
+										192:[max_ecross1<0.0768138] yes=223,no=224,missing=223
+											223:[std_ecross2<0.0114192] yes=261,no=262,missing=261
+												261:leaf=0.224572
+												262:leaf=-0.0350841
+											224:leaf=-0.0897021
+								122:leaf=0.0864657
+							88:leaf=0.0611831
+						60:[avg_iH1<5.60672] yes=89,no=90,missing=89
+							89:[norm_a3_slope<-1.78132e-10] yes=123,no=124,missing=123
+								123:leaf=-0.0854848
+								124:[norm_a3_slope<3.1762e-10] yes=159,no=160,missing=159
+									159:[avg_beta23<19.512] yes=193,no=194,missing=193
+										193:[avg_beta12<9.28938] yes=225,no=226,missing=225
+											225:[std_ecross3<0.0655661] yes=263,no=264,missing=263
+												263:leaf=0.150115
+												264:leaf=-0.223791
+											226:[max_ecross2<0.0682702] yes=265,no=266,missing=265
+												265:leaf=0.253665
+												266:leaf=0.181906
+										194:[norm_max_a3<3.86941e-05] yes=227,no=228,missing=227
+											227:leaf=0.138428
+											228:[min_ecross1<0.0144512] yes=267,no=268,missing=267
+												267:leaf=0.273968
+												268:leaf=0.203795
+									160:leaf=-0.0562084
+							90:leaf=-0.163227
+					34:[norm_a1_slope<-3.6901e-12] yes=61,no=62,missing=61
+						61:[std_ecross2<0.0706045] yes=91,no=92,missing=91
+							91:[norm_a3_slope<1.20554e-10] yes=125,no=126,missing=125
+								125:[max_ecross2<0.437764] yes=161,no=162,missing=161
+									161:[norm_a3_slope<-7.52689e-11] yes=195,no=196,missing=195
+										195:leaf=-0.0732879
+										196:[avg_beta23<9.55917] yes=229,no=230,missing=229
+											229:leaf=-0.0226714
+											230:[std_ecross2<0.0299057] yes=269,no=270,missing=269
+												269:leaf=0.221611
+												270:leaf=0.0779436
+									162:leaf=-0.215128
+								126:leaf=-0.238552
+							92:leaf=-0.346561
+						62:[std_beta23<0.136959] yes=93,no=94,missing=93
+							93:[std_ecross3<0.0547532] yes=127,no=128,missing=127
+								127:[min_ecross1<0.238898] yes=163,no=164,missing=163
+									163:[min_ecross3<0.512852] yes=197,no=198,missing=197
+										197:[max_ecross1<0.0340538] yes=231,no=232,missing=231
+											231:[max_ecross2<0.414598] yes=271,no=272,missing=271
+												271:leaf=0.260764
+												272:leaf=0.105571
+											232:[std_ecross3<0.00877723] yes=273,no=274,missing=273
+												273:leaf=0.222423
+												274:leaf=0.1378
+										198:[avg_beta23<27.5167] yes=233,no=234,missing=233
+											233:leaf=-0.0812712
+											234:leaf=0.177487
+									164:leaf=-0.177427
+								128:[avg_beta23<6.58135] yes=165,no=166,missing=165
+									165:leaf=-0.218676
+									166:[avg_iH1<0.472172] yes=199,no=200,missing=199
+										199:leaf=-0.0921429
+										200:[avg_ecross3<0.425768] yes=235,no=236,missing=235
+											235:[norm_max_window10_a3<0.000193522] yes=275,no=276,missing=275
+												275:leaf=0.0650251
+												276:leaf=0.211295
+											236:[avg_ecross3<0.746873] yes=277,no=278,missing=277
+												277:leaf=-0.182999
+												278:leaf=0.202993
+							94:[avg_beta12<22.7984] yes=129,no=130,missing=129
+								129:leaf=-0.334971
+								130:leaf=0.0992865
+				18:leaf=-0.286989
+		4:[std_beta23<0.251725] yes=9,no=10,missing=9
+			9:[avg_ecross1<0.603134] yes=19,no=20,missing=19
+				19:[max_ecross2<0.228969] yes=35,no=36,missing=35
+					35:[norm_max_a1<0.0316881] yes=63,no=64,missing=63
+						63:[std_ecross3<0.0739708] yes=95,no=96,missing=95
+							95:[min_beta12<4.33301] yes=131,no=132,missing=131
+								131:[std_ecross3<0.007849] yes=167,no=168,missing=167
+									167:leaf=-0.0109157
+									168:leaf=0.0332054
+								132:[min_beta23<6.62198] yes=169,no=170,missing=169
+									169:[max_ecross1<0.0412268] yes=201,no=202,missing=201
+										201:[norm_max_a2<0.00305504] yes=237,no=238,missing=237
+											237:leaf=0.0738021
+											238:leaf=0.242715
+										202:leaf=-0.0846195
+									170:[max_ecross1<0.486937] yes=203,no=204,missing=203
+										203:[min_ecross3<0.272126] yes=239,no=240,missing=239
+											239:[std_ecross2<0.134973] yes=279,no=280,missing=279
+												279:leaf=0.253077
+												280:leaf=0.131502
+											240:leaf=0.093601
+										204:[std_ecross2<0.0106119] yes=241,no=242,missing=241
+											241:[max_ecross3<0.0552433] yes=281,no=282,missing=281
+												281:leaf=0.253545
+												282:leaf=0.141548
+											242:[avg_iH1<3.03536] yes=283,no=284,missing=283
+												283:leaf=-0.219566
+												284:leaf=0.110855
+							96:[std_ecross2<0.00854983] yes=133,no=134,missing=133
+								133:leaf=0.171732
+								134:leaf=-0.302925
+						64:leaf=-0.283883
+					36:[min_beta23<16.9135] yes=65,no=66,missing=65
+						65:[min_beta12<22.8193] yes=97,no=98,missing=97
+							97:[min_ecross2<0.0112581] yes=135,no=136,missing=135
+								135:[norm_std_window10_a2<0.00103759] yes=171,no=172,missing=171
+									171:leaf=-0.144155
+									172:leaf=0.163341
+								136:[std_beta23<0.193422] yes=173,no=174,missing=173
+									173:[max_ecross1<0.795365] yes=205,no=206,missing=205
+										205:leaf=-0.357465
+										206:leaf=-0.0806259
+									174:leaf=0.0974323
+							98:[max_ecross1<0.190571] yes=137,no=138,missing=137
+								137:[norm_std_window10_a2<0.000498274] yes=175,no=176,missing=175
+									175:leaf=0.0296614
+									176:[norm_max_a2<0.00323568] yes=207,no=208,missing=207
+										207:[avg_beta23<7.0018] yes=243,no=244,missing=243
+											243:leaf=0.152424
+											244:[min_ecross3<0.0434259] yes=285,no=286,missing=285
+												285:leaf=0.278133
+												286:leaf=0.180989
+										208:leaf=0.0929452
+								138:leaf=-0.162382
+						66:[norm_a1_slope<-2.83421e-10] yes=99,no=100,missing=99
+							99:leaf=-0.207064
+							100:[min_ecross3<0.0975995] yes=139,no=140,missing=139
+								139:[min_ecross2<0.041974] yes=177,no=178,missing=177
+									177:[std_beta23<0.0668833] yes=209,no=210,missing=209
+										209:[std_ecross2<0.0472888] yes=245,no=246,missing=245
+											245:[min_ecross1<0.153089] yes=287,no=288,missing=287
+												287:leaf=0.26456
+												288:leaf=0.124192
+											246:leaf=-0.0263312
+										210:leaf=-0.215813
+									178:[max_ecross2<0.470648] yes=211,no=212,missing=211
+										211:[avg_iH2<2.14931] yes=247,no=248,missing=247
+											247:[std_beta23<0.00931582] yes=289,no=290,missing=289
+												289:leaf=0.135786
+												290:leaf=0.260138
+											248:leaf=0.121166
+										212:leaf=0.0426124
+								140:[avg_beta12<15.945] yes=179,no=180,missing=179
+									179:leaf=-0.295627
+									180:leaf=0.0896647
+				20:[norm_max_a2<0.00014772] yes=37,no=38,missing=37
+					37:leaf=0.0938169
+					38:leaf=-0.283995
+			10:[norm_max_a2<0.00120191] yes=21,no=22,missing=21
+				21:leaf=0.0940861
+				22:[avg_ecross1<0.00939749] yes=39,no=40,missing=39
+					39:leaf=-0.120121
+					40:leaf=-0.276645
+	2:[std_beta12<0.121574] yes=5,no=6,missing=5
+		5:[max_ecross2<0.624781] yes=11,no=12,missing=11
+			11:[norm_max_a2<0.00175174] yes=23,no=24,missing=23
+				23:[avg_iH2<2.58706] yes=41,no=42,missing=41
+					41:[max_ecross2<0.543638] yes=67,no=68,missing=67
+						67:[avg_beta23<25.4016] yes=101,no=102,missing=101
+							101:leaf=-0.239693
+							102:leaf=0.216031
+						68:[std_ecross2<0.0829707] yes=103,no=104,missing=103
+							103:[avg_beta23<10.8301] yes=141,no=142,missing=141
+								141:leaf=0.273676
+								142:[std_ecross3<0.00567241] yes=181,no=182,missing=181
+									181:[norm_max_window10_a1<5.60265e-05] yes=213,no=214,missing=213
+										213:leaf=-0.0446404
+										214:[max_ecross2<0.588614] yes=249,no=250,missing=249
+											249:[norm_max_window10_a3<6.53445e-05] yes=291,no=292,missing=291
+												291:leaf=0.301069
+												292:leaf=0.165948
+											250:[avg_iH2<0.194056] yes=293,no=294,missing=293
+												293:leaf=0.247374
+												294:leaf=0.0244421
+									182:leaf=-0.15578
+							104:leaf=-0.0252674
+					42:[norm_max_a1<3.03213e-05] yes=69,no=70,missing=69
+						69:leaf=0.164353
+						70:leaf=-0.326519
+				24:[norm_a3_slope<3.58241e-11] yes=43,no=44,missing=43
+					43:leaf=-0.311503
+					44:leaf=-0.0753109
+			12:[std_beta12<0.0137649] yes=25,no=26,missing=25
+				25:[std_beta23<0.0175755] yes=45,no=46,missing=45
+					45:leaf=0.299682
+					46:leaf=-0.127735
+				26:[max_ecross3<0.151142] yes=47,no=48,missing=47
+					47:[norm_std_a2<0.00127039] yes=71,no=72,missing=71
+						71:[norm_max_window10_a1<0.000785799] yes=105,no=106,missing=105
+							105:[avg_iH1<3.99864] yes=143,no=144,missing=143
+								143:leaf=-0.302122
+								144:leaf=-0.108691
+							106:leaf=0.171124
+						72:leaf=0.254105
+					48:[min_ecross1<0.00293013] yes=73,no=74,missing=73
+						73:[std_beta23<0.054135] yes=107,no=108,missing=107
+							107:leaf=0.0721778
+							108:leaf=-0.267726
+						74:leaf=-0.292219
+		6:[avg_iH2<28.4162] yes=13,no=14,missing=13
+			13:[min_beta12<29.0225] yes=27,no=28,missing=27
+				27:[std_ecross2<0.00201382] yes=49,no=50,missing=49
+					49:leaf=-0.0704528
+					50:[max_ecross2<0.525735] yes=75,no=76,missing=75
+						75:leaf=-0.107076
+						76:[min_beta12<26.3602] yes=109,no=110,missing=109
+							109:leaf=-0.270286
+							110:[avg_iH1<0.273579] yes=145,no=146,missing=145
+								145:leaf=-0.0638454
+								146:leaf=-0.270419
+				28:leaf=-0.0656934
+			14:leaf=-0.0537395
+booster[4]:
+0:[std_beta12<0.152237] yes=1,no=2,missing=1
+	1:[max_ecross2<0.349069] yes=3,no=4,missing=3
+		3:[std_beta23<0.0204731] yes=7,no=8,missing=7
+			7:[std_beta12<0.0232501] yes=15,no=16,missing=15
+				15:[avg_ecross2<0.601476] yes=29,no=30,missing=29
+					29:[max_ecross2<0.0842804] yes=51,no=52,missing=51
+						51:[std_ecross2<0.255736] yes=79,no=80,missing=79
+							79:leaf=0.251025
+							80:leaf=0.133931
+						52:[min_ecross1<0.362653] yes=81,no=82,missing=81
+							81:[std_ecross3<0.030786] yes=115,no=116,missing=115
+								115:[max_ecross3<0.286962] yes=155,no=156,missing=155
+									155:[max_beta23<19.9168] yes=187,no=188,missing=187
+										187:[max_ecross1<0.0922221] yes=225,no=226,missing=225
+											225:leaf=0.245929
+											226:[avg_ecross3<0.432416] yes=269,no=270,missing=269
+												269:leaf=0.224358
+												270:leaf=0.0820355
+										188:leaf=0.24851
+									156:[avg_beta12<11.8365] yes=189,no=190,missing=189
+										189:leaf=0.0812909
+										190:[norm_a2_slope<-2.39947e-11] yes=227,no=228,missing=227
+											227:leaf=0.148467
+											228:[std_beta12<0.014099] yes=271,no=272,missing=271
+												271:leaf=0.233807
+												272:leaf=0.167208
+								116:[max_ecross3<0.34289] yes=157,no=158,missing=157
+									157:[min_beta23<7.50253] yes=191,no=192,missing=191
+										191:leaf=0.106369
+										192:[max_ecross1<0.171779] yes=229,no=230,missing=229
+											229:[std_ecross3<0.0329374] yes=273,no=274,missing=273
+												273:leaf=0.139807
+												274:leaf=0.233069
+											230:[norm_std_window10_a1<0.000183086] yes=275,no=276,missing=275
+												275:leaf=0.0906573
+												276:leaf=0.222793
+									158:leaf=0.0593394
+							82:[min_ecross1<0.401244] yes=117,no=118,missing=117
+								117:leaf=-0.00527654
+								118:[avg_ecross3<0.0479342] yes=159,no=160,missing=159
+									159:leaf=0.241159
+									160:leaf=0.118745
+					30:[max_ecross3<0.165288] yes=53,no=54,missing=53
+						53:[min_ecross1<0.221855] yes=83,no=84,missing=83
+							83:[avg_beta12<6.86123] yes=119,no=120,missing=119
+								119:leaf=0.065706
+								120:[min_beta23<10.5462] yes=161,no=162,missing=161
+									161:[norm_std_a3<8.05071e-05] yes=193,no=194,missing=193
+										193:[std_ecross3<0.0319304] yes=231,no=232,missing=231
+											231:leaf=0.23139
+											232:[std_ecross2<0.17997] yes=277,no=278,missing=277
+												277:leaf=-0.0251627
+												278:leaf=0.0689406
+										194:leaf=0.249813
+									162:[avg_ecross2<1.03282] yes=195,no=196,missing=195
+										195:[max_ecross2<0.172063] yes=233,no=234,missing=233
+											233:leaf=0.244745
+											234:[min_beta23<18.1632] yes=279,no=280,missing=279
+												279:leaf=0.0713548
+												280:leaf=0.234675
+										196:[norm_std_a1<1.00684e-05] yes=235,no=236,missing=235
+											235:leaf=0.238511
+											236:leaf=0.0989169
+							84:leaf=0.0480503
+						54:leaf=0.0140616
+				16:[std_ecross2<0.0559571] yes=31,no=32,missing=31
+					31:[avg_beta12<4.66351] yes=55,no=56,missing=55
+						55:[min_ecross1<0.0536567] yes=85,no=86,missing=85
+							85:leaf=-0.0764093
+							86:leaf=0.214735
+						56:[max_ecross2<0.16526] yes=87,no=88,missing=87
+							87:[avg_ecross2<0.40859] yes=121,no=122,missing=121
+								121:[max_ecross3<0.319938] yes=163,no=164,missing=163
+									163:[avg_beta12<5.69719] yes=197,no=198,missing=197
+										197:[avg_beta12<5.36046] yes=237,no=238,missing=237
+											237:[norm_std_window10_a2<2.43719e-05] yes=281,no=282,missing=281
+												281:leaf=0.245769
+												282:leaf=0.134054
+											238:leaf=0.0788659
+										198:[norm_std_a1<0.00236359] yes=239,no=240,missing=239
+											239:[norm_a1_slope<7.64609e-10] yes=283,no=284,missing=283
+												283:leaf=0.242151
+												284:leaf=0.160919
+											240:leaf=0.160715
+									164:leaf=0.140407
+								122:[min_ecross3<0.00886844] yes=165,no=166,missing=165
+									165:[std_ecross3<0.00560124] yes=199,no=200,missing=199
+										199:leaf=0.143076
+										200:[std_beta12<0.0416818] yes=241,no=242,missing=241
+											241:leaf=0.166444
+											242:leaf=0.278791
+									166:leaf=0.0484455
+							88:[std_beta12<0.0634304] yes=123,no=124,missing=123
+								123:[max_ecross3<0.128616] yes=167,no=168,missing=167
+									167:[avg_beta12<12.901] yes=201,no=202,missing=201
+										201:[norm_std_a1<0.000430614] yes=243,no=244,missing=243
+											243:leaf=-0.0103199
+											244:leaf=0.256633
+										202:leaf=0.248769
+									168:[norm_std_a2<5.43519e-05] yes=203,no=204,missing=203
+										203:leaf=0.190172
+										204:leaf=-0.0132698
+								124:leaf=-0.00655653
+					32:[max_ecross1<0.139002] yes=57,no=58,missing=57
+						57:[avg_beta12<16.3941] yes=89,no=90,missing=89
+							89:[min_beta23<20.0299] yes=125,no=126,missing=125
+								125:leaf=-0.0546764
+								126:leaf=0.226285
+							90:[norm_a2_slope<2.99563e-11] yes=127,no=128,missing=127
+								127:leaf=0.2635
+								128:leaf=0.180387
+						58:[min_ecross1<0.0513441] yes=91,no=92,missing=91
+							91:[min_ecross3<0.026941] yes=129,no=130,missing=129
+								129:leaf=-0.401754
+								130:leaf=-0.0146257
+							92:[avg_iH1<3.22218] yes=131,no=132,missing=131
+								131:[std_ecross2<0.0733621] yes=169,no=170,missing=169
+									169:leaf=0.0425158
+									170:[min_beta23<15.5838] yes=205,no=206,missing=205
+										205:leaf=0.167952
+										206:leaf=0.258784
+								132:leaf=-0.139301
+			8:[avg_ecross2<0.613531] yes=17,no=18,missing=17
+				17:[avg_ecross3<0.735413] yes=33,no=34,missing=33
+					33:[max_ecross2<0.0554611] yes=59,no=60,missing=59
+						59:[max_ecross3<1.53302] yes=93,no=94,missing=93
+							93:[max_beta12<6.26636] yes=133,no=134,missing=133
+								133:leaf=0.126136
+								134:[min_ecross3<0.770647] yes=171,no=172,missing=171
+									171:[std_ecross2<0.0132794] yes=207,no=208,missing=207
+										207:[min_beta23<4.01494] yes=245,no=246,missing=245
+											245:leaf=0.170902
+											246:leaf=0.2491
+										208:[norm_std_a2<7.95042e-05] yes=247,no=248,missing=247
+											247:[norm_std_a2<4.70905e-05] yes=285,no=286,missing=285
+												285:leaf=0.203426
+												286:leaf=0.017401
+											248:[avg_ecross3<0.266698] yes=287,no=288,missing=287
+												287:leaf=0.254705
+												288:leaf=0.185324
+									172:[norm_std_window10_a3<0.00194707] yes=209,no=210,missing=209
+										209:leaf=0.0532723
+										210:leaf=0.228803
+							94:leaf=0.0837263
+						60:[std_beta23<0.337399] yes=95,no=96,missing=95
+							95:[norm_a1_slope<1.5362e-10] yes=135,no=136,missing=135
+								135:[std_ecross3<0.0580956] yes=173,no=174,missing=173
+									173:[norm_a2_slope<-4.36125e-10] yes=211,no=212,missing=211
+										211:leaf=-0.159797
+										212:[max_ecross1<0.153062] yes=249,no=250,missing=249
+											249:[std_ecross1<0.0370161] yes=289,no=290,missing=289
+												289:leaf=0.209573
+												290:leaf=0.116113
+											250:[max_ecross3<0.32081] yes=291,no=292,missing=291
+												291:leaf=0.169518
+												292:leaf=0.0557229
+									174:[std_beta12<0.0353347] yes=213,no=214,missing=213
+										213:[norm_a3_slope<-1.85623e-10] yes=251,no=252,missing=251
+											251:leaf=-0.157067
+											252:[norm_a2_slope<-9.1028e-11] yes=293,no=294,missing=293
+												293:leaf=-0.151591
+												294:leaf=0.150066
+										214:[norm_max_window10_a2<0.00131483] yes=253,no=254,missing=253
+											253:leaf=-0.319917
+											254:leaf=0.0702753
+								136:[max_ecross2<0.268468] yes=175,no=176,missing=175
+									175:leaf=-0.358631
+									176:leaf=0.0364165
+							96:[avg_beta12<26.1425] yes=137,no=138,missing=137
+								137:leaf=-0.286632
+								138:leaf=0.0846348
+					34:[min_ecross3<0.0563687] yes=61,no=62,missing=61
+						61:[norm_std_window10_a3<0.000424755] yes=97,no=98,missing=97
+							97:leaf=-0.165402
+							98:leaf=0.169349
+						62:leaf=-0.283208
+				18:[avg_iH1<1.53645] yes=35,no=36,missing=35
+					35:leaf=-0.345869
+					36:[max_ecross1<0.00495693] yes=63,no=64,missing=63
+						63:[norm_std_a3<5.232e-05] yes=99,no=100,missing=99
+							99:leaf=0.255883
+							100:leaf=0.0183971
+						64:[norm_std_window10_a2<0.000379141] yes=101,no=102,missing=101
+							101:[max_ecross1<0.197637] yes=139,no=140,missing=139
+								139:leaf=-0.318599
+								140:leaf=-0.0790801
+							102:leaf=0.0603267
+		4:[std_beta23<0.181644] yes=9,no=10,missing=9
+			9:[avg_ecross2<0.27467] yes=19,no=20,missing=19
+				19:[norm_a1_slope<-1.3124e-10] yes=37,no=38,missing=37
+					37:[avg_iH1<0.445481] yes=65,no=66,missing=65
+						65:leaf=0.0455788
+						66:leaf=-0.306554
+					38:[std_beta23<0.0251078] yes=67,no=68,missing=67
+						67:[min_ecross1<0.41501] yes=103,no=104,missing=103
+							103:[norm_a1_slope<1.5735e-10] yes=141,no=142,missing=141
+								141:[max_ecross2<0.526115] yes=177,no=178,missing=177
+									177:[avg_iH1<4.1551] yes=215,no=216,missing=215
+										215:[min_beta23<19.2777] yes=255,no=256,missing=255
+											255:[std_beta23<0.0170388] yes=295,no=296,missing=295
+												295:leaf=0.210566
+												296:leaf=0.100634
+											256:[norm_max_window10_a2<0.000146188] yes=297,no=298,missing=297
+												297:leaf=0.20144
+												298:leaf=0.254031
+										216:leaf=0.0813284
+									178:[norm_a2_slope<-1.55888e-11] yes=217,no=218,missing=217
+										217:leaf=-0.159166
+										218:[norm_a2_slope<1.37069e-11] yes=257,no=258,missing=257
+											257:[avg_ecross3<0.0130043] yes=299,no=300,missing=299
+												299:leaf=0.0705531
+												300:leaf=0.242643
+											258:leaf=-0.0417592
+								142:leaf=-0.0345455
+							104:leaf=-0.0587095
+						68:[max_ecross3<0.16332] yes=105,no=106,missing=105
+							105:[std_ecross2<0.0761227] yes=143,no=144,missing=143
+								143:[max_beta23<24.1983] yes=179,no=180,missing=179
+									179:[norm_max_window10_a2<0.00058811] yes=219,no=220,missing=219
+										219:leaf=-0.199822
+										220:[std_beta12<0.0936375] yes=259,no=260,missing=259
+											259:[norm_std_window10_a1<0.000116068] yes=301,no=302,missing=301
+												301:leaf=0.117474
+												302:leaf=0.251515
+											260:leaf=-0.0450857
+									180:[norm_a3_slope<-2.06645e-12] yes=221,no=222,missing=221
+										221:[avg_ecross2<0.132697] yes=261,no=262,missing=261
+											261:leaf=0.0967712
+											262:leaf=0.183624
+										222:[norm_std_a1<1.59261e-05] yes=263,no=264,missing=263
+											263:leaf=0.169478
+											264:leaf=0.268378
+								144:leaf=-0.166319
+							106:[norm_std_window10_a3<5.19171e-05] yes=145,no=146,missing=145
+								145:leaf=-0.307393
+								146:[norm_std_window10_a1<0.000256371] yes=181,no=182,missing=181
+									181:[min_beta12<18.9491] yes=223,no=224,missing=223
+										223:[max_beta12<15.3946] yes=265,no=266,missing=265
+											265:[norm_a3_slope<1.56417e-11] yes=303,no=304,missing=303
+												303:leaf=-0.0748304
+												304:leaf=0.153709
+											266:leaf=-0.311998
+										224:[max_ecross2<0.60864] yes=267,no=268,missing=267
+											267:[min_beta23<9.2027] yes=305,no=306,missing=305
+												305:leaf=0.206129
+												306:leaf=0.0655507
+											268:leaf=-0.142766
+									182:leaf=-0.286239
+				20:[norm_a2_slope<1.56446e-11] yes=39,no=40,missing=39
+					39:[max_ecross2<0.471925] yes=69,no=70,missing=69
+						69:[max_beta23<18.5912] yes=107,no=108,missing=107
+							107:[min_ecross3<0.0297111] yes=147,no=148,missing=147
+								147:leaf=-0.344348
+								148:[max_ecross3<0.0677564] yes=183,no=184,missing=183
+									183:leaf=0.257187
+									184:leaf=0.0049738
+							108:[std_ecross3<0.0019984] yes=149,no=150,missing=149
+								149:leaf=0.0367621
+								150:[max_ecross3<0.113473] yes=185,no=186,missing=185
+									185:leaf=0.249265
+									186:leaf=0.123319
+						70:[norm_a2_slope<-6.07272e-12] yes=109,no=110,missing=109
+							109:[max_beta12<8.11683] yes=151,no=152,missing=151
+								151:leaf=-0.10051
+								152:leaf=-0.297794
+							110:[std_ecross1<0.0150165] yes=153,no=154,missing=153
+								153:leaf=0.180226
+								154:leaf=-0.161599
+					40:[norm_std_a3<3.79076e-06] yes=71,no=72,missing=71
+						71:leaf=0.0190396
+						72:leaf=-0.315051
+			10:leaf=-0.271737
+	2:[std_beta23<0.0783535] yes=5,no=6,missing=5
+		5:[max_ecross1<0.816824] yes=11,no=12,missing=11
+			11:[norm_std_window10_a1<0.00186678] yes=21,no=22,missing=21
+				21:[max_ecross1<0.0779116] yes=41,no=42,missing=41
+					41:leaf=0.218415
+					42:[std_beta12<0.177429] yes=73,no=74,missing=73
+						73:leaf=0.000262279
+						74:leaf=-0.301199
+				22:[norm_std_window10_a3<0.000165784] yes=43,no=44,missing=43
+					43:[avg_ecross2<0.15608] yes=75,no=76,missing=75
+						75:[norm_a3_slope<-1.06224e-11] yes=111,no=112,missing=111
+							111:leaf=0.171184
+							112:leaf=0.270742
+						76:leaf=0.0781515
+					44:leaf=0.0335937
+			12:[std_beta12<0.270986] yes=23,no=24,missing=23
+				23:leaf=-0.0365531
+				24:leaf=-0.262962
+		6:[std_beta12<0.20262] yes=13,no=14,missing=13
+			13:[min_beta12<26.2853] yes=25,no=26,missing=25
+				25:[min_ecross3<0.000781141] yes=45,no=46,missing=45
+					45:leaf=-0.00209267
+					46:leaf=-0.257687
+				26:[max_ecross2<0.337056] yes=47,no=48,missing=47
+					47:leaf=0.31408
+					48:leaf=0.0475157
+			14:[avg_beta12<-166.59] yes=27,no=28,missing=27
+				27:leaf=-0.0266385
+				28:[min_ecross3<3.81844e-05] yes=49,no=50,missing=49
+					49:leaf=-0.0325214
+					50:[avg_ecross3<0.00870303] yes=77,no=78,missing=77
+						77:[min_beta23<13.4419] yes=113,no=114,missing=113
+							113:leaf=-0.0960569
+							114:leaf=-0.246439
+						78:leaf=-0.253847
+booster[5]:
+0:[norm_max_a2<0.00331094] yes=1,no=2,missing=1
+	1:[max_ecross2<0.344123] yes=3,no=4,missing=3
+		3:[std_beta23<0.0205437] yes=7,no=8,missing=7
+			7:[std_beta12<0.0267032] yes=15,no=16,missing=15
+				15:[avg_ecross2<0.601476] yes=27,no=28,missing=27
+					27:[max_ecross2<0.0851391] yes=47,no=48,missing=47
+						47:[avg_ecross1<0.894715] yes=73,no=74,missing=73
+							73:[std_ecross2<0.253667] yes=111,no=112,missing=111
+								111:leaf=0.238509
+								112:leaf=0.149312
+							74:leaf=0.148066
+						48:[min_ecross1<0.363126] yes=75,no=76,missing=75
+							75:[max_ecross3<0.300762] yes=113,no=114,missing=113
+								113:[std_ecross1<0.201554] yes=151,no=152,missing=151
+									151:[max_beta23<9.57997] yes=199,no=200,missing=199
+										199:[avg_ecross1<0.187796] yes=253,no=254,missing=253
+											253:[norm_max_window10_a2<5.17823e-05] yes=309,no=310,missing=309
+												309:leaf=0.0863848
+												310:leaf=0.211734
+											254:leaf=-0.000997425
+										200:[min_beta12<6.15421] yes=255,no=256,missing=255
+											255:leaf=0.0870186
+											256:[avg_ecross1<0.476832] yes=311,no=312,missing=311
+												311:leaf=0.230163
+												312:leaf=0.182396
+									152:leaf=0.105015
+								114:[std_ecross2<0.057066] yes=153,no=154,missing=153
+									153:[max_ecross2<0.194813] yes=201,no=202,missing=201
+										201:[avg_ecross1<0.00682385] yes=257,no=258,missing=257
+											257:leaf=0.153489
+											258:leaf=0.230107
+										202:[std_ecross2<0.00174302] yes=259,no=260,missing=259
+											259:leaf=0.227782
+											260:[std_ecross1<0.00476957] yes=313,no=314,missing=313
+												313:leaf=0.0132004
+												314:leaf=0.182629
+									154:leaf=-0.0153335
+							76:[avg_ecross3<0.0479342] yes=115,no=116,missing=115
+								115:[max_ecross1<0.449183] yes=155,no=156,missing=155
+									155:leaf=0.130158
+									156:leaf=0.227306
+								116:[avg_beta12<28.0811] yes=157,no=158,missing=157
+									157:leaf=-0.149137
+									158:leaf=0.117267
+					28:[max_ecross3<0.16455] yes=49,no=50,missing=49
+						49:[max_ecross1<0.233963] yes=77,no=78,missing=77
+							77:[avg_beta12<6.73915] yes=117,no=118,missing=117
+								117:leaf=0.0421554
+								118:[avg_beta23<8.0165] yes=159,no=160,missing=159
+									159:leaf=0.072229
+									160:[max_ecross1<0.0764257] yes=203,no=204,missing=203
+										203:[avg_beta23<10.0708] yes=261,no=262,missing=261
+											261:[norm_max_a3<0.000142466] yes=315,no=316,missing=315
+												315:leaf=0.0766157
+												316:leaf=0.223747
+											262:[avg_ecross2<1.03088] yes=317,no=318,missing=317
+												317:leaf=0.228608
+												318:leaf=0.171359
+										204:[avg_beta12<12.4087] yes=263,no=264,missing=263
+											263:leaf=0.0662992
+											264:leaf=0.209793
+							78:[avg_ecross1<0.270351] yes=119,no=120,missing=119
+								119:leaf=0.121739
+								120:leaf=0.0143653
+						50:leaf=-0.11009
+				16:[avg_ecross1<0.940889] yes=29,no=30,missing=29
+					29:[std_ecross2<0.0400288] yes=51,no=52,missing=51
+						51:[max_ecross1<0.907262] yes=79,no=80,missing=79
+							79:[max_ecross2<0.0857781] yes=121,no=122,missing=121
+								121:[avg_ecross1<0.389257] yes=161,no=162,missing=161
+									161:[max_ecross1<0.467165] yes=205,no=206,missing=205
+										205:leaf=0.236954
+										206:[std_ecross2<0.0119821] yes=265,no=266,missing=265
+											265:[avg_beta12<9.98286] yes=319,no=320,missing=319
+												319:leaf=0.098966
+												320:leaf=0.228146
+											266:leaf=0.00203007
+									162:[avg_ecross3<0.053621] yes=207,no=208,missing=207
+										207:leaf=-0.0259366
+										208:[avg_iH1<3.52686] yes=267,no=268,missing=267
+											267:leaf=0.114568
+											268:leaf=0.240637
+								122:[std_beta12<0.0876769] yes=163,no=164,missing=163
+									163:[min_ecross1<0.505565] yes=209,no=210,missing=209
+										209:[avg_beta12<5.7556] yes=269,no=270,missing=269
+											269:leaf=0.0145983
+											270:[avg_beta23<8.67436] yes=321,no=322,missing=321
+												321:leaf=0.103329
+												322:leaf=0.215524
+										210:leaf=-0.0587809
+									164:[avg_iH1<0.617025] yes=211,no=212,missing=211
+										211:leaf=0.150048
+										212:leaf=-0.160971
+							80:leaf=-0.00875505
+						52:[avg_beta12<16.8401] yes=81,no=82,missing=81
+							81:[norm_max_window10_a1<0.00030255] yes=123,no=124,missing=123
+								123:leaf=-0.329253
+								124:[avg_beta23<12.1142] yes=165,no=166,missing=165
+									165:leaf=-0.115153
+									166:[max_ecross1<0.314632] yes=213,no=214,missing=213
+										213:[avg_beta12<6.48782] yes=271,no=272,missing=271
+											271:leaf=0.088512
+											272:[norm_max_a1<0.00101346] yes=323,no=324,missing=323
+												323:leaf=0.154659
+												324:leaf=0.239923
+										214:leaf=0.0202427
+							82:[max_ecross1<0.460422] yes=125,no=126,missing=125
+								125:[std_beta12<0.0518343] yes=167,no=168,missing=167
+									167:leaf=0.238873
+									168:leaf=0.152499
+								126:leaf=0.0508427
+					30:leaf=-0.169825
+			8:[avg_ecross3<0.898663] yes=17,no=18,missing=17
+				17:[avg_ecross1<0.622093] yes=31,no=32,missing=31
+					31:[std_beta12<0.0267204] yes=53,no=54,missing=53
+						53:[std_ecross2<0.00619654] yes=83,no=84,missing=83
+							83:[max_ecross3<0.691549] yes=127,no=128,missing=127
+								127:[max_ecross1<0.349672] yes=169,no=170,missing=169
+									169:[avg_iH1<0.0859361] yes=215,no=216,missing=215
+										215:[max_ecross2<0.230946] yes=273,no=274,missing=273
+											273:[std_beta12<0.0106227] yes=325,no=326,missing=325
+												325:leaf=0.23357
+												326:leaf=0.155174
+											274:leaf=0.0766289
+										216:[avg_ecross3<0.532334] yes=275,no=276,missing=275
+											275:leaf=0.23524
+											276:leaf=0.156513
+									170:leaf=0.144181
+								128:[norm_max_a3<0.0013953] yes=171,no=172,missing=171
+									171:leaf=0.00292956
+									172:[min_ecross2<0.0643942] yes=217,no=218,missing=217
+										217:[min_ecross3<0.682846] yes=277,no=278,missing=277
+											277:[std_ecross1<0.0047778] yes=327,no=328,missing=327
+												327:leaf=0.0832595
+												328:leaf=0.214929
+											278:leaf=0.241659
+										218:leaf=0.0448466
+							84:[max_ecross3<0.126792] yes=129,no=130,missing=129
+								129:[avg_beta23<16.9885] yes=173,no=174,missing=173
+									173:[avg_beta12<9.21276] yes=219,no=220,missing=219
+										219:leaf=0.0148339
+										220:[norm_max_a3<0.000831872] yes=279,no=280,missing=279
+											279:[norm_std_a2<0.00013774] yes=329,no=330,missing=329
+												329:leaf=0.00238239
+												330:leaf=0.208149
+											280:leaf=0.242751
+									174:[norm_std_a2<0.00010854] yes=221,no=222,missing=221
+										221:leaf=0.164663
+										222:leaf=0.236948
+								130:[avg_ecross3<0.715246] yes=175,no=176,missing=175
+									175:[max_ecross2<0.0781729] yes=223,no=224,missing=223
+										223:[avg_beta12<8.87016] yes=281,no=282,missing=281
+											281:leaf=0.0151028
+											282:[norm_max_a1<2.80104e-05] yes=331,no=332,missing=331
+												331:leaf=0.132937
+												332:leaf=0.211076
+										224:[std_beta23<0.122014] yes=283,no=284,missing=283
+											283:[min_beta23<5.72216] yes=333,no=334,missing=333
+												333:leaf=-0.113933
+												334:leaf=0.135879
+											284:leaf=-0.256144
+									176:leaf=-0.186897
+						54:[avg_ecross3<0.274841] yes=85,no=86,missing=85
+							85:[min_beta23<4.606] yes=131,no=132,missing=131
+								131:leaf=-0.218012
+								132:[max_ecross1<0.775396] yes=177,no=178,missing=177
+									177:[avg_beta12<17.9287] yes=225,no=226,missing=225
+										225:[max_beta23<13.4333] yes=285,no=286,missing=285
+											285:[norm_max_a1<0.0011848] yes=335,no=336,missing=335
+												335:leaf=-0.339422
+												336:leaf=0.0613845
+											286:[avg_ecross2<0.461013] yes=337,no=338,missing=337
+												337:leaf=0.17473
+												338:leaf=-0.166967
+										226:[max_ecross3<0.514441] yes=287,no=288,missing=287
+											287:[min_ecross1<0.0184452] yes=339,no=340,missing=339
+												339:leaf=0.236275
+												340:leaf=0.146344
+											288:[avg_beta12<25.2399] yes=341,no=342,missing=341
+												341:leaf=-0.1418
+												342:leaf=0.116356
+									178:[max_ecross3<0.0109332] yes=227,no=228,missing=227
+										227:leaf=0.163645
+										228:leaf=-0.286804
+							86:[norm_std_window10_a2<0.000453137] yes=133,no=134,missing=133
+								133:[avg_ecross1<0.0557172] yes=179,no=180,missing=179
+									179:[avg_beta12<26.2865] yes=229,no=230,missing=229
+										229:leaf=-0.0661846
+										230:leaf=0.193951
+									180:[max_ecross2<0.230707] yes=231,no=232,missing=231
+										231:leaf=-0.334477
+										232:leaf=-0.154224
+								134:[max_ecross2<0.180563] yes=181,no=182,missing=181
+									181:[max_ecross2<0.150718] yes=233,no=234,missing=233
+										233:leaf=0.0524366
+										234:leaf=0.275939
+									182:[min_ecross2<0.0840614] yes=235,no=236,missing=235
+										235:leaf=-0.169919
+										236:leaf=0.115142
+					32:leaf=-0.26176
+				18:[min_ecross1<0.0002242] yes=33,no=34,missing=33
+					33:leaf=-0.0398769
+					34:leaf=-0.252116
+		4:[max_ecross2<0.607464] yes=9,no=10,missing=9
+			9:[min_beta23<19.3197] yes=19,no=20,missing=19
+				19:[min_beta12<21.4674] yes=35,no=36,missing=35
+					35:[avg_ecross2<0.118409] yes=55,no=56,missing=55
+						55:[norm_max_window10_a1<5.61472e-05] yes=87,no=88,missing=87
+							87:leaf=-0.19985
+							88:[std_beta12<0.0465491] yes=135,no=136,missing=135
+								135:[norm_std_a1<0.000148018] yes=183,no=184,missing=183
+									183:[norm_std_window10_a2<0.000228833] yes=237,no=238,missing=237
+										237:leaf=-0.0216847
+										238:[avg_ecross3<0.0315068] yes=289,no=290,missing=289
+											289:leaf=0.220847
+											290:leaf=0.0825026
+									184:[norm_std_a1<0.000257043] yes=239,no=240,missing=239
+										239:leaf=0.243319
+										240:leaf=0.107388
+								136:[std_ecross1<0.0244194] yes=185,no=186,missing=185
+									185:leaf=-0.289094
+									186:leaf=0.0970912
+						56:[std_beta12<0.0226112] yes=89,no=90,missing=89
+							89:[norm_max_a1<0.00015912] yes=137,no=138,missing=137
+								137:[norm_std_a2<0.000216355] yes=187,no=188,missing=187
+									187:leaf=-0.357206
+									188:leaf=0.01616
+								138:leaf=0.122969
+							90:leaf=-0.292408
+					36:[min_ecross1<0.15289] yes=57,no=58,missing=57
+						57:[avg_ecross2<0.399084] yes=91,no=92,missing=91
+							91:[min_ecross3<0.255926] yes=139,no=140,missing=139
+								139:[avg_beta12<24.249] yes=189,no=190,missing=189
+									189:[norm_std_a1<3.23639e-05] yes=241,no=242,missing=241
+										241:[avg_beta12<23.0093] yes=291,no=292,missing=291
+											291:leaf=0.225747
+											292:leaf=0.0365469
+										242:leaf=-0.0783352
+									190:[min_ecross2<0.392627] yes=243,no=244,missing=243
+										243:[min_beta23<8.17781] yes=293,no=294,missing=293
+											293:leaf=0.150086
+											294:leaf=0.238042
+										244:[avg_iH1<2.29587] yes=295,no=296,missing=295
+											295:leaf=-0.00916929
+											296:leaf=0.204535
+								140:leaf=-0.0408594
+							92:leaf=-0.0941662
+						58:[std_ecross2<0.0144629] yes=93,no=94,missing=93
+							93:leaf=0.0986012
+							94:leaf=-0.329265
+				20:[norm_max_a3<0.000596141] yes=37,no=38,missing=37
+					37:[std_ecross1<0.112024] yes=59,no=60,missing=59
+						59:[std_beta12<0.024859] yes=95,no=96,missing=95
+							95:[min_ecross1<0.255691] yes=141,no=142,missing=141
+								141:[min_ecross3<0.309152] yes=191,no=192,missing=191
+									191:[std_ecross1<0.000447031] yes=245,no=246,missing=245
+										245:[max_ecross1<0.00386477] yes=297,no=298,missing=297
+											297:leaf=0.228118
+											298:leaf=0.00471644
+										246:[min_ecross2<0.385877] yes=299,no=300,missing=299
+											299:leaf=0.238711
+											300:[avg_beta12<24.6161] yes=343,no=344,missing=343
+												343:leaf=0.131221
+												344:leaf=0.234255
+									192:[avg_ecross2<0.0869391] yes=247,no=248,missing=247
+										247:[avg_ecross3<0.0401366] yes=301,no=302,missing=301
+											301:leaf=0.157866
+											302:leaf=0.243567
+										248:[std_ecross2<0.0287079] yes=303,no=304,missing=303
+											303:leaf=-0.0780546
+											304:leaf=0.135539
+								142:[min_ecross2<0.341944] yes=193,no=194,missing=193
+									193:leaf=-0.0263472
+									194:leaf=0.209062
+							96:[std_ecross2<0.075866] yes=143,no=144,missing=143
+								143:[min_ecross3<0.0759919] yes=195,no=196,missing=195
+									195:[avg_ecross1<0.0509808] yes=249,no=250,missing=249
+										249:[norm_max_a1<4.20213e-05] yes=305,no=306,missing=305
+											305:leaf=0.108755
+											306:[avg_ecross1<0.0170529] yes=345,no=346,missing=345
+												345:leaf=0.137405
+												346:leaf=0.23346
+										250:[std_beta12<0.070183] yes=307,no=308,missing=307
+											307:[avg_ecross1<0.110413] yes=347,no=348,missing=347
+												347:leaf=0.0633697
+												348:leaf=0.22522
+											308:leaf=-0.0966454
+									196:[avg_ecross3<0.028516] yes=251,no=252,missing=251
+										251:leaf=0.112015
+										252:leaf=-0.177802
+								144:leaf=-0.138243
+						60:leaf=-0.154284
+					38:[min_ecross1<0.0111925] yes=61,no=62,missing=61
+						61:leaf=0.0318905
+						62:leaf=-0.302791
+			10:[min_ecross1<0.0191253] yes=21,no=22,missing=21
+				21:[min_beta12<25.5874] yes=39,no=40,missing=39
+					39:[avg_beta12<15.255] yes=63,no=64,missing=63
+						63:[avg_ecross2<0.198057] yes=97,no=98,missing=97
+							97:[avg_ecross1<0.218141] yes=145,no=146,missing=145
+								145:[norm_max_a2<0.00236481] yes=197,no=198,missing=197
+									197:leaf=-0.124328
+									198:leaf=0.192746
+								146:leaf=0.287507
+							98:[max_beta23<11.2359] yes=147,no=148,missing=147
+								147:leaf=-0.0327875
+								148:leaf=-0.252552
+						64:[std_ecross1<0.00429335] yes=99,no=100,missing=99
+							99:[min_ecross2<0.399146] yes=149,no=150,missing=149
+								149:leaf=0.0422198
+								150:leaf=-0.156022
+							100:leaf=-0.265711
+					40:[max_beta23<17.345] yes=65,no=66,missing=65
+						65:[norm_max_window10_a2<0.00112107] yes=101,no=102,missing=101
+							101:leaf=0.122649
+							102:leaf=0.291141
+						66:leaf=-0.0982304
+				22:[norm_std_window10_a2<9.06366e-05] yes=41,no=42,missing=41
+					41:[std_ecross1<0.0189999] yes=67,no=68,missing=67
+						67:[norm_max_a3<8.35042e-05] yes=103,no=104,missing=103
+							103:leaf=0.242145
+							104:leaf=0.0303462
+						68:leaf=-0.248631
+					42:[avg_iH1<0.352795] yes=69,no=70,missing=69
+						69:[avg_ecross1<0.0174257] yes=105,no=106,missing=105
+							105:leaf=-0.259128
+							106:leaf=0.0842145
+						70:[min_ecross3<0.000763553] yes=107,no=108,missing=107
+							107:leaf=-0.117421
+							108:leaf=-0.253474
+	2:[max_ecross2<0.328005] yes=5,no=6,missing=5
+		5:[std_beta23<0.251725] yes=11,no=12,missing=11
+			11:[avg_ecross1<0.134061] yes=23,no=24,missing=23
+				23:[norm_std_window10_a2<0.00131822] yes=43,no=44,missing=43
+					43:leaf=-0.0329037
+					44:[min_ecross2<0.0367462] yes=71,no=72,missing=71
+						71:leaf=0.138192
+						72:[avg_ecross3<0.123797] yes=109,no=110,missing=109
+							109:leaf=0.175412
+							110:leaf=0.288338
+				24:leaf=-0.251924
+			12:leaf=-0.243175
+		6:[max_ecross2<0.466128] yes=13,no=14,missing=13
+			13:[std_ecross2<0.0113996] yes=25,no=26,missing=25
+				25:leaf=0.0285687
+				26:[max_ecross2<0.444958] yes=45,no=46,missing=45
+					45:leaf=-0.25299
+					46:leaf=-0.0767427
+			14:leaf=-0.241851
+booster[6]:
+0:[std_beta12<0.168647] yes=1,no=2,missing=1
+	1:[max_ecross2<0.230246] yes=3,no=4,missing=3
+		3:[std_beta12<0.0158006] yes=7,no=8,missing=7
+			7:[avg_ecross3<0.652476] yes=15,no=16,missing=15
+				15:[max_ecross2<0.0866173] yes=29,no=30,missing=29
+					29:[avg_ecross2<0.628204] yes=53,no=54,missing=53
+						53:[max_ecross3<0.590736] yes=83,no=84,missing=83
+							83:[std_ecross2<0.24789] yes=117,no=118,missing=117
+								117:[norm_a3_slope<4.67736e-10] yes=159,no=160,missing=159
+									159:[avg_beta23<7.75654] yes=207,no=208,missing=207
+										207:[std_ecross2<0.0236884] yes=253,no=254,missing=253
+											253:leaf=0.226616
+											254:[norm_a3_slope<-2.02026e-11] yes=309,no=310,missing=309
+												309:leaf=0.0560422
+												310:leaf=0.1829
+										208:leaf=0.229437
+									160:leaf=0.142692
+								118:leaf=0.122883
+							84:[norm_max_a3<0.0012621] yes=119,no=120,missing=119
+								119:[std_beta12<0.0032258] yes=161,no=162,missing=161
+									161:leaf=0.205114
+									162:leaf=-0.0130675
+								120:[norm_a2_slope<2.89367e-11] yes=163,no=164,missing=163
+									163:[avg_ecross1<0.00813157] yes=209,no=210,missing=209
+										209:leaf=0.123223
+										210:leaf=0.225601
+									164:leaf=0.133863
+						54:[norm_std_a3<6.22274e-05] yes=85,no=86,missing=85
+							85:[norm_a1_slope<1.27407e-12] yes=121,no=122,missing=121
+								121:[avg_ecross3<0.465251] yes=165,no=166,missing=165
+									165:[max_ecross1<0.0789659] yes=211,no=212,missing=211
+										211:leaf=0.229024
+										212:leaf=0.154407
+									166:leaf=0.129673
+								122:[avg_ecross1<0.624036] yes=167,no=168,missing=167
+									167:leaf=0.00469508
+									168:leaf=0.206815
+							86:leaf=0.0311418
+					30:[min_ecross3<0.653147] yes=55,no=56,missing=55
+						55:[avg_beta23<8.64401] yes=87,no=88,missing=87
+							87:[min_beta12<14.9444] yes=123,no=124,missing=123
+								123:leaf=-0.164959
+								124:[norm_a3_slope<1.60701e-10] yes=169,no=170,missing=169
+									169:[std_ecross2<0.047228] yes=213,no=214,missing=213
+										213:[norm_std_a3<8.29877e-05] yes=255,no=256,missing=255
+											255:leaf=0.11776
+											256:[max_ecross2<0.103506] yes=311,no=312,missing=311
+												311:leaf=0.136469
+												312:leaf=0.229288
+										214:[std_ecross1<0.00796494] yes=257,no=258,missing=257
+											257:leaf=-0.107964
+											258:leaf=0.217145
+									170:leaf=0.0157474
+							88:[std_ecross3<0.045964] yes=125,no=126,missing=125
+								125:[min_ecross2<0.00163631] yes=171,no=172,missing=171
+									171:[avg_ecross3<0.180611] yes=215,no=216,missing=215
+										215:[min_beta12<25.7254] yes=259,no=260,missing=259
+											259:[std_beta12<0.0128434] yes=313,no=314,missing=313
+												313:leaf=0.221817
+												314:leaf=0.145419
+											260:leaf=0.0774786
+										216:leaf=0.0361047
+									172:[min_ecross3<0.153119] yes=217,no=218,missing=217
+										217:[max_ecross1<0.127781] yes=261,no=262,missing=261
+											261:leaf=0.227731
+											262:[std_beta12<0.0142323] yes=315,no=316,missing=315
+												315:leaf=0.213767
+												316:leaf=0.132083
+										218:[std_ecross2<0.023739] yes=263,no=264,missing=263
+											263:[std_beta12<0.00938313] yes=317,no=318,missing=317
+												317:leaf=0.221886
+												318:leaf=0.165325
+											264:[norm_std_window10_a1<1.18048e-05] yes=319,no=320,missing=319
+												319:leaf=0.0270311
+												320:leaf=0.203586
+								126:[min_ecross2<0.00288931] yes=173,no=174,missing=173
+									173:leaf=-0.0132221
+									174:[norm_a3_slope<1.96961e-11] yes=219,no=220,missing=219
+										219:[max_ecross2<0.187019] yes=265,no=266,missing=265
+											265:[norm_a2_slope<-2.97786e-12] yes=321,no=322,missing=321
+												321:leaf=0.147497
+												322:leaf=0.2133
+											266:leaf=0.0967636
+										220:[std_ecross2<0.0290558] yes=267,no=268,missing=267
+											267:leaf=0.177087
+											268:leaf=-0.0420552
+						56:leaf=-0.109714
+				16:[max_ecross3<0.28002] yes=31,no=32,missing=31
+					31:[avg_beta23<10.2382] yes=57,no=58,missing=57
+						57:[norm_std_a2<1.71851e-05] yes=89,no=90,missing=89
+							89:leaf=0.213471
+							90:[avg_ecross3<0.820227] yes=127,no=128,missing=127
+								127:[norm_a2_slope<1.73854e-12] yes=175,no=176,missing=175
+									175:leaf=0.00861304
+									176:leaf=0.117917
+								128:leaf=-0.197511
+						58:[norm_std_window10_a3<4.58202e-05] yes=91,no=92,missing=91
+							91:[norm_std_window10_a1<1.10946e-05] yes=129,no=130,missing=129
+								129:leaf=0.226446
+								130:leaf=0.118686
+							92:leaf=0.119208
+					32:leaf=-0.144198
+			8:[max_ecross3<0.522564] yes=17,no=18,missing=17
+				17:[std_ecross2<0.0308542] yes=33,no=34,missing=33
+					33:[avg_beta23<5.01174] yes=59,no=60,missing=59
+						59:leaf=-0.0352012
+						60:[max_ecross1<0.466025] yes=93,no=94,missing=93
+							93:[min_beta12<5.6773] yes=131,no=132,missing=131
+								131:[avg_ecross1<0.459374] yes=177,no=178,missing=177
+									177:[norm_std_a3<0.000181119] yes=221,no=222,missing=221
+										221:[std_ecross3<0.000961219] yes=269,no=270,missing=269
+											269:leaf=0.0195731
+											270:[std_ecross2<0.0182492] yes=323,no=324,missing=323
+												323:leaf=0.235419
+												324:leaf=0.150025
+										222:leaf=-0.0311038
+									178:leaf=-0.108909
+								132:[avg_iH2<4.37451] yes=179,no=180,missing=179
+									179:[max_ecross2<0.156861] yes=223,no=224,missing=223
+										223:[norm_a3_slope<2.70655e-10] yes=271,no=272,missing=271
+											271:[std_ecross2<0.0261725] yes=325,no=326,missing=325
+												325:leaf=0.223548
+												326:leaf=0.182189
+											272:leaf=0.104034
+										224:[norm_a3_slope<-1.51082e-11] yes=273,no=274,missing=273
+											273:leaf=0.0424558
+											274:[std_beta12<0.0627476] yes=327,no=328,missing=327
+												327:leaf=0.209872
+												328:leaf=0.114852
+									180:leaf=0.0710837
+							94:[norm_max_a1<0.00049374] yes=133,no=134,missing=133
+								133:leaf=-0.104596
+								134:[max_ecross3<0.0602228] yes=181,no=182,missing=181
+									181:[std_beta12<0.0768153] yes=225,no=226,missing=225
+										225:leaf=0.227074
+										226:[std_ecross1<0.0155704] yes=275,no=276,missing=275
+											275:leaf=0.217752
+											276:leaf=0.0505482
+									182:[std_ecross2<0.0059245] yes=227,no=228,missing=227
+										227:[std_beta12<0.0712797] yes=277,no=278,missing=277
+											277:leaf=0.207415
+											278:leaf=0.0529094
+										228:leaf=-0.175918
+					34:[norm_a1_slope<5.30226e-11] yes=61,no=62,missing=61
+						61:[min_beta12<12.1712] yes=95,no=96,missing=95
+							95:[avg_beta23<14.9571] yes=135,no=136,missing=135
+								135:[avg_ecross3<0.149132] yes=183,no=184,missing=183
+									183:[std_beta12<0.023158] yes=229,no=230,missing=229
+										229:[norm_std_a3<3.81856e-05] yes=279,no=280,missing=279
+											279:leaf=0.0741305
+											280:leaf=0.225805
+										230:leaf=-0.137459
+									184:[norm_a1_slope<1.70717e-11] yes=231,no=232,missing=231
+										231:leaf=-0.405015
+										232:leaf=-0.000693797
+								136:[avg_ecross1<0.823284] yes=185,no=186,missing=185
+									185:[max_ecross2<0.208743] yes=233,no=234,missing=233
+										233:[max_ecross1<0.229231] yes=281,no=282,missing=281
+											281:[avg_beta23<22.3502] yes=329,no=330,missing=329
+												329:leaf=0.15315
+												330:leaf=0.219932
+											282:leaf=0.0573225
+										234:leaf=-0.0144668
+									186:leaf=-0.190432
+							96:[avg_ecross3<0.62707] yes=137,no=138,missing=137
+								137:[min_ecross3<0.134857] yes=187,no=188,missing=187
+									187:[max_beta12<23.6437] yes=235,no=236,missing=235
+										235:[avg_ecross2<0.408563] yes=283,no=284,missing=283
+											283:[norm_a2_slope<-7.26646e-11] yes=331,no=332,missing=331
+												331:leaf=0.0681431
+												332:leaf=0.209426
+											284:[std_ecross2<0.220005] yes=333,no=334,missing=333
+												333:leaf=-0.0541039
+												334:leaf=0.18715
+										236:[avg_beta23<6.17194] yes=285,no=286,missing=285
+											285:[norm_a2_slope<5.39943e-11] yes=335,no=336,missing=335
+												335:leaf=0.101205
+												336:leaf=0.238296
+											286:leaf=0.235103
+									188:leaf=0.0341425
+								138:leaf=-0.0206058
+						62:[max_ecross2<0.101259] yes=97,no=98,missing=97
+							97:[std_beta12<0.0333747] yes=139,no=140,missing=139
+								139:leaf=0.184615
+								140:leaf=-0.0551127
+							98:leaf=-0.221613
+				18:[std_ecross2<0.000799139] yes=35,no=36,missing=35
+					35:[min_beta12<19.169] yes=63,no=64,missing=63
+						63:leaf=0.253243
+						64:leaf=0.16858
+					36:[norm_std_window10_a3<0.00420639] yes=65,no=66,missing=65
+						65:[std_ecross2<0.0300069] yes=99,no=100,missing=99
+							99:[norm_std_window10_a3<0.000891708] yes=141,no=142,missing=141
+								141:leaf=-0.148264
+								142:[max_ecross1<0.0393312] yes=189,no=190,missing=189
+									189:leaf=0.232522
+									190:leaf=0.00187572
+							100:leaf=-0.304892
+						66:leaf=-0.278618
+		4:[std_ecross3<0.0554668] yes=9,no=10,missing=9
+			9:[max_ecross2<0.557265] yes=19,no=20,missing=19
+				19:[std_beta12<0.0260032] yes=37,no=38,missing=37
+					37:[norm_a3_slope<1.55627e-10] yes=67,no=68,missing=67
+						67:[max_ecross3<0.292107] yes=101,no=102,missing=101
+							101:[avg_ecross2<0.53528] yes=143,no=144,missing=143
+								143:[avg_beta23<19.6527] yes=191,no=192,missing=191
+									191:[norm_a3_slope<1.16345e-11] yes=237,no=238,missing=237
+										237:[max_ecross2<0.424858] yes=287,no=288,missing=287
+											287:[avg_ecross1<0.295179] yes=337,no=338,missing=337
+												337:leaf=0.187533
+												338:leaf=0.021401
+											288:leaf=-0.0364911
+										238:leaf=-0.139861
+									192:[std_ecross2<0.143043] yes=239,no=240,missing=239
+										239:[avg_ecross1<0.00557646] yes=289,no=290,missing=289
+											289:[max_ecross3<0.0508153] yes=339,no=340,missing=339
+												339:leaf=0.222777
+												340:leaf=0.0589249
+											290:[norm_a1_slope<-2.28213e-11] yes=341,no=342,missing=341
+												341:leaf=0.124746
+												342:leaf=0.217671
+										240:leaf=0.110991
+								144:[max_ecross1<0.0641321] yes=193,no=194,missing=193
+									193:leaf=0.176377
+									194:leaf=-0.246044
+							102:[avg_iH2<2.05841] yes=145,no=146,missing=145
+								145:[min_ecross3<0.00359826] yes=195,no=196,missing=195
+									195:leaf=-0.0828098
+									196:[std_ecross2<0.00187778] yes=241,no=242,missing=241
+										241:[norm_a2_slope<-1.2085e-12] yes=291,no=292,missing=291
+											291:leaf=0.151379
+											292:leaf=0.23687
+										242:[norm_max_a3<0.000960269] yes=293,no=294,missing=293
+											293:[avg_ecross1<0.0153546] yes=343,no=344,missing=343
+												343:leaf=0.0129967
+												344:leaf=0.157997
+											294:leaf=-0.0395085
+								146:leaf=-0.154356
+						68:leaf=-0.178686
+					38:[min_ecross3<0.418643] yes=69,no=70,missing=69
+						69:[avg_beta23<18.0659] yes=103,no=104,missing=103
+							103:[min_beta12<19.4328] yes=147,no=148,missing=147
+								147:[norm_std_a2<2.64762e-05] yes=197,no=198,missing=197
+									197:leaf=0.254722
+									198:[min_beta23<15.1045] yes=243,no=244,missing=243
+										243:[max_beta12<17.7467] yes=295,no=296,missing=295
+											295:[max_ecross2<0.387575] yes=345,no=346,missing=345
+												345:leaf=-0.356569
+												346:leaf=-0.207686
+											296:leaf=-0.0141528
+										244:[avg_iH2<0.803477] yes=297,no=298,missing=297
+											297:[std_ecross3<0.00574754] yes=347,no=348,missing=347
+												347:leaf=-0.0443765
+												348:leaf=0.174805
+											298:leaf=-0.193455
+								148:[max_ecross1<0.313742] yes=199,no=200,missing=199
+									199:[norm_max_a1<6.20831e-05] yes=245,no=246,missing=245
+										245:[avg_beta23<10.4427] yes=299,no=300,missing=299
+											299:leaf=-0.175749
+											300:[std_ecross1<0.000258121] yes=349,no=350,missing=349
+												349:leaf=0.193452
+												350:leaf=0.0885
+										246:[norm_max_a1<0.000110563] yes=301,no=302,missing=301
+											301:[norm_a2_slope<6.19036e-11] yes=351,no=352,missing=351
+												351:leaf=0.231261
+												352:leaf=0.145742
+											302:[max_beta12<24.8185] yes=353,no=354,missing=353
+												353:leaf=0.040779
+												354:leaf=0.179952
+									200:leaf=-0.163053
+							104:[avg_ecross2<0.458552] yes=149,no=150,missing=149
+								149:[norm_a2_slope<-1.56015e-10] yes=201,no=202,missing=201
+									201:[norm_std_window10_a1<0.00054376] yes=247,no=248,missing=247
+										247:leaf=-0.213562
+										248:leaf=0.139294
+									202:[norm_a1_slope<-1.97208e-10] yes=249,no=250,missing=249
+										249:leaf=-0.0815975
+										250:[min_ecross2<0.019206] yes=303,no=304,missing=303
+											303:[avg_ecross2<0.0919904] yes=355,no=356,missing=355
+												355:leaf=0.155907
+												356:leaf=-0.0534526
+											304:[norm_max_window10_a2<0.00116508] yes=357,no=358,missing=357
+												357:leaf=0.198466
+												358:leaf=0.107674
+								150:leaf=-0.116893
+						70:leaf=-0.289731
+				20:[norm_a2_slope<5.10846e-11] yes=39,no=40,missing=39
+					39:[norm_a2_slope<-2.4075e-11] yes=71,no=72,missing=71
+						71:[avg_ecross1<0.0433029] yes=105,no=106,missing=105
+							105:[avg_ecross1<0.01727] yes=151,no=152,missing=151
+								151:leaf=-0.260969
+								152:[max_ecross3<0.0459636] yes=203,no=204,missing=203
+									203:leaf=0.22561
+									204:leaf=-0.021701
+							106:[max_ecross2<0.781486] yes=153,no=154,missing=153
+								153:leaf=-0.274139
+								154:leaf=-0.139424
+						72:[max_ecross2<0.764642] yes=107,no=108,missing=107
+							107:[min_ecross3<0.312216] yes=155,no=156,missing=155
+								155:[avg_beta23<9.5162] yes=205,no=206,missing=205
+									205:leaf=0.243513
+									206:[norm_std_window10_a1<0.00010968] yes=251,no=252,missing=251
+										251:[norm_a1_slope<-5.56948e-13] yes=305,no=306,missing=305
+											305:leaf=-0.200554
+											306:[norm_max_a3<1.16471e-05] yes=359,no=360,missing=359
+												359:leaf=0.187411
+												360:leaf=0.0208884
+										252:[std_beta12<0.0157479] yes=307,no=308,missing=307
+											307:leaf=0.26286
+											308:[std_beta12<0.0570967] yes=361,no=362,missing=361
+												361:leaf=-0.0519775
+												362:leaf=0.189571
+								156:leaf=-0.0851245
+							108:leaf=-0.173348
+					40:leaf=-0.25613
+			10:[std_beta12<0.0142572] yes=21,no=22,missing=21
+				21:[avg_beta23<15.4678] yes=41,no=42,missing=41
+					41:[max_ecross3<0.50256] yes=73,no=74,missing=73
+						73:[max_ecross2<0.26597] yes=109,no=110,missing=109
+							109:leaf=-0.0436285
+							110:leaf=-0.404306
+						74:[avg_ecross1<0.0887965] yes=111,no=112,missing=111
+							111:leaf=-0.0949418
+							112:leaf=0.168153
+					42:[norm_a3_slope<-9.92639e-12] yes=75,no=76,missing=75
+						75:leaf=0.232166
+						76:leaf=0.0944441
+				22:[max_beta12<20.0041] yes=43,no=44,missing=43
+					43:leaf=-0.259002
+					44:[max_ecross3<0.507282] yes=77,no=78,missing=77
+						77:[norm_a3_slope<3.44703e-12] yes=113,no=114,missing=113
+							113:leaf=-0.144905
+							114:[norm_std_window10_a3<0.000576533] yes=157,no=158,missing=157
+								157:leaf=0.0666333
+								158:leaf=0.249059
+						78:leaf=-0.250227
+	2:[max_ecross2<0.18192] yes=5,no=6,missing=5
+		5:[min_beta12<4.73582] yes=11,no=12,missing=11
+			11:leaf=-0.238478
+			12:[norm_max_a3<0.00145001] yes=23,no=24,missing=23
+				23:[max_ecross2<0.0868095] yes=45,no=46,missing=45
+					45:[std_beta12<0.284499] yes=79,no=80,missing=79
+						79:[norm_a3_slope<-8.0949e-13] yes=115,no=116,missing=115
+							115:leaf=0.249026
+							116:leaf=0.149765
+						80:leaf=0.100954
+					46:[norm_std_a2<0.000901863] yes=81,no=82,missing=81
+						81:leaf=-0.0868046
+						82:leaf=0.172958
+				24:leaf=-0.0931625
+		6:[norm_max_a2<0.00132015] yes=13,no=14,missing=13
+			13:[std_ecross1<0.0150897] yes=25,no=26,missing=25
+				25:[max_beta23<16.3184] yes=47,no=48,missing=47
+					47:leaf=0.169595
+					48:leaf=-0.0145742
+				26:[norm_max_a2<0.000950277] yes=49,no=50,missing=49
+					49:leaf=-0.249084
+					50:leaf=-0.0980291
+			14:[min_beta12<28.6111] yes=27,no=28,missing=27
+				27:[max_ecross3<0.00131207] yes=51,no=52,missing=51
+					51:leaf=-0.103319
+					52:leaf=-0.232672
+				28:leaf=-0.0787607
+booster[7]:
+0:[norm_max_a2<0.00346695] yes=1,no=2,missing=1
+	1:[std_beta23<0.0199795] yes=3,no=4,missing=3
+		3:[std_beta12<0.0148759] yes=7,no=8,missing=7
+			7:[max_ecross2<0.230296] yes=15,no=16,missing=15
+				15:[avg_ecross2<0.757183] yes=25,no=26,missing=25
+					25:[max_ecross2<0.0851391] yes=45,no=46,missing=45
+						45:[avg_ecross1<0.894715] yes=77,no=78,missing=77
+							77:[std_ecross2<0.168489] yes=109,no=110,missing=109
+								109:[std_ecross3<0.281099] yes=147,no=148,missing=147
+									147:leaf=0.222615
+									148:leaf=0.14017
+								110:[min_beta23<11.5061] yes=149,no=150,missing=149
+									149:leaf=0.101822
+									150:leaf=0.207001
+							78:leaf=0.136461
+						46:[min_ecross1<0.305723] yes=79,no=80,missing=79
+							79:[min_beta23<7.55917] yes=111,no=112,missing=111
+								111:leaf=0.0719966
+								112:[std_ecross3<0.0457328] yes=151,no=152,missing=151
+									151:[max_ecross3<0.289999] yes=189,no=190,missing=189
+										189:[norm_a1_slope<3.48731e-11] yes=235,no=236,missing=235
+											235:leaf=0.215289
+											236:leaf=0.148185
+										190:[std_beta12<0.00887388] yes=237,no=238,missing=237
+											237:[std_ecross2<0.0151779] yes=289,no=290,missing=289
+												289:leaf=0.216012
+												290:leaf=0.158488
+											238:leaf=0.0726388
+									152:[norm_std_a3<3.93375e-05] yes=191,no=192,missing=191
+										191:[min_beta23<14.5251] yes=239,no=240,missing=239
+											239:leaf=0.149265
+											240:leaf=0.223654
+										192:[avg_iH2<1.69921] yes=241,no=242,missing=241
+											241:leaf=0.206017
+											242:[max_ecross2<0.153656] yes=291,no=292,missing=291
+												291:leaf=0.146618
+												292:leaf=-0.0292501
+							80:[avg_iH2<0.674897] yes=113,no=114,missing=113
+								113:leaf=0.193872
+								114:leaf=0.0266959
+					26:[avg_ecross2<0.807213] yes=47,no=48,missing=47
+						47:leaf=0.033613
+						48:[norm_a1_slope<1.3158e-12] yes=81,no=82,missing=81
+							81:[avg_ecross2<1.16117] yes=115,no=116,missing=115
+								115:[norm_a2_slope<6.8798e-12] yes=153,no=154,missing=153
+									153:leaf=0.213675
+									154:leaf=0.12831
+								116:leaf=0.116829
+							82:[avg_ecross2<0.899486] yes=117,no=118,missing=117
+								117:leaf=0.208714
+								118:leaf=-0.0102028
+				16:[min_ecross2<0.00199404] yes=27,no=28,missing=27
+					27:leaf=-0.0734764
+					28:[avg_ecross3<0.526704] yes=49,no=50,missing=49
+						49:[min_beta23<24.256] yes=83,no=84,missing=83
+							83:[avg_ecross2<0.258105] yes=119,no=120,missing=119
+								119:[std_beta23<0.0156871] yes=155,no=156,missing=155
+									155:[avg_iH1<0.48319] yes=193,no=194,missing=193
+										193:[min_beta12<25.4029] yes=243,no=244,missing=243
+											243:[max_ecross2<0.319603] yes=293,no=294,missing=293
+												293:leaf=0.201884
+												294:leaf=0.0901611
+											244:leaf=0.0547833
+										194:[avg_ecross1<0.288635] yes=245,no=246,missing=245
+											245:leaf=0.209449
+											246:leaf=0.125591
+									156:[min_beta12<22.6917] yes=195,no=196,missing=195
+										195:leaf=-0.058905
+										196:[norm_a3_slope<-7.44775e-12] yes=247,no=248,missing=247
+											247:leaf=0.210359
+											248:leaf=0.0762478
+								120:[min_ecross2<0.125604] yes=157,no=158,missing=157
+									157:leaf=-0.128792
+									158:[min_ecross3<0.00693712] yes=197,no=198,missing=197
+										197:[std_beta12<0.00995792] yes=249,no=250,missing=249
+											249:leaf=0.139809
+											250:leaf=0.222677
+										198:leaf=0.0151945
+							84:[min_ecross1<0.247582] yes=121,no=122,missing=121
+								121:leaf=0.216477
+								122:leaf=0.120642
+						50:leaf=0.0413074
+			8:[max_ecross2<0.521236] yes=17,no=18,missing=17
+				17:[avg_ecross1<0.937942] yes=29,no=30,missing=29
+					29:[max_ecross2<0.112253] yes=51,no=52,missing=51
+						51:[min_beta12<5.48249] yes=85,no=86,missing=85
+							85:[norm_a2_slope<-4.38319e-12] yes=123,no=124,missing=123
+								123:leaf=-0.0724679
+								124:[norm_std_a2<6.07174e-05] yes=159,no=160,missing=159
+									159:[norm_std_window10_a3<1.99869e-05] yes=199,no=200,missing=199
+										199:leaf=0.0596533
+										200:[min_ecross2<0.0138941] yes=251,no=252,missing=251
+											251:leaf=0.232035
+											252:leaf=0.127078
+									160:leaf=-0.0475318
+							86:[min_ecross1<0.707596] yes=125,no=126,missing=125
+								125:[avg_ecross1<0.188878] yes=161,no=162,missing=161
+									161:[avg_ecross2<0.268307] yes=201,no=202,missing=201
+										201:leaf=0.219627
+										202:[norm_a3_slope<-4.65367e-13] yes=253,no=254,missing=253
+											253:leaf=0.0662473
+											254:leaf=0.212199
+									162:[norm_a1_slope<3.44395e-10] yes=203,no=204,missing=203
+										203:[min_beta23<13.1898] yes=255,no=256,missing=255
+											255:[norm_max_a3<3.30121e-05] yes=295,no=296,missing=295
+												295:leaf=0.201742
+												296:leaf=0.0503566
+											256:[avg_ecross3<0.182244] yes=297,no=298,missing=297
+												297:leaf=0.206811
+												298:leaf=0.144619
+										204:leaf=0.0507098
+								126:[norm_max_a2<7.9986e-05] yes=163,no=164,missing=163
+									163:leaf=0.194928
+									164:leaf=-0.0723182
+						52:[std_beta12<0.063931] yes=87,no=88,missing=87
+							87:[std_ecross2<0.121735] yes=127,no=128,missing=127
+								127:[min_ecross1<0.486989] yes=165,no=166,missing=165
+									165:[max_ecross3<0.0619074] yes=205,no=206,missing=205
+										205:[max_beta12<13.1695] yes=257,no=258,missing=257
+											257:[norm_std_window10_a3<4.6413e-06] yes=299,no=300,missing=299
+												299:leaf=-0.0334469
+												300:leaf=0.18664
+											258:[max_beta23<9.3801] yes=301,no=302,missing=301
+												301:leaf=0.141531
+												302:leaf=0.213896
+										206:[avg_ecross2<0.376063] yes=259,no=260,missing=259
+											259:[avg_ecross1<0.277851] yes=303,no=304,missing=303
+												303:leaf=0.15294
+												304:leaf=0.00681068
+											260:leaf=-0.069654
+									166:leaf=-0.0150611
+								128:[min_beta12<17.9266] yes=167,no=168,missing=167
+									167:[std_beta12<0.0201604] yes=207,no=208,missing=207
+										207:leaf=0.056298
+										208:leaf=-0.301208
+									168:[min_ecross1<0.00710332] yes=209,no=210,missing=209
+										209:leaf=0.213519
+										210:leaf=0.0918473
+							88:[norm_max_a2<0.000380064] yes=129,no=130,missing=129
+								129:[norm_a1_slope<-1.28913e-10] yes=169,no=170,missing=169
+									169:leaf=-0.0984068
+									170:[std_ecross1<0.0062538] yes=211,no=212,missing=211
+										211:leaf=0.232857
+										212:[avg_ecross3<0.0839507] yes=261,no=262,missing=261
+											261:leaf=-0.0134569
+											262:leaf=0.108251
+								130:leaf=-0.267622
+					30:[min_ecross3<0.000261938] yes=53,no=54,missing=53
+						53:leaf=0.10815
+						54:leaf=-0.206929
+				18:[max_ecross2<0.665929] yes=31,no=32,missing=31
+					31:[avg_iH2<1.09844] yes=55,no=56,missing=55
+						55:[min_beta23<25.8146] yes=89,no=90,missing=89
+							89:leaf=0.00811166
+							90:leaf=0.199236
+						56:leaf=-0.215166
+					32:leaf=-0.250003
+		4:[max_ecross2<0.290133] yes=9,no=10,missing=9
+			9:[avg_ecross2<0.613531] yes=19,no=20,missing=19
+				19:[min_ecross1<0.31063] yes=33,no=34,missing=33
+					33:[std_ecross2<0.0364966] yes=57,no=58,missing=57
+						57:[min_beta12<4.76328] yes=91,no=92,missing=91
+							91:leaf=-0.139742
+							92:[max_ecross3<0.237378] yes=131,no=132,missing=131
+								131:[min_beta23<15.7049] yes=171,no=172,missing=171
+									171:[min_beta12<10.8834] yes=213,no=214,missing=213
+										213:[min_ecross1<0.00383697] yes=263,no=264,missing=263
+											263:leaf=-0.0878317
+											264:[avg_ecross1<0.0642498] yes=305,no=306,missing=305
+												305:leaf=0.188737
+												306:leaf=-0.00418448
+										214:[max_ecross2<0.17528] yes=265,no=266,missing=265
+											265:[avg_ecross2<0.290119] yes=307,no=308,missing=307
+												307:leaf=0.215733
+												308:leaf=0.133783
+											266:[min_beta12<23.2877] yes=309,no=310,missing=309
+												309:leaf=-0.023371
+												310:leaf=0.210875
+									172:[min_ecross1<0.14599] yes=215,no=216,missing=215
+										215:[norm_a3_slope<-1.34161e-11] yes=267,no=268,missing=267
+											267:[max_ecross3<0.122505] yes=311,no=312,missing=311
+												311:leaf=0.107708
+												312:leaf=0.220152
+											268:[max_ecross2<0.264791] yes=313,no=314,missing=313
+												313:leaf=0.227135
+												314:leaf=0.167783
+										216:leaf=0.102739
+								132:[norm_max_a2<0.000233613] yes=173,no=174,missing=173
+									173:[std_ecross2<0.00467424] yes=217,no=218,missing=217
+										217:[norm_max_a3<0.0126999] yes=269,no=270,missing=269
+											269:[norm_max_a3<0.000513993] yes=315,no=316,missing=315
+												315:leaf=0.137522
+												316:leaf=0.211934
+											270:leaf=0.0979957
+										218:[max_beta23<7.03424] yes=271,no=272,missing=271
+											271:leaf=-0.15579
+											272:[min_ecross1<0.0744615] yes=317,no=318,missing=317
+												317:leaf=0.185725
+												318:leaf=0.0279642
+									174:[min_beta12<9.43604] yes=219,no=220,missing=219
+										219:[avg_ecross3<0.0414967] yes=273,no=274,missing=273
+											273:leaf=0.0974861
+											274:leaf=-0.315151
+										220:[min_ecross3<0.530004] yes=275,no=276,missing=275
+											275:[max_beta23<6.58899] yes=319,no=320,missing=319
+												319:leaf=-0.101429
+												320:leaf=0.15338
+											276:[norm_max_window10_a3<0.00553439] yes=321,no=322,missing=321
+												321:leaf=-0.197263
+												322:leaf=0.140134
+						58:[std_beta23<0.129462] yes=93,no=94,missing=93
+							93:[avg_ecross3<0.560554] yes=133,no=134,missing=133
+								133:[min_beta12<6.86726] yes=175,no=176,missing=175
+									175:[max_ecross2<0.110572] yes=221,no=222,missing=221
+										221:[norm_std_a2<0.000434624] yes=277,no=278,missing=277
+											277:leaf=0.0769322
+											278:leaf=0.240554
+										222:[avg_ecross1<0.142636] yes=279,no=280,missing=279
+											279:leaf=0.0312084
+											280:leaf=-0.29486
+									176:[max_beta23<15.7046] yes=223,no=224,missing=223
+										223:[min_beta12<16.2605] yes=281,no=282,missing=281
+											281:[max_ecross2<0.0983645] yes=323,no=324,missing=323
+												323:leaf=0.128017
+												324:leaf=-0.172756
+											282:[min_ecross2<0.00336381] yes=325,no=326,missing=325
+												325:leaf=-0.083951
+												326:leaf=0.171955
+										224:[norm_a3_slope<2.06512e-11] yes=283,no=284,missing=283
+											283:[norm_a1_slope<1.32856e-12] yes=327,no=328,missing=327
+												327:leaf=0.210493
+												328:leaf=0.101262
+											284:leaf=0.0171273
+								134:[norm_a2_slope<8.6495e-13] yes=177,no=178,missing=177
+									177:leaf=-0.341048
+									178:[norm_max_window10_a2<8.81209e-05] yes=225,no=226,missing=225
+										225:leaf=0.210625
+										226:leaf=-0.0674185
+							94:leaf=-0.224058
+					34:[norm_std_a2<2.48506e-05] yes=59,no=60,missing=59
+						59:leaf=0.209374
+						60:[norm_a1_slope<-8.30105e-11] yes=95,no=96,missing=95
+							95:[min_beta12<18.5891] yes=135,no=136,missing=135
+								135:leaf=-0.113971
+								136:leaf=0.172634
+							96:[min_ecross1<0.393974] yes=137,no=138,missing=137
+								137:leaf=-0.0528786
+								138:leaf=-0.359829
+				20:[avg_iH1<1.55005] yes=35,no=36,missing=35
+					35:leaf=-0.305799
+					36:[avg_ecross1<0.536425] yes=61,no=62,missing=61
+						61:[max_ecross3<0.125205] yes=97,no=98,missing=97
+							97:[std_ecross3<0.129438] yes=139,no=140,missing=139
+								139:leaf=-0.0461297
+								140:[max_ecross3<0.0436695] yes=179,no=180,missing=179
+									179:leaf=0.229675
+									180:leaf=0.126086
+							98:leaf=-0.114633
+						62:leaf=-0.240254
+			10:[norm_a2_slope<9.6514e-11] yes=21,no=22,missing=21
+				21:[norm_a2_slope<-1.83016e-10] yes=37,no=38,missing=37
+					37:[max_ecross3<0.046631] yes=63,no=64,missing=63
+						63:[avg_ecross1<0.0502172] yes=99,no=100,missing=99
+							99:leaf=0.1884
+							100:leaf=-0.0953739
+						64:[avg_iH1<4.66851] yes=101,no=102,missing=101
+							101:leaf=-0.24887
+							102:leaf=-0.136074
+					38:[min_ecross1<0.411353] yes=65,no=66,missing=65
+						65:[min_ecross3<0.290903] yes=103,no=104,missing=103
+							103:[std_ecross3<0.0647564] yes=141,no=142,missing=141
+								141:[avg_iH1<4.09742] yes=181,no=182,missing=181
+									181:[min_beta23<24.6008] yes=227,no=228,missing=227
+										227:[max_beta12<24.2073] yes=285,no=286,missing=285
+											285:[avg_iH2<3.08038] yes=329,no=330,missing=329
+												329:leaf=0.072957
+												330:leaf=-0.194091
+											286:[min_ecross1<0.0792644] yes=331,no=332,missing=331
+												331:leaf=0.188146
+												332:leaf=-0.0864006
+										228:[std_ecross2<0.00449082] yes=287,no=288,missing=287
+											287:leaf=0.0204787
+											288:[min_ecross2<0.465201] yes=333,no=334,missing=333
+												333:leaf=0.213881
+												334:leaf=0.0418612
+									182:[norm_a1_slope<-7.64018e-12] yes=229,no=230,missing=229
+										229:leaf=0.078646
+										230:leaf=-0.21958
+								142:[avg_iH1<2.83353] yes=183,no=184,missing=183
+									183:[min_ecross2<0.0538487] yes=231,no=232,missing=231
+										231:leaf=-0.109706
+										232:leaf=-0.283263
+									184:[avg_ecross1<0.171342] yes=233,no=234,missing=233
+										233:leaf=0.233977
+										234:leaf=0.0475356
+							104:[max_ecross2<0.458274] yes=143,no=144,missing=143
+								143:[avg_iH1<0.733868] yes=185,no=186,missing=185
+									185:leaf=0.136439
+									186:leaf=-0.1381
+								144:[min_beta12<19.8296] yes=187,no=188,missing=187
+									187:leaf=-0.144229
+									188:leaf=-0.298966
+						66:leaf=-0.253192
+				22:[min_ecross1<0.00256799] yes=39,no=40,missing=39
+					39:[std_ecross1<0.00522249] yes=67,no=68,missing=67
+						67:[std_ecross3<0.00842768] yes=105,no=106,missing=105
+							105:[min_ecross1<0.000680189] yes=145,no=146,missing=145
+								145:leaf=0.100815
+								146:leaf=0.254094
+							106:leaf=0.0135668
+						68:leaf=-0.193716
+					40:[norm_std_a2<0.00139004] yes=69,no=70,missing=69
+						69:[avg_ecross3<1.32255] yes=107,no=108,missing=107
+							107:leaf=-0.265569
+							108:leaf=-0.0729159
+						70:leaf=-0.016181
+	2:[std_beta23<0.229651] yes=5,no=6,missing=5
+		5:[min_ecross1<0.0565017] yes=11,no=12,missing=11
+			11:[max_ecross3<0.0401061] yes=23,no=24,missing=23
+				23:[avg_ecross1<0.0326117] yes=41,no=42,missing=41
+					41:[std_beta23<0.145512] yes=71,no=72,missing=71
+						71:leaf=0.13575
+						72:leaf=0.281458
+					42:[max_ecross2<0.269435] yes=73,no=74,missing=73
+						73:leaf=0.146168
+						74:leaf=-0.130311
+				24:[norm_std_window10_a3<0.000966805] yes=43,no=44,missing=43
+					43:[norm_max_a3<0.000111693] yes=75,no=76,missing=75
+						75:leaf=0.0107967
+						76:leaf=-0.263954
+					44:leaf=0.108335
+			12:leaf=-0.232603
+		6:[max_ecross3<0.00451872] yes=13,no=14,missing=13
+			13:leaf=-0.155814
+			14:leaf=-0.225431
+booster[8]:
+0:[max_ecross2<0.490431] yes=1,no=2,missing=1
+	1:[std_beta23<0.0242839] yes=3,no=4,missing=3
+		3:[max_ecross1<0.183113] yes=7,no=8,missing=7
+			7:[avg_ecross2<0.469782] yes=15,no=16,missing=15
+				15:[max_ecross2<0.173472] yes=29,no=30,missing=29
+					29:[min_beta23<7.8059] yes=45,no=46,missing=45
+						45:[avg_beta12<10.9776] yes=73,no=74,missing=73
+							73:leaf=-0.0201539
+							74:[max_ecross2<0.0739176] yes=105,no=106,missing=105
+								105:[avg_ecross2<0.32702] yes=151,no=152,missing=151
+									151:leaf=0.211091
+									152:leaf=0.141671
+								106:[std_ecross1<0.0027321] yes=153,no=154,missing=153
+									153:leaf=-0.00647941
+									154:[norm_max_window10_a1<0.000109385] yes=201,no=202,missing=201
+										201:[max_beta12<22.0859] yes=253,no=254,missing=253
+											253:leaf=0.016439
+											254:leaf=0.187557
+										202:leaf=0.208326
+						46:[max_ecross2<0.062879] yes=75,no=76,missing=75
+							75:leaf=0.217398
+							76:[avg_beta12<6.40058] yes=107,no=108,missing=107
+								107:leaf=0.0788581
+								108:[avg_beta23<15.6371] yes=155,no=156,missing=155
+									155:[avg_ecross2<0.275852] yes=203,no=204,missing=203
+										203:[min_ecross3<0.18529] yes=255,no=256,missing=255
+											255:[std_ecross1<0.034557] yes=321,no=322,missing=321
+												321:leaf=0.210343
+												322:leaf=0.151849
+											256:leaf=0.115311
+										204:[avg_beta23<10.4873] yes=257,no=258,missing=257
+											257:leaf=0.0427284
+											258:[norm_a3_slope<3.55645e-13] yes=323,no=324,missing=323
+												323:leaf=0.197644
+												324:leaf=0.0833942
+									156:[avg_ecross1<0.514997] yes=205,no=206,missing=205
+										205:[avg_beta12<8.15063] yes=259,no=260,missing=259
+											259:[norm_std_window10_a1<4.43037e-05] yes=325,no=326,missing=325
+												325:leaf=0.0920379
+												326:leaf=0.206735
+											260:leaf=0.215529
+										206:leaf=0.145255
+					30:[min_ecross3<0.316719] yes=47,no=48,missing=47
+						47:[norm_std_a1<7.65296e-05] yes=77,no=78,missing=77
+							77:[norm_a3_slope<-4.70254e-11] yes=109,no=110,missing=109
+								109:leaf=0.0592876
+								110:[max_ecross1<0.0776745] yes=157,no=158,missing=157
+									157:[norm_std_a3<4.46456e-05] yes=207,no=208,missing=207
+										207:[norm_std_window10_a1<3.5197e-05] yes=261,no=262,missing=261
+											261:leaf=0.215159
+											262:leaf=0.148843
+										208:[norm_max_a1<2.73735e-05] yes=263,no=264,missing=263
+											263:[avg_beta12<25.5855] yes=327,no=328,missing=327
+												327:leaf=0.0189073
+												328:leaf=0.161912
+											264:leaf=0.205251
+									158:[avg_iH1<5.27026] yes=209,no=210,missing=209
+										209:[norm_max_a1<1.88411e-05] yes=265,no=266,missing=265
+											265:leaf=0.0620849
+											266:[avg_beta23<21.3096] yes=329,no=330,missing=329
+												329:leaf=0.153921
+												330:leaf=0.207655
+										210:leaf=0.0256091
+							78:[avg_beta23<14.6141] yes=111,no=112,missing=111
+								111:leaf=-0.170666
+								112:[norm_std_window10_a3<2.76079e-05] yes=159,no=160,missing=159
+									159:leaf=0.115067
+									160:leaf=0.214604
+						48:[avg_ecross1<0.0234999] yes=79,no=80,missing=79
+							79:[avg_ecross1<0.00751233] yes=113,no=114,missing=113
+								113:leaf=0.100258
+								114:leaf=0.209287
+							80:leaf=-0.069144
+				16:[max_ecross3<0.292317] yes=31,no=32,missing=31
+					31:[avg_iH2<2.33149] yes=49,no=50,missing=49
+						49:leaf=-0.0732256
+						50:[avg_beta23<10.6055] yes=81,no=82,missing=81
+							81:[avg_beta12<15.7074] yes=115,no=116,missing=115
+								115:leaf=-0.127952
+								116:[norm_max_a1<5.0562e-05] yes=161,no=162,missing=161
+									161:[max_ecross3<0.043926] yes=211,no=212,missing=211
+										211:[avg_iH1<0.655688] yes=267,no=268,missing=267
+											267:leaf=0.210054
+											268:leaf=0.0517308
+										212:leaf=-0.075162
+									162:[std_ecross1<0.042135] yes=213,no=214,missing=213
+										213:leaf=0.224344
+										214:leaf=0.136377
+							82:[avg_beta12<6.72902] yes=117,no=118,missing=117
+								117:leaf=-0.00209561
+								118:[norm_max_window10_a3<9.53778e-05] yes=163,no=164,missing=163
+									163:[max_ecross1<0.0199081] yes=215,no=216,missing=215
+										215:[avg_ecross1<0.386273] yes=269,no=270,missing=269
+											269:leaf=0.22113
+											270:[max_ecross1<0.0089542] yes=331,no=332,missing=331
+												331:leaf=0.123226
+												332:leaf=0.195028
+										216:[std_beta23<0.00913029] yes=271,no=272,missing=271
+											271:[avg_ecross2<1.0293] yes=333,no=334,missing=333
+												333:leaf=0.196191
+												334:leaf=0.105431
+											272:[norm_max_a2<0.000295613] yes=335,no=336,missing=335
+												335:leaf=-0.095147
+												336:leaf=0.179929
+									164:leaf=0.055112
+					32:leaf=-0.116938
+			8:[std_ecross2<0.0408983] yes=17,no=18,missing=17
+				17:[norm_max_a2<0.000199679] yes=33,no=34,missing=33
+					33:[max_ecross3<0.339917] yes=51,no=52,missing=51
+						51:[avg_ecross1<0.477681] yes=83,no=84,missing=83
+							83:[norm_max_a1<3.1874e-05] yes=119,no=120,missing=119
+								119:leaf=0.0447137
+								120:[min_beta12<6.9834] yes=165,no=166,missing=165
+									165:[max_ecross1<0.424121] yes=217,no=218,missing=217
+										217:[norm_std_window10_a3<1.90451e-05] yes=273,no=274,missing=273
+											273:leaf=0.0487557
+											274:leaf=0.203381
+										218:leaf=-0.0618939
+									166:[norm_max_a1<0.0033346] yes=219,no=220,missing=219
+										219:[min_ecross3<0.0768842] yes=275,no=276,missing=275
+											275:[avg_beta23<24.9708] yes=337,no=338,missing=337
+												337:leaf=0.200435
+												338:leaf=0.223655
+											276:[max_ecross1<0.538125] yes=339,no=340,missing=339
+												339:leaf=0.184823
+												340:leaf=0.0608082
+										220:[max_ecross2<0.0229974] yes=277,no=278,missing=277
+											277:leaf=0.193618
+											278:leaf=0.0179993
+							84:[avg_iH2<2.38112] yes=121,no=122,missing=121
+								121:leaf=-0.142755
+								122:[norm_max_a3<7.61944e-05] yes=167,no=168,missing=167
+									167:leaf=0.103041
+									168:leaf=0.214511
+						52:[std_ecross1<0.00767567] yes=85,no=86,missing=85
+							85:[norm_std_window10_a2<2.97551e-05] yes=123,no=124,missing=123
+								123:leaf=0.210207
+								124:leaf=0.0707038
+							86:leaf=-0.0622437
+					34:[avg_ecross1<0.36908] yes=53,no=54,missing=53
+						53:[max_ecross1<0.537614] yes=87,no=88,missing=87
+							87:[avg_beta23<9.8373] yes=125,no=126,missing=125
+								125:leaf=-0.0293922
+								126:[norm_a3_slope<3.20444e-11] yes=169,no=170,missing=169
+									169:[avg_beta12<25.5357] yes=221,no=222,missing=221
+										221:[avg_beta23<15.9976] yes=279,no=280,missing=279
+											279:[avg_iH2<0.621065] yes=341,no=342,missing=341
+												341:leaf=0.158326
+												342:leaf=-0.0156449
+											280:[norm_max_window10_a3<0.000169231] yes=343,no=344,missing=343
+												343:leaf=0.195421
+												344:leaf=0.111933
+										222:[max_ecross1<0.437236] yes=281,no=282,missing=281
+											281:leaf=-0.034531
+											282:leaf=0.189881
+									170:leaf=0.00842856
+							88:[avg_iH1<1.21608] yes=127,no=128,missing=127
+								127:[norm_max_window10_a1<0.00155952] yes=171,no=172,missing=171
+									171:leaf=-0.0760245
+									172:[avg_iH2<0.418782] yes=223,no=224,missing=223
+										223:leaf=0.11411
+										224:leaf=0.230242
+								128:leaf=-0.237768
+						54:leaf=-0.211667
+				18:[std_ecross1<0.181417] yes=35,no=36,missing=35
+					35:[max_ecross3<0.212759] yes=55,no=56,missing=55
+						55:[norm_a1_slope<-6.21997e-11] yes=89,no=90,missing=89
+							89:leaf=-0.0882921
+							90:[max_ecross1<0.520008] yes=129,no=130,missing=129
+								129:[min_ecross2<0.162677] yes=173,no=174,missing=173
+									173:[norm_a1_slope<5.54021e-11] yes=225,no=226,missing=225
+										225:[norm_a1_slope<4.82223e-12] yes=283,no=284,missing=283
+											283:[norm_a1_slope<4.50822e-13] yes=345,no=346,missing=345
+												345:leaf=0.159542
+												346:leaf=0.00115419
+											284:[std_beta23<0.00749688] yes=347,no=348,missing=347
+												347:leaf=0.148166
+												348:leaf=0.238259
+										226:leaf=0.0262589
+									174:leaf=-0.0085966
+								130:[avg_beta23<23.2763] yes=175,no=176,missing=175
+									175:leaf=-0.182341
+									176:leaf=0.160734
+						56:leaf=-0.107075
+					36:[std_beta23<0.00514195] yes=57,no=58,missing=57
+						57:leaf=0.0570894
+						58:leaf=-0.233968
+		4:[max_ecross1<0.805342] yes=9,no=10,missing=9
+			9:[max_ecross2<0.178422] yes=19,no=20,missing=19
+				19:[norm_max_a2<8.31514e-05] yes=37,no=38,missing=37
+					37:[std_ecross2<0.0198646] yes=59,no=60,missing=59
+						59:[avg_beta23<6.25636] yes=91,no=92,missing=91
+							91:[std_ecross2<0.00306702] yes=131,no=132,missing=131
+								131:leaf=0.198368
+								132:leaf=0.0784426
+							92:[norm_std_a3<0.000346574] yes=133,no=134,missing=133
+								133:[norm_max_a3<0.000508908] yes=177,no=178,missing=177
+									177:leaf=0.211329
+									178:leaf=0.0669723
+								134:[min_ecross3<0.756186] yes=179,no=180,missing=179
+									179:[norm_a3_slope<2.75146e-10] yes=227,no=228,missing=227
+										227:[norm_a3_slope<-9.9193e-10] yes=285,no=286,missing=285
+											285:leaf=0.151046
+											286:leaf=0.220241
+										228:leaf=0.158123
+									180:leaf=0.14588
+						60:leaf=0.0475302
+					38:[std_ecross1<0.10652] yes=61,no=62,missing=61
+						61:[min_beta23<3.42188] yes=93,no=94,missing=93
+							93:leaf=-0.156573
+							94:[avg_ecross2<0.770842] yes=135,no=136,missing=135
+								135:[max_ecross1<0.155827] yes=181,no=182,missing=181
+									181:[min_beta23<26.1346] yes=229,no=230,missing=229
+										229:[std_ecross2<0.0776039] yes=287,no=288,missing=287
+											287:[avg_beta12<10.8945] yes=349,no=350,missing=349
+												349:leaf=0.0851349
+												350:leaf=0.156943
+											288:[avg_ecross1<0.19456] yes=351,no=352,missing=351
+												351:leaf=-0.0506372
+												352:leaf=0.150377
+										230:[norm_max_a2<0.000243611] yes=289,no=290,missing=289
+											289:leaf=0.103998
+											290:[norm_max_a3<4.02045e-05] yes=353,no=354,missing=353
+												353:leaf=0.151099
+												354:leaf=0.224391
+									182:[max_ecross3<0.302971] yes=231,no=232,missing=231
+										231:[std_ecross1<0.025452] yes=291,no=292,missing=291
+											291:[norm_std_a3<0.000333456] yes=355,no=356,missing=355
+												355:leaf=0.0867917
+												356:leaf=0.216052
+											292:[norm_a1_slope<-5.87817e-11] yes=357,no=358,missing=357
+												357:leaf=0.0671952
+												358:leaf=-0.105671
+										232:[min_ecross2<0.000793118] yes=293,no=294,missing=293
+											293:leaf=0.0960238
+											294:[avg_beta23<9.97381] yes=359,no=360,missing=359
+												359:leaf=-0.0554273
+												360:leaf=-0.396802
+								136:leaf=-0.0925637
+						62:[min_ecross2<0.0125549] yes=95,no=96,missing=95
+							95:leaf=-0.227069
+							96:leaf=0.011423
+				20:[std_beta23<0.255789] yes=39,no=40,missing=39
+					39:[min_beta23<15.3924] yes=63,no=64,missing=63
+						63:[min_beta12<17.0197] yes=97,no=98,missing=97
+							97:[norm_std_window10_a2<2.15414e-05] yes=137,no=138,missing=137
+								137:leaf=0.213829
+								138:[avg_beta23<12.2604] yes=183,no=184,missing=183
+									183:[norm_max_window10_a2<0.000329487] yes=233,no=234,missing=233
+										233:leaf=-0.374986
+										234:[norm_max_window10_a2<0.000507563] yes=295,no=296,missing=295
+											295:leaf=-0.187279
+											296:leaf=-0.288695
+									184:[min_beta12<9.80709] yes=235,no=236,missing=235
+										235:leaf=-0.321171
+										236:[norm_max_window10_a1<0.000501172] yes=297,no=298,missing=297
+											297:leaf=-0.0708001
+											298:leaf=0.175166
+							98:[max_ecross2<0.291424] yes=139,no=140,missing=139
+								139:[std_ecross2<0.135752] yes=185,no=186,missing=185
+									185:[max_ecross3<0.408955] yes=237,no=238,missing=237
+										237:[norm_std_a3<0.000104617] yes=299,no=300,missing=299
+											299:[avg_ecross1<0.0135555] yes=361,no=362,missing=361
+												361:leaf=0.183392
+												362:leaf=-0.024684
+											300:[norm_std_a1<1.37157e-05] yes=363,no=364,missing=363
+												363:leaf=0.123363
+												364:leaf=0.222889
+										238:[min_ecross2<0.133816] yes=301,no=302,missing=301
+											301:leaf=-0.0652196
+											302:[avg_ecross2<0.098411] yes=365,no=366,missing=365
+												365:leaf=0.0283437
+												366:leaf=0.183066
+									186:leaf=-0.0506544
+								140:[max_ecross1<0.189913] yes=187,no=188,missing=187
+									187:[norm_std_a1<6.68562e-06] yes=239,no=240,missing=239
+										239:leaf=-0.211724
+										240:[avg_ecross2<0.0626774] yes=303,no=304,missing=303
+											303:[avg_iH1<0.330142] yes=367,no=368,missing=367
+												367:leaf=0.0691737
+												368:leaf=0.190318
+											304:[norm_max_window10_a3<0.000503626] yes=369,no=370,missing=369
+												369:leaf=-0.245295
+												370:leaf=0.0914258
+									188:leaf=-0.292056
+						64:[min_ecross3<0.0927945] yes=99,no=100,missing=99
+							99:[avg_ecross2<0.472691] yes=141,no=142,missing=141
+								141:[norm_a3_slope<-4.7812e-11] yes=189,no=190,missing=189
+									189:leaf=-0.028807
+									190:[norm_max_a2<0.00122182] yes=241,no=242,missing=241
+										241:[norm_std_window10_a2<0.000357071] yes=305,no=306,missing=305
+											305:[norm_a3_slope<-2.5252e-12] yes=371,no=372,missing=371
+												371:leaf=0.046759
+												372:leaf=0.175396
+											306:[avg_beta23<24.904] yes=373,no=374,missing=373
+												373:leaf=0.237272
+												374:leaf=0.152587
+										242:[norm_max_a2<0.00160803] yes=307,no=308,missing=307
+											307:[avg_beta23<18.927] yes=375,no=376,missing=375
+												375:leaf=0.149147
+												376:leaf=-0.125547
+											308:[min_beta23<20.7844] yes=377,no=378,missing=377
+												377:leaf=0.0557656
+												378:leaf=0.188567
+								142:leaf=-0.136714
+							100:[norm_max_a2<0.000926695] yes=143,no=144,missing=143
+								143:[norm_std_a1<9.72485e-05] yes=191,no=192,missing=191
+									191:[max_ecross1<0.0420112] yes=243,no=244,missing=243
+										243:[avg_iH2<1.96858] yes=309,no=310,missing=309
+											309:leaf=0.131925
+											310:leaf=0.211542
+										244:[norm_max_window10_a3<0.000529838] yes=311,no=312,missing=311
+											311:leaf=-0.102719
+											312:leaf=0.142633
+									192:leaf=-0.124496
+								144:[std_ecross2<0.0119274] yes=193,no=194,missing=193
+									193:leaf=0.0454453
+									194:leaf=-0.333275
+					40:[norm_std_window10_a2<0.00222151] yes=65,no=66,missing=65
+						65:leaf=-0.230393
+						66:leaf=-0.0793128
+			10:[max_ecross3<0.0172471] yes=21,no=22,missing=21
+				21:leaf=-0.119607
+				22:leaf=-0.232843
+	2:[norm_max_a2<0.00154806] yes=5,no=6,missing=5
+		5:[std_ecross1<0.0830987] yes=11,no=12,missing=11
+			11:[norm_a1_slope<-1.58301e-10] yes=23,no=24,missing=23
+				23:leaf=-0.229832
+				24:[min_ecross3<0.394576] yes=41,no=42,missing=41
+					41:[min_beta23<25.7378] yes=67,no=68,missing=67
+						67:[norm_a1_slope<2.04204e-11] yes=101,no=102,missing=101
+							101:[norm_std_window10_a1<0.000110439] yes=145,no=146,missing=145
+								145:[min_beta12<24.1739] yes=195,no=196,missing=195
+									195:[norm_max_a2<0.000505488] yes=245,no=246,missing=245
+										245:[norm_std_window10_a2<0.000103091] yes=313,no=314,missing=313
+											313:leaf=-0.261586
+											314:[norm_max_window10_a1<7.18161e-05] yes=379,no=380,missing=379
+												379:leaf=-0.0353289
+												380:leaf=0.185863
+										246:leaf=-0.274898
+									196:[norm_a1_slope<9.28208e-14] yes=247,no=248,missing=247
+										247:[avg_beta23<7.83373] yes=315,no=316,missing=315
+											315:leaf=0.165756
+											316:leaf=-0.1755
+										248:[min_ecross2<0.364452] yes=317,no=318,missing=317
+											317:[std_beta23<0.0490607] yes=381,no=382,missing=381
+												381:leaf=0.158577
+												382:leaf=0.276843
+											318:leaf=0.0800179
+								146:[norm_std_window10_a3<0.000231378] yes=197,no=198,missing=197
+									197:[norm_std_a1<0.000139347] yes=249,no=250,missing=249
+										249:leaf=0.182267
+										250:leaf=-0.0158283
+									198:[avg_beta12<9.51165] yes=251,no=252,missing=251
+										251:leaf=0.296791
+										252:[norm_a1_slope<-1.64057e-12] yes=319,no=320,missing=319
+											319:leaf=0.111077
+											320:leaf=0.218396
+							102:[min_ecross3<0.00641403] yes=147,no=148,missing=147
+								147:leaf=-0.0301293
+								148:leaf=-0.273093
+						68:[avg_iH2<1.72942] yes=103,no=104,missing=103
+							103:[avg_ecross1<0.0261538] yes=149,no=150,missing=149
+								149:leaf=0.0265175
+								150:[min_ecross2<0.466924] yes=199,no=200,missing=199
+									199:leaf=0.226988
+									200:leaf=0.124236
+							104:leaf=-0.0270369
+					42:[min_ecross2<0.195824] yes=69,no=70,missing=69
+						69:leaf=-0.26032
+						70:leaf=-0.0357359
+			12:leaf=-0.229492
+		6:[std_ecross2<0.021605] yes=13,no=14,missing=13
+			13:[min_ecross3<0.00192668] yes=25,no=26,missing=25
+				25:[norm_max_a1<0.00027254] yes=43,no=44,missing=43
+					43:[avg_iH2<0.364095] yes=71,no=72,missing=71
+						71:leaf=0.293242
+						72:leaf=0.0746696
+					44:leaf=-0.10339
+				26:leaf=-0.233268
+			14:[max_ecross1<0.00211215] yes=27,no=28,missing=27
+				27:leaf=-0.113456
+				28:leaf=-0.218477
+booster[9]:
+0:[norm_max_a2<0.00355906] yes=1,no=2,missing=1
+	1:[std_beta12<0.0239555] yes=3,no=4,missing=3
+		3:[std_beta12<0.00876266] yes=7,no=8,missing=7
+			7:[avg_ecross3<0.581285] yes=13,no=14,missing=13
+				13:[std_ecross3<0.0398594] yes=25,no=26,missing=25
+					25:[norm_a3_slope<6.84633e-10] yes=45,no=46,missing=45
+						45:[min_ecross3<0.731175] yes=69,no=70,missing=69
+							69:[max_ecross1<0.108274] yes=97,no=98,missing=97
+								97:[min_ecross2<0.385864] yes=131,no=132,missing=131
+									131:[min_ecross3<0.149467] yes=171,no=172,missing=171
+										171:[min_ecross2<0.312793] yes=211,no=212,missing=211
+											211:leaf=0.212398
+											212:leaf=0.144711
+										172:[min_ecross2<0.188316] yes=213,no=214,missing=213
+											213:[std_beta12<0.00810568] yes=249,no=250,missing=249
+												249:leaf=0.20303
+												250:leaf=0.10674
+											214:leaf=0.101324
+									132:leaf=0.0428742
+								98:[norm_std_window10_a2<3.71475e-05] yes=133,no=134,missing=133
+									133:[norm_a3_slope<3.68413e-11] yes=173,no=174,missing=173
+										173:[min_ecross1<0.377155] yes=215,no=216,missing=215
+											215:[std_ecross1<0.000203684] yes=251,no=252,missing=251
+												251:leaf=0.138161
+												252:leaf=0.208705
+											216:leaf=0.121982
+										174:leaf=0.121765
+									134:[norm_std_a3<0.000209119] yes=175,no=176,missing=175
+										175:[norm_std_a1<7.96117e-06] yes=217,no=218,missing=217
+											217:leaf=0.0234215
+											218:[norm_std_a2<5.18277e-05] yes=253,no=254,missing=253
+												253:leaf=0.109871
+												254:leaf=0.202151
+										176:leaf=-0.0619181
+							70:leaf=0.0630709
+						46:leaf=0.0642967
+					26:[norm_std_window10_a2<2.39979e-05] yes=47,no=48,missing=47
+						47:[min_ecross2<0.171843] yes=71,no=72,missing=71
+							71:[norm_a3_slope<-2.03043e-10] yes=99,no=100,missing=99
+								99:leaf=0.0971399
+								100:[norm_a2_slope<-2.83421e-12] yes=135,no=136,missing=135
+									135:[norm_max_a3<0.000158993] yes=177,no=178,missing=177
+										177:leaf=0.0945088
+										178:leaf=0.202983
+									136:[min_ecross3<0.397917] yes=179,no=180,missing=179
+										179:leaf=0.213005
+										180:leaf=0.13892
+							72:leaf=0.108897
+						48:[norm_a3_slope<-5.2726e-11] yes=73,no=74,missing=73
+							73:leaf=-0.0135145
+							74:[max_ecross1<0.168917] yes=101,no=102,missing=101
+								101:[avg_ecross1<0.0252647] yes=137,no=138,missing=137
+									137:[avg_ecross3<0.213137] yes=181,no=182,missing=181
+										181:[norm_std_a2<5.78475e-05] yes=219,no=220,missing=219
+											219:leaf=0.193611
+											220:leaf=0.0937395
+										182:leaf=-0.107997
+									138:[norm_a2_slope<-2.6961e-11] yes=183,no=184,missing=183
+										183:leaf=0.0557619
+										184:[norm_std_a2<2.98833e-05] yes=221,no=222,missing=221
+											221:[norm_std_a3<2.58237e-05] yes=255,no=256,missing=255
+												255:leaf=0.179048
+												256:leaf=0.00042866
+											222:[avg_ecross1<0.287079] yes=257,no=258,missing=257
+												257:leaf=0.187695
+												258:leaf=0.0687328
+								102:leaf=-0.0170412
+				14:[max_beta23<7.82554] yes=27,no=28,missing=27
+					27:[norm_std_a2<3.61786e-05] yes=49,no=50,missing=49
+						49:leaf=0.0779848
+						50:leaf=-0.178257
+					28:[max_ecross1<0.0174665] yes=51,no=52,missing=51
+						51:[norm_max_window10_a3<9.80231e-05] yes=75,no=76,missing=75
+							75:leaf=0.201529
+							76:[norm_max_a2<6.29804e-05] yes=103,no=104,missing=103
+								103:leaf=0.192955
+								104:leaf=0.0128549
+						52:[norm_a2_slope<1.73931e-12] yes=77,no=78,missing=77
+							77:[norm_max_a2<6.64279e-05] yes=105,no=106,missing=105
+								105:leaf=0.187355
+								106:leaf=0.0361253
+							78:leaf=-0.127211
+			8:[avg_ecross3<0.426273] yes=15,no=16,missing=15
+				15:[min_ecross3<0.282843] yes=29,no=30,missing=29
+					29:[norm_a3_slope<-2.38606e-10] yes=53,no=54,missing=53
+						53:leaf=-0.0779141
+						54:[norm_a3_slope<3.14964e-10] yes=79,no=80,missing=79
+							79:[avg_ecross2<0.855924] yes=107,no=108,missing=107
+								107:[norm_std_a1<0.000130138] yes=139,no=140,missing=139
+									139:[max_ecross1<0.0601853] yes=185,no=186,missing=185
+										185:[std_ecross3<0.0498309] yes=223,no=224,missing=223
+											223:[min_ecross2<0.448848] yes=259,no=260,missing=259
+												259:leaf=0.196704
+												260:leaf=0.055821
+											224:[norm_max_a1<3.95527e-05] yes=261,no=262,missing=261
+												261:leaf=0.00747665
+												262:leaf=0.170912
+										186:[std_beta12<0.013895] yes=225,no=226,missing=225
+											225:[norm_max_window10_a1<7.9273e-06] yes=263,no=264,missing=263
+												263:leaf=0.000893683
+												264:leaf=0.167714
+											226:[avg_ecross1<0.188442] yes=265,no=266,missing=265
+												265:leaf=0.128459
+												266:leaf=0.0159037
+									140:[max_ecross1<0.388119] yes=187,no=188,missing=187
+										187:[norm_std_a3<0.00120963] yes=227,no=228,missing=227
+											227:[std_ecross3<0.104272] yes=267,no=268,missing=267
+												267:leaf=0.210407
+												268:leaf=0.120718
+											228:leaf=0.101414
+										188:[min_ecross3<0.0759119] yes=229,no=230,missing=229
+											229:[norm_a3_slope<4.14368e-12] yes=269,no=270,missing=269
+												269:leaf=0.20097
+												270:leaf=0.10306
+											230:leaf=0.00582501
+								108:[norm_a2_slope<-3.57966e-12] yes=141,no=142,missing=141
+									141:leaf=0.151163
+									142:leaf=-0.108677
+							80:leaf=-0.0561483
+					30:[avg_iH2<1.12666] yes=55,no=56,missing=55
+						55:[std_beta12<0.0204262] yes=81,no=82,missing=81
+							81:[min_ecross2<0.0157009] yes=109,no=110,missing=109
+								109:[norm_max_window10_a1<4.98884e-05] yes=143,no=144,missing=143
+									143:[max_ecross1<0.0405993] yes=189,no=190,missing=189
+										189:leaf=0.129637
+										190:leaf=0.0576261
+									144:[avg_beta12<22.0593] yes=191,no=192,missing=191
+										191:[norm_a2_slope<1.33464e-11] yes=231,no=232,missing=231
+											231:leaf=0.219213
+											232:leaf=0.153826
+										192:leaf=0.113487
+								110:[norm_std_window10_a2<0.000127659] yes=145,no=146,missing=145
+									145:leaf=-0.0235388
+									146:[std_ecross3<0.00167601] yes=193,no=194,missing=193
+										193:leaf=0.199455
+										194:leaf=0.0465092
+							82:leaf=-0.0476736
+						56:[norm_max_a3<0.000432776] yes=83,no=84,missing=83
+							83:[norm_max_a2<0.000283862] yes=111,no=112,missing=111
+								111:leaf=-0.336337
+								112:[std_ecross3<0.00424902] yes=147,no=148,missing=147
+									147:leaf=0.063499
+									148:leaf=-0.115614
+							84:[max_ecross1<0.12984] yes=113,no=114,missing=113
+								113:[std_ecross2<0.00720316] yes=149,no=150,missing=149
+									149:leaf=0.205693
+									150:leaf=0.0589371
+								114:leaf=-0.0706484
+				16:[avg_ecross3<0.860312] yes=31,no=32,missing=31
+					31:[min_ecross2<0.073808] yes=57,no=58,missing=57
+						57:[max_ecross1<0.0888592] yes=85,no=86,missing=85
+							85:[norm_max_a3<0.000280284] yes=115,no=116,missing=115
+								115:[norm_std_a2<9.81255e-05] yes=151,no=152,missing=151
+									151:leaf=0.0686479
+									152:leaf=0.205728
+								116:[min_ecross3<0.0237425] yes=153,no=154,missing=153
+									153:leaf=0.129045
+									154:leaf=-0.15041
+							86:[norm_max_a2<7.75719e-05] yes=117,no=118,missing=117
+								117:leaf=0.169838
+								118:leaf=-0.208149
+						58:leaf=-0.166376
+					32:leaf=-0.268313
+		4:[avg_ecross3<0.412503] yes=9,no=10,missing=9
+			9:[max_ecross1<0.96281] yes=17,no=18,missing=17
+				17:[norm_a2_slope<-1.70331e-10] yes=33,no=34,missing=33
+					33:[max_ecross1<0.376607] yes=59,no=60,missing=59
+						59:[avg_ecross2<0.0967646] yes=87,no=88,missing=87
+							87:[min_beta23<6.58327] yes=119,no=120,missing=119
+								119:leaf=-0.0510898
+								120:[std_ecross1<0.00523089] yes=155,no=156,missing=155
+									155:[min_ecross1<0.00177278] yes=195,no=196,missing=195
+										195:leaf=0.203814
+										196:leaf=0.123321
+									156:leaf=0.0313252
+							88:[norm_a3_slope<1.77814e-11] yes=121,no=122,missing=121
+								121:[norm_max_a2<0.0025515] yes=157,no=158,missing=157
+									157:leaf=-0.06276
+									158:leaf=0.14283
+								122:leaf=-0.264678
+						60:[norm_a3_slope<9.47349e-11] yes=89,no=90,missing=89
+							89:leaf=-0.262738
+							90:leaf=-0.142179
+					34:[norm_a2_slope<1.44779e-10] yes=61,no=62,missing=61
+						61:[std_ecross2<0.00387736] yes=91,no=92,missing=91
+							91:[norm_max_a2<0.00020299] yes=123,no=124,missing=123
+								123:[norm_max_a1<0.00614871] yes=159,no=160,missing=159
+									159:[min_ecross2<0.321093] yes=197,no=198,missing=197
+										197:[norm_max_a3<3.99891e-05] yes=233,no=234,missing=233
+											233:leaf=0.0992423
+											234:[norm_max_a1<0.00255332] yes=271,no=272,missing=271
+												271:leaf=0.21183
+												272:leaf=0.173599
+										198:leaf=0.0994892
+									160:leaf=0.0842264
+								124:[norm_std_window10_a2<0.000150529] yes=161,no=162,missing=161
+									161:leaf=-0.104803
+									162:[norm_a3_slope<-1.61623e-11] yes=199,no=200,missing=199
+										199:leaf=-0.0292401
+										200:[min_ecross1<0.18798] yes=235,no=236,missing=235
+											235:[norm_max_window10_a3<0.000544767] yes=273,no=274,missing=273
+												273:leaf=0.198039
+												274:leaf=0.117067
+											236:[std_ecross3<0.00282083] yes=275,no=276,missing=275
+												275:leaf=-0.0437017
+												276:leaf=0.181735
+							92:[min_ecross3<0.0955355] yes=125,no=126,missing=125
+								125:[std_ecross3<0.102685] yes=163,no=164,missing=163
+									163:[max_ecross1<0.312326] yes=201,no=202,missing=201
+										201:[max_beta12<19.1951] yes=237,no=238,missing=237
+											237:[avg_ecross2<0.551656] yes=277,no=278,missing=277
+												277:leaf=0.122772
+												278:leaf=-0.109466
+											238:[min_ecross2<0.440933] yes=279,no=280,missing=279
+												279:leaf=0.18202
+												280:leaf=0.0263316
+										202:[min_beta23<17.0672] yes=239,no=240,missing=239
+											239:[norm_std_window10_a1<0.000259881] yes=281,no=282,missing=281
+												281:leaf=-0.275021
+												282:leaf=0.020185
+											240:[std_ecross3<0.00226187] yes=283,no=284,missing=283
+												283:leaf=0.0312646
+												284:leaf=0.145869
+									164:leaf=-0.169085
+								126:[max_ecross1<0.556466] yes=165,no=166,missing=165
+									165:[norm_max_a3<0.00128479] yes=203,no=204,missing=203
+										203:[norm_a3_slope<-2.57141e-11] yes=241,no=242,missing=241
+											241:leaf=-0.225679
+											242:[std_ecross2<0.0773528] yes=285,no=286,missing=285
+												285:leaf=0.0826939
+												286:leaf=-0.175064
+										204:leaf=-0.191112
+									166:leaf=-0.301368
+						62:[std_ecross2<0.0222053] yes=93,no=94,missing=93
+							93:[norm_a3_slope<4.47311e-12] yes=127,no=128,missing=127
+								127:[max_ecross1<0.0360264] yes=167,no=168,missing=167
+									167:[norm_max_a2<0.00213262] yes=205,no=206,missing=205
+										205:leaf=0.112435
+										206:leaf=0.234229
+									168:[norm_std_window10_a1<0.000551241] yes=207,no=208,missing=207
+										207:[std_beta12<0.0399052] yes=243,no=244,missing=243
+											243:leaf=0.0123148
+											244:leaf=-0.229114
+										208:[max_ecross1<0.400007] yes=245,no=246,missing=245
+											245:leaf=0.219448
+											246:leaf=0.0927008
+								128:leaf=-0.138746
+							94:[min_ecross1<0.00046447] yes=129,no=130,missing=129
+								129:leaf=0.126772
+								130:[avg_beta12<24.6458] yes=169,no=170,missing=169
+									169:[avg_ecross3<0.177969] yes=209,no=210,missing=209
+										209:[norm_max_a1<0.00152371] yes=247,no=248,missing=247
+											247:leaf=-0.323581
+											248:leaf=-0.172843
+										210:leaf=-0.0937441
+									170:leaf=0.0397131
+				18:[norm_max_a3<8.03388e-05] yes=35,no=36,missing=35
+					35:leaf=-0.014057
+					36:leaf=-0.231503
+			10:[norm_max_a2<0.000505498] yes=19,no=20,missing=19
+				19:[norm_std_a2<0.000221735] yes=37,no=38,missing=37
+					37:[norm_std_window10_a2<5.14637e-05] yes=63,no=64,missing=63
+						63:leaf=0.0711863
+						64:leaf=-0.173226
+					38:leaf=0.203401
+				20:[max_ecross1<0.00463208] yes=39,no=40,missing=39
+					39:leaf=-0.0168042
+					40:[norm_std_window10_a2<0.000800966] yes=65,no=66,missing=65
+						65:[avg_ecross1<0.260107] yes=95,no=96,missing=95
+							95:leaf=-0.263957
+							96:leaf=-0.177881
+						66:leaf=-0.0867887
+	2:[std_beta12<0.261757] yes=5,no=6,missing=5
+		5:[min_ecross3<0.0198739] yes=11,no=12,missing=11
+			11:[avg_ecross2<0.0773143] yes=21,no=22,missing=21
+				21:[norm_max_a3<0.000115432] yes=41,no=42,missing=41
+					41:leaf=0.214348
+					42:leaf=0.0193774
+				22:[norm_max_window10_a1<0.00125592] yes=43,no=44,missing=43
+					43:[norm_max_a1<5.98357e-05] yes=67,no=68,missing=67
+						67:leaf=-0.0213192
+						68:leaf=-0.25891
+					44:leaf=0.201996
+			12:[std_ecross1<0.0322609] yes=23,no=24,missing=23
+				23:leaf=-0.234611
+				24:leaf=-0.115454
+		6:leaf=-0.214711
