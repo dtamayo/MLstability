@@ -7,7 +7,7 @@ warnings.filterwarnings('ignore') # to suppress warnings about REBOUND versions 
 
 datapath = '/mnt/ssd/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/workspace/stability/stabilitydataset/'
-sys.path.append(repopath + 'generate_data/')
+sys.path.append(repopath + 'generate_training_data/')
 from training_data_functions import gen_training_data, runorbtseries
 
 Norbits = 1e4
@@ -15,7 +15,7 @@ Nout = 1729
 datasets = 'all'
 runfunc = runorbtseries
 
-gendatafolder = repopath + 'generate_data/'
+gendatafolder = repopath + 'generate_training_data/'
 foldername = runfunc.__name__ + 'Norbits' + '{:.1e}'.format(Norbits) + 'Nout' + str(Nout)
 
 already_exists = call('mkdir ' + gendatafolder + foldername, shell=True)
