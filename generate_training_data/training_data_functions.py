@@ -40,7 +40,10 @@ def runorbtseries(sim, times):
     sim.ri_whfast.keep_unsynchronized = 1
     
     for i, time in enumerate(times):
-        sim.integrate(time, exact_finish_time=0)
+        try:
+            sim.integrate(time, exact_finish_time=0)
+        except:
+            return val # if there's a collision will return 0s from that point on
     ###############################
     # Chunk above should be the same in all runfuncs we write in order to match simarchives
     # Fill in values below

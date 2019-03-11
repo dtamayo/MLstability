@@ -22,31 +22,30 @@ already_exists = call('mkdir ' + gendatafolder + foldername, shell=True)
 if not already_exists: # store a copy of this script in generate_data so we can always regenerate what we had
     call('cp ' + gendatafolder + '/generate_data.py ' + gendatafolder + foldername, shell=True)
     call('python ' + gendatafolder + foldername + '/generate_data.py ', shell=True)
-    exit()
     # we always run the copied script so that we do the same thing whether we're running for first time or regenerating
 # if it does exist don't overwrite since we don't want to overwrite history
 
-def allsystems():
-    return ['random', 'resonant'] + ttvsystems()
+def expandall():
+    datasets = ['random', 'resonant']
+    return datasets
 
-def ttvsystems():
-    folders = ['Kepler-431', 'KOI-0115', 'KOI-0168', 'EPIC-210897587-2', 'Kepler-446', 'KOI-0085', 'KOI-0156', 'KOI-1576', 'LP-358-499', 'KOI-2086', 'KOI-0314'] 
-    return ['TTVsystems/' + folder for folder in folders]
+def expandttv():
+    return datasets
+
+def expanddistributions():
+    return datasets
 
 if datasets == 'all':
-    datasets = allsystems()
-
-if datasets == 'ttv':
-    datasets = ttvsystems()
+    datasets = expandall()
 
 for dataset in list(datasets):
-    if dataset == 'random':
+    if dataset == 'resonant':
+        if rebound.__githash__ != '25f856dc2f79e0ad17b2f6bd604225f550593376':
+            print('resonant dataset not run. Check out rebound commit 25f856dc2f79e0ad17b2f6bd604225f550593376 and rerun script if needed')
+            continue 
+    elif dataset == 'random':
         if rebound.__githash__ != 'db3ae2cea8f3462463d3e0c5788a34625bb49a9c':
             print('random dataset not run. Check out rebound commit db3ae2cea8f3462463d3e0c5788a34625bb49a9c and rerun script if needed')
-            continue 
-    else:
-        if rebound.__githash__ != '25f856dc2f79e0ad17b2f6bd604225f550593376':
-            print('{0} dataset not run. Check out rebound commit 25f856dc2f79e0ad17b2f6bd604225f550593376 and rerun script if needed'.format(dataset))
             continue 
 
     safolder = datapath + dataset + '/simulation_archives/runs/'
@@ -55,7 +54,7 @@ for dataset in list(datasets):
     already_exists = call('mkdir ' + trainingdatafolder + foldername, shell=True)
     if already_exists:
         print('output folder already exists at {0}. Remove it if you want to regenerate'.format(trainingdatafolder+foldername))
-        continue
+        exit()
     call('cp ' + trainingdatafolder + 'labels.csv ' + trainingdatafolder + foldername, shell=True)
     call('cp ' + trainingdatafolder + 'masses.csv ' + trainingdatafolder + foldername, shell=True)
     call('cp ' + trainingdatafolder + 'runstrings.csv ' + trainingdatafolder + foldername, shell=True)
@@ -63,5 +62,5 @@ for dataset in list(datasets):
     Norbits = float(Norbits)
     Nout = int(Nout)
     times = np.linspace(0, Norbits, Nout)
-    print(trainingdatafolder + foldername)
+
     gen_training_data(times, trainingdatafolder + foldername, safolder, runorbtseries)

@@ -30,7 +30,7 @@ def labels(row):
         row['shadow_instability_time'] = ssim.t
         row['Stable'] = row['instability_time'] > 9.99e8
     except:
-        print(row['runstring'])
+        print(pathtosa+'sa'+row['runstring'])
     return row
 
 def masses(row):
@@ -41,10 +41,16 @@ def masses(row):
         row['m2'] = sim.particles[2].m
         row['m3'] = sim.particles[3].m
     except:
-        print(row['runstring'])
+        print(pathtosa+'sa'+row['runstring'])
     return row
 
-for dataset in ['resonant', 'random']:
+def ttvsystems():
+    folders = ['Kepler-431', 'KOI-0115', 'KOI-0168', 'EPIC-210897587-2', 'Kepler-446', 'KOI-0085', 'KOI-0156', 'KOI-1576', 'LP-358-499', 'KOI-2086', 'KOI-0314'] 
+    return ['TTVsystems/' + folder for folder in folders]
+
+
+datasets = ['resonant', 'random'] + ttvsystems()
+for dataset in datasets:
     pathtosa = datapath + dataset + '/simulation_archives/runs/'
     pathtossa = datapath + dataset + '/simulation_archives/shadowruns/'
     pathtotraining = repopath + 'training_data/' + dataset + '/'
