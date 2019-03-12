@@ -33,17 +33,24 @@ if not already_exists: # store a copy of this script in generate_data so we can 
 # if it does exist don't overwrite since we don't want to overwrite history
 
 def allsystems():
-    return ['random', 'resonant'] + ttvsystems()
+    return ['random', 'resonant'] + ttvsystems() + nonressystems()
 
 def ttvsystems():
-    folders = ['Kepler-431', 'KOI-0115', 'KOI-0168', 'EPIC-210897587-2', 'Kepler-446', 'KOI-0085', 'KOI-0156', 'KOI-1576', 'LP-358-499', 'KOI-2086', 'KOI-0314'] 
+    folders = ['KOI-0115', 'KOI-0168', 'KOI-0085', 'KOI-0156', 'KOI-1576', 'KOI-2086', 'KOI-0314'] 
     return ['TTVsystems/' + folder for folder in folders]
+
+def nonressystems():
+    folders = ['Kepler-431', 'EPIC-210897587-2', 'Kepler-446', 'LP-358-499'] 
+    return ['nonressystems/' + folder for folder in folders]
 
 if datasets == 'all':
     datasets = allsystems()
 
 if datasets == 'ttv':
     datasets = ttvsystems()
+
+if datasets == 'nonres':
+    datasets = nonressystems()
 
 for dataset in list(datasets):
     if dataset == 'random':
