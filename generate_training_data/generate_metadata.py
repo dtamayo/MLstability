@@ -16,18 +16,22 @@ call('cp ' + repopath + 'generate_training_data/inputresonantparams.csv ' + repo
 
 def labels(row):
     try:
+        sa = rebound.SimulationArchive(pathtosa+'sa'+row['runstring'])
+        sim = sa[0]
+        P1 = sim.particles[1].P # Need initial orbital period for TTVsystems, where P1 != 1
+
         try: # Needed for old integrations (random and Naireen) because no snapshot on end
             sim = rebound.Simulation(pathtosa+'../../final_conditions/runs/fc'+row['runstring'])
         except: # New runs (resonant and Ari) have snapshots at collision
             sa = rebound.SimulationArchive(pathtosa+'sa'+row['runstring'])
             sim = sa[-1]
-        row['instability_time'] = sim.t
+        row['instability_time'] = sim.t/P1
         try:
             ssim = rebound.Simulation(pathtossa+'../../final_conditions/shadowruns/fc'+row['runstring'])
         except:
             ssa = rebound.SimulationArchive(pathtossa+'sa'+row['runstring'])
             ssim = ssa[-1]
-        row['shadow_instability_time'] = ssim.t
+        row['shadow_instability_time'] = ssim.t/P1
         row['Stable'] = row['instability_time'] > 9.99e8
     except:
         print(pathtosa+'sa'+row['runstring'])

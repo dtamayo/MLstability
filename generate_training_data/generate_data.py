@@ -4,19 +4,25 @@ from subprocess import call
 import sys
 import warnings
 warnings.filterwarnings('ignore') # to suppress warnings about REBOUND versions that I've already tested
+from collections import OrderedDict
 
 datapath = '/mnt/ssd/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/workspace/stability/MLstability/'
 sys.path.append(repopath + 'generate_training_data/')
-from training_data_functions import gen_training_data, runorbtseries
+from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb
 
-Norbits = 1e4
-Nout = 1729
-datasets = 'all'
-runfunc = runorbtseries
+datasets = ['resonant']
+runfunc = orbsummaryfeaturesxgb # Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+
+kwargs = OrderedDict()
+kwargs['Norbits'] = 1e4
+kwargs['Nout'] = 1729
+kwargs['window'] = 10
+foldername = runfunc.__name__
+for key, val in kwargs.items():
+    foldername += '{0}{1}'.format(key, val)
 
 gendatafolder = repopath + 'generate_training_data/'
-foldername = runfunc.__name__ + 'Norbits' + '{:.1e}'.format(Norbits) + 'Nout' + str(Nout)
 
 already_exists = call('mkdir ' + gendatafolder + foldername, shell=True)
 if not already_exists: # store a copy of this script in generate_data so we can always regenerate what we had
@@ -60,8 +66,5 @@ for dataset in list(datasets):
     call('cp ' + trainingdatafolder + 'masses.csv ' + trainingdatafolder + foldername, shell=True)
     call('cp ' + trainingdatafolder + 'runstrings.csv ' + trainingdatafolder + foldername, shell=True)
 
-    Norbits = float(Norbits)
-    Nout = int(Nout)
-    times = np.linspace(0, Norbits, Nout)
     print(trainingdatafolder + foldername)
-    gen_training_data(times, trainingdatafolder + foldername, safolder, runorbtseries)
+    gen_training_data(trainingdatafolder + foldername, safolder, runfunc, list(kwargs.values()))
