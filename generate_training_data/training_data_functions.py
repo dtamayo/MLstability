@@ -14,17 +14,17 @@ def training_data(row, safolder, runfunc, args):
         sim = sa[0]
     except:
         print("traininst_data_functions.py Error reading " + safolder+'sa'+row['runstring'])
-        sim = None
-    val = runfunc(sim, args)
-    return val
+        return None
+    
+    return runfunc(sim, args)
 
 def gen_training_data(outputfolder, safolder, runfunc, args):
-    df = pd.read_csv(outputfolder+"/runstrings.csv", index_col = 0).head(100)
+    df = pd.read_csv(outputfolder+"/runstrings.csv", index_col = 0)
     ddf = dd.from_pandas(df, npartitions=24)
     sa = rebound.SimulationArchive(safolder+'sa'+df.loc[0]['runstring'])
-    res = runfunc(sa[0], args) # Choose formatting based on selected runfunc return type
+    testres = runfunc(sa[0], args) # Choose formatting based on selected runfunc return type
     
-    if isinstance(res, np.ndarray): # for runfuncs that return an np array of time series
+    if isinstance(testres, np.ndarray): # for runfuncs that return an np array of time series
         res = ddf.apply(training_data, axis=1, meta=('f0', 'object'), args=(safolder, runfunc, args)).compute(scheduler='processes') # dask meta autodetect fails. Here we're returning a np.array not Series or DataFrame so meta = object
         Nsys = df.shape[0]
         Ntimes = res[0].shape[0]
@@ -32,8 +32,9 @@ def gen_training_data(outputfolder, safolder, runfunc, args):
         matrix = np.concatenate(res.values).ravel().reshape((Nsys, Ntimes, Nvals)) 
         np.save(outputfolder+'/trainingdata.npy', matrix)
 
-    if isinstance(res, pd.Series):
-        res = ddf.apply(training_data, axis=1, args=(safolder, runfunc, args)).compute(scheduler='processes')
+    if isinstance(testres, pd.Series):
+        metadf = pd.DataFrame([testres]) # make single row dataframe to autodetect meta
+        res = ddf.apply(training_data, axis=1, meta=metadf, args=(safolder, runfunc, args)).compute(scheduler='processes')
         # meta autodetect should work for simple functions that return a series
         res.to_csv(outputfolder+'/trainingdata.csv')
 
@@ -41,23 +42,22 @@ def gen_training_data(outputfolder, safolder, runfunc, args):
 def orbtseries(sim, args):
     Norbits = args[0]
     Nout = args[1]
-    times = np.linspace(0, Norbits*sim.particles[1].P, Nout) # TTV systems don't have ps[1].P=1, so must multiply!
     val = np.zeros((Nout, 19))
 
     ###############################
-    if sim == None:
-        return val
     sim.collision_resolve = collision
     sim.ri_whfast.keep_unsynchronized = 1
+    ###############################
+    # Chunk above should be the same in all runfuncs we write in order to match simarchives
+    # Fill in values below
+    
+    times = np.linspace(0, Norbits*sim.particles[1].P, Nout) # TTV systems don't have ps[1].P=1, so must multiply!
     
     for i, time in enumerate(times):
         try:
             sim.integrate(time, exact_finish_time=0)
         except:
             return val # if there's a collision will return 0s from that point on
-    ###############################
-    # Chunk above should be the same in all runfuncs we write in order to match simarchives
-    # Fill in values below
 
         orbits = sim.calculate_orbits()
         for j, o in enumerate(orbits):
@@ -75,13 +75,12 @@ def orbsummaryfeaturesxgb(sim, args):
     Nout = args[1]
     window = args[2]
 
-    times = np.linspace(0, Norbits*sim.particles[1].P, Nout) # TTV systems don't have ps[1].P=1, so must multiply!
     ###############################
-    if sim == None:
-        return val
     sim.collision_resolve = collision
     sim.ri_whfast.keep_unsynchronized = 1
     ##############################
+    
+    times = np.linspace(0, Norbits*sim.particles[1].P, Nout) # TTV systems don't have ps[1].P=1, so must multiply!
 
     ps = sim.particles
     P0 = ps[1].P
