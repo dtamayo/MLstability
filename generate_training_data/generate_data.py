@@ -12,11 +12,12 @@ sys.path.append(repopath + 'generate_training_data/')
 from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb
 
 datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = orbtseries# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+runfunc = orbsummaryfeaturesxgb # Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
 kwargs['Nout'] = 1729
+kwargs['window'] = 10
 
 foldername = runfunc.__name__
 for key, val in kwargs.items():
@@ -70,7 +71,7 @@ for dataset in list(datasets):
         print('output folder already exists at {0}. Remove it if you want to regenerate'.format(trainingdatafolder+foldername))
         continue
     call('cp ' + trainingdatafolder + 'labels.csv ' + trainingdatafolder + foldername, shell=True)
-    call('cp ' + trainingdatafolder + 'masses.csv ' + trainingdatafolder + foldername, shell=True)
+    call('cp ' + trainingdatafolder + 'massratios.csv ' + trainingdatafolder + foldername, shell=True)
     call('cp ' + trainingdatafolder + 'runstrings.csv ' + trainingdatafolder + foldername, shell=True)
 
     print(trainingdatafolder + foldername)

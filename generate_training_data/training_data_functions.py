@@ -93,8 +93,8 @@ def orbsummaryfeaturesxgb(sim, args):
     beta12 = np.zeros(Nout)
     beta23 = np.zeros(Nout)
 
-    Rhill12 = ps[1].a*((ps[1].m+ps[2].m)/3.)**(1./3.)
-    Rhill23 = ps[2].a*((ps[2].m+ps[3].m)/3.)**(1./3.)
+    Rhill12 = ps[1].a*((ps[1].m+ps[2].m)/3./ps[0].m)**(1./3.)
+    Rhill23 = ps[2].a*((ps[2].m+ps[3].m)/3./ps[0].m)**(1./3.)
     
     eHill = [0, Rhill12/ps[1].a, max(Rhill12, Rhill23)/ps[2].a, Rhill23/ps[3].a]
     daOvera = [0, (ps[2].a-ps[1].a)/ps[1].a, min(ps[3].a-ps[2].a, ps[2].a-ps[1].a)/ps[2].a, (ps[3].a-ps[2].a)/ps[3].a]
@@ -106,8 +106,8 @@ def orbsummaryfeaturesxgb(sim, args):
             inc[j,i] = ps[j].inc
 
         # mutual hill radii since that's what goes into Hill stability
-        Rhill12 = ps[1].a*((ps[1].m+ps[2].m)/3.)**(1./3.)
-        Rhill23 = ps[2].a*((ps[2].m+ps[3].m)/3.)**(1./3.)
+        Rhill12 = ps[1].a*((ps[1].m+ps[2].m)/3./ps[0].m)**(1./3.)
+        Rhill23 = ps[2].a*((ps[2].m+ps[3].m)/3./ps[0].m)**(1./3.)
         
         beta12[i] = (ps[2].a - ps[1].a)/Rhill12
         beta23[i] = (ps[3].a - ps[2].a)/Rhill23   
