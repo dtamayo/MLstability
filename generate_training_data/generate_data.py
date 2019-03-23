@@ -11,7 +11,7 @@ repopath = '/mnt/ssd/workspace/stability/MLstability/'
 sys.path.append(repopath + 'generate_training_data/')
 from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb
 
-datasets = ['resonant'] # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
+datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
 runfunc = ressummaryfeaturesxgb# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
