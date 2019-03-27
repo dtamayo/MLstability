@@ -9,14 +9,14 @@ from collections import OrderedDict
 datapath = '/mnt/ssd/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/workspace/stability/MLstability/'
 sys.path.append(repopath + 'generate_training_data/')
-from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb
+from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb
 
 datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = orbsummaryfeaturesxgb # Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+runfunc = orbsummaryfeaturesxgb# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
-kwargs['Nout'] = 1729
+kwargs['Nout'] = 1000
 kwargs['window'] = 10
 
 foldername = runfunc.__name__
@@ -34,17 +34,24 @@ if not already_exists: # store a copy of this script in generate_data so we can 
 # if it does exist don't overwrite since we don't want to overwrite history
 
 def allsystems():
-    return ['random', 'resonant'] + ttvsystems()
+    return ['random', 'resonant'] + ttvsystems() + nonressystems()
 
 def ttvsystems():
-    folders = ['Kepler-431', 'KOI-0115', 'KOI-0168', 'EPIC-210897587-2', 'Kepler-446', 'KOI-0085', 'KOI-0156', 'KOI-1576', 'LP-358-499', 'KOI-2086', 'KOI-0314'] 
+    folders = ['KOI-0115', 'KOI-0168', 'KOI-0085', 'KOI-0156', 'KOI-1576', 'KOI-2086', 'KOI-0314'] 
     return ['TTVsystems/' + folder for folder in folders]
+
+def nonressystems():
+    folders = ['Kepler-431', 'EPIC-210897587-2', 'Kepler-446', 'LP-358-499'] 
+    return ['nonressystems/' + folder for folder in folders]
 
 if datasets == 'all':
     datasets = allsystems()
 
 if datasets == 'ttv':
     datasets = ttvsystems()
+
+if datasets == 'nonres':
+    datasets = nonressystems()
 
 for dataset in list(datasets):
     if dataset == 'random':
@@ -64,7 +71,7 @@ for dataset in list(datasets):
         print('output folder already exists at {0}. Remove it if you want to regenerate'.format(trainingdatafolder+foldername))
         continue
     call('cp ' + trainingdatafolder + 'labels.csv ' + trainingdatafolder + foldername, shell=True)
-    call('cp ' + trainingdatafolder + 'masses.csv ' + trainingdatafolder + foldername, shell=True)
+    call('cp ' + trainingdatafolder + 'massratios.csv ' + trainingdatafolder + foldername, shell=True)
     call('cp ' + trainingdatafolder + 'runstrings.csv ' + trainingdatafolder + foldername, shell=True)
 
     print(trainingdatafolder + foldername)

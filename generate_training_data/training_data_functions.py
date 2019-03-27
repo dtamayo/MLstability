@@ -6,6 +6,7 @@ from collections import OrderedDict
 from celmech.poincare import Poincare, PoincareHamiltonian
 from celmech import Andoyer, AndoyerHamiltonian
 from celmech.resonances import resonant_period_ratios, resonance_intersections_list, resonance_pratio_span
+from celmech.transformations import masses_to_jacobi
 import itertools
 
 def collision(reb_sim, col):
@@ -61,7 +62,7 @@ def orbtseries(sim, args):
         try:
             sim.integrate(time, exact_finish_time=0)
         except:
-            return val # if there's a collision will return 0s from that point on
+            break
 
         orbits = sim.calculate_orbits()
         for j, o in enumerate(orbits):
@@ -116,7 +117,7 @@ def orbsummaryfeaturesxgb(sim, args):
         beta12[i] = (ps[2].a - ps[1].a)/Rhill12
         beta23[i] = (ps[3].a - ps[2].a)/Rhill23   
         try:
-            sim.integrate(t)
+            sim.integrate(t, exact_finish_time=0)
         except:
             break
     
@@ -169,10 +170,27 @@ def orbsummaryfeaturesxgb(sim, args):
 
     return pd.Series(features, index=list(features.keys()))
 
+def poincare_from_simulation(sim, average=True):
+    ps = sim.particles
+    mjac, Mjac = masses_to_jacobi([p.m for p in ps])
+    pvars = Poincare(sim.G)
+    for i in range(1, sim.N-sim.N_var):
+        M = Mjac[i]
+        m = mjac[i]
+        primary = sim.calculate_com(last=i)
+        primary.m = Mjac[i]-ps[i].m
+        o = ps[i].calculate_orbit(primary=primary)
+        sLambda = np.sqrt(sim.G*M*o.a)
+        sGamma = sLambda*(1.-np.sqrt(1.-o.e**2))
+        pvars.add(m=m, sLambda=sLambda, l=o.l, sGamma=sGamma, gamma=-o.pomega, M=M)
+    if average == True:
+        pvars.average_synodic_terms()
+    return pvars
+    
 def findres(sim, i1, i2):
     delta = 0.03
     maxorder = 2
-    ps = Poincare.from_Simulation(sim=sim).particles # get averaged mean motions
+    ps = poincare_from_simulation(sim=sim).particles # get averaged mean motions
     n1 = ps[i1].n
     n2 = ps[i2].n
     
@@ -180,6 +198,9 @@ def findres(sim, i1, i2):
     m2 = ps[i2].m
     
     Pratio = n2/n1
+    if np.isnan(Pratio): # probably due to close encounter where averaging step doesn't converge 
+        return np.nan, np.nan, np.nan
+
     res = resonant_period_ratios(Pratio-delta,Pratio+delta, order=maxorder)
     
     Z = np.sqrt((ps[i1].e*np.cos(ps[i1].pomega) - ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].e*np.sin(ps[i1].pomega) - ps[i2].e*np.sin(ps[i2].pomega))**2)
@@ -202,6 +223,11 @@ def findres(sim, i1, i2):
 def ressummaryfeaturesxgb(sim, args):
     Norbits = args[0]
     Nout = args[1]
+    
+    ###############################
+    sim.collision_resolve = collision
+    sim.ri_whfast.keep_unsynchronized = 1
+    ##############################
 
     features = OrderedDict()
     ps = sim.particles
@@ -256,16 +282,16 @@ def ressummaryfeaturesxgb(sim, args):
             i1, i2 = int(i1), int(i2)
             eminus[j, i] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2)
             if js[j] != -1:
-                avars = Andoyer.from_Simulation(sim=sim, j=js[j], k=ks[j], a10=a0[i1], i1=i1, i2=i2)
+                pvars = poincare_from_simulation(sim)
+                avars = Andoyer.from_Poincare(pvars, j=js[j], k=ks[j], a10=a0[i1], i1=i1, i2=i2)
                 rebound_Z[j, i] = avars.Z
                 rebound_phi[j, i] = avars.phi
                 rebound_Zcom[j, i] = avars.Zcom
                 rebound_phiZcom[j, i] = avars.phiZcom
                 rebound_Zstar[j, i] = avars.Zstar
                 rebound_dKprime[j, i] = avars.dKprime
-        
         try:
-            sim.integrate(t)
+            sim.integrate(t, exact_finish_time=0)
         except:
             break
         
@@ -283,10 +309,13 @@ def ressummaryfeaturesxgb(sim, args):
         Zc = Zcross[i]
         features['EMmed'+s] = np.median(EM)/Zc
         features['EMmax'+s] = EM.max()/Zc
-        p = np.poly1d(np.polyfit(times, EM, 3))
-        m = p(times)
-        EMdrift = np.abs((m[-1]-m[0])/m[0])
-        features['EMdrift'+s] = EMdrift
+        try:
+            p = np.poly1d(np.polyfit(times, EM, 3))
+            m = p(times)
+            EMdrift = np.abs((m[-1]-m[0])/m[0])
+            features['EMdrift'+s] = EMdrift
+        except:
+            features['EMdrift'+s] = np.nan
         maxindex = (m == m.max()).nonzero()[0][0] # index where cubic polynomial fit to EM reaches max to track long wavelength variations (secular?)
         if EMdrift > 0.1 and (maxindex < 0.01*Nout or maxindex > 0.99*Nout): # don't flag as not capturing secular if Z isn't varying significantly in first place
             features['capseculartscale'+s] = 0
@@ -296,21 +325,30 @@ def ressummaryfeaturesxgb(sim, args):
         rollstd = pd.Series(EM).rolling(window=100).std()
         features['EMrollingstd'+s] = rollstd[100:].median()/EM[0]
         var = [EM[:j].var() for j in range(len(EM))]
-        p = np.poly1d(np.polyfit(times[len(var)//2:], var[len(var)//2:], 1)) # fit only second half to get rid of transient
-        features['DiffcoeffEM'+s] = p[1]/Zc**2
+        try:
+            p = np.poly1d(np.polyfit(times[len(var)//2:], var[len(var)//2:], 1)) # fit only second half to get rid of transient
+            features['DiffcoeffEM'+s] = p[1]/Zc**2
+        except:
+            features['DiffcoeffEM'+s] = np.nan
         features['medvarEM'+s] = np.median(var[len(var)//2:])/Zc**2
         if strengths[i] != -1:
             Z = rebound_Z[i]
             features['Zmed'+s] = np.median(Z)/Zc
             features['Zmax'+s] = rebound_Z[i].max()/Zc
-            p = np.poly1d(np.polyfit(times, Z, 3))
-            m = p(times)
-            features['Zdetrendedstd'+s] = pd.Series(Z-m).std()/Z[0]
+            try:
+                p = np.poly1d(np.polyfit(times, Z, 3))
+                m = p(times)
+                features['Zdetrendedstd'+s] = pd.Series(Z-m).std()/Z[0]
+            except:
+                features['Zdetrendedstd'+s] = np.nan
             rollstd = pd.Series(Z).rolling(window=100).std()
             features['Zrollingstd'+s] = rollstd[100:].median()/Z[0]
             var = [Z[:j].var() for j in range(len(Z))]
-            p = np.poly1d(np.polyfit(times[len(var)//2:], var[len(var)//2:], 1)) # fit only second half to get rid of transient
-            features['DiffcoeffZ'+s] = p[1]/Zc**2
+            try:
+                p = np.poly1d(np.polyfit(times[len(var)//2:], var[len(var)//2:], 1)) # fit only second half to get rid of transient
+                features['DiffcoeffZ'+s] = p[1]/Zc**2
+            except:
+                features['DiffcoeffZ'+s] = np.nan
             features['medvarZ'+s] = np.median(var[len(var)//2:])/Zc**2
             features['Zcomdrift'+s] = np.max(np.abs(rebound_Zcom[i]-rebound_Zcom[i, 0])/rebound_Zcom[i, 0])
             rollstd = pd.Series(rebound_Zcom[i]).rolling(window=100).std()
@@ -324,5 +362,21 @@ def ressummaryfeaturesxgb(sim, args):
             Zcosphi = Z*np.cos(rebound_phi[i])
             features['Zcosphistd'+s] = Zcosphi.std()/Zc
             features['medZcosphi'+s] = np.median(Zcosphi)/Zc
+        else:
+            features['Zmed'+s] = -1
+            features['Zmax'+s] = -1
+            features['Zdetrendedstd'+s] = -1
+            features['Zrollingstd'+s] = -1
+            features['DiffcoeffZ'+s] = -1
+            features['medvarZ'+s] = -1
+            features['Zcomdrift'+s] = -1
+            features['Zcomrollingstd'+s] = -1
+            features['phiZcomdrift'+s] = -1
+            features['phiZcomrollingstd'+s] = -1
+            features['Zstardrift'+s] = -1
+            features['Zstarrollingstd'+s] = -1
+            features['Zcosphistd'+s] = -1
+            features['medZcosphi'+s] = -1
+
     features['tlyap'] = 1/sim.calculate_lyapunov()
     return pd.Series(features, index=list(features.keys()))

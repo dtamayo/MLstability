@@ -12,11 +12,11 @@ sys.path.append(repopath + 'generate_training_data/')
 from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb
 
 datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = orbtseries# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+runfunc = ressummaryfeaturesxgb # Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
-kwargs['Nout'] = 1729
+kwargs['Nout'] = 1000
 #kwargs['window'] = 10
 
 foldername = runfunc.__name__

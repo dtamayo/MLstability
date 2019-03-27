@@ -37,24 +37,29 @@ def labels(row):
         print(pathtosa+'sa'+row['runstring'])
     return row
 
-def masses(row):
+def massratios(row):
     try:
         sa = rebound.SimulationArchive(pathtosa+'sa'+row['runstring'])
         sim = sa[0]
-        row['m1'] = sim.particles[1].m
-        row['m2'] = sim.particles[2].m
-        row['m3'] = sim.particles[3].m
+        row['m1'] = sim.particles[1].m/sim.particles[0].m
+        row['m2'] = sim.particles[2].m/sim.particles[0].m
+        row['m3'] = sim.particles[3].m/sim.particles[0].m
     except:
         print(pathtosa+'sa'+row['runstring'])
     return row
 
 def ttvsystems():
-    folders = ['Kepler-431', 'KOI-0115', 'KOI-0168', 'EPIC-210897587-2', 'Kepler-446', 'KOI-0085', 'KOI-0156', 'KOI-1576', 'LP-358-499', 'KOI-2086', 'KOI-0314'] 
+    folders = ['KOI-0115', 'KOI-0168', 'KOI-0085', 'KOI-0156', 'KOI-1576', 'KOI-2086', 'KOI-0314'] 
     return ['TTVsystems/' + folder for folder in folders]
 
+def nonressystems():
+    folders = ['Kepler-431', 'EPIC-210897587-2', 'Kepler-446', 'LP-358-499'] 
+    return ['nonressystems/' + folder for folder in folders]
 
-datasets = ['resonant', 'random'] + ttvsystems()
+
+datasets = ['resonant', 'random'] + ttvsystems() + nonressystems()
 for dataset in datasets:
+    print(dataset)
     pathtosa = datapath + dataset + '/simulation_archives/runs/'
     pathtossa = datapath + dataset + '/simulation_archives/shadowruns/'
     pathtotraining = repopath + 'training_data/' + dataset + '/'
@@ -78,5 +83,5 @@ for dataset in datasets:
     df['m2'] = -1
     df['m3'] = -1
 
-    df = df.apply(masses, axis=1)
-    df.to_csv(pathtotraining+'masses.csv', encoding='ascii')
+    df = df.apply(massratios, axis=1)
+    df.to_csv(pathtotraining+'massratios.csv', encoding='ascii')
