@@ -379,4 +379,5 @@ def ressummaryfeaturesxgb(sim, args):
             features['medZcosphi'+s] = -1
 
     features['tlyap'] = 1/sim.calculate_lyapunov()
+    features['megno'] = sim.calculate_megno()
     return pd.Series(features, index=list(features.keys()))

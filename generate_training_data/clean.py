@@ -9,7 +9,7 @@ runfunc = 'ressummaryfeaturesxgb'#'orbtseries'#'orbsummaryfeaturesxgb'
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
-kwargs['Nout'] = 1729
+kwargs['Nout'] = 1000
 #kwargs['window'] = 10
 
 foldername = runfunc
@@ -38,8 +38,8 @@ if datasets == 'nonres':
 
 for dataset in list(datasets):
     folder = datapath + dataset + '/'
-    call('rm -f ' + folder + 'labels.csv', shell=True)
-    call('rm -f ' + folder + 'massratios.csv', shell=True)
-    call('rm -f ' + folder + 'runstrings.csv', shell=True)
+    #call('rm -f ' + folder + 'labels.csv', shell=True)
+    #call('rm -f ' + folder + 'massratios.csv', shell=True)
+    #call('rm -f ' + folder + 'runstrings.csv', shell=True)
     call('rm -rf ' + folder + foldername, shell=True)
     call('rm -rf ' + foldername, shell=True)

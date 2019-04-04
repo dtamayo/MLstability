@@ -9,7 +9,7 @@ warnings.filterwarnings('ignore') # filter REBOUND warnings about version that I
 datapath = '/mnt/ssd/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/workspace/stability/MLstability/'
 
-if rebound.__githash__ != '25f856dc2f79e0ad17b2f6bd604225f550593376':
+if rebound.__githash__ != 'b165135deb8c5f2920abaed1637657ef8ce4f087':
     print('Should checkout commit above to ensure this runs correctly')
 
 call('cp ' + repopath + 'generate_training_data/inputresonantparams.csv ' + repopath + 'training_data/resonant/', shell=True)

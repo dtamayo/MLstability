@@ -12,11 +12,11 @@ sys.path.append(repopath + 'generate_training_data/')
 from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb
 
 datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = orbtseries# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+runfunc = ressummaryfeaturesxgb# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
-kwargs['Nout'] = 1729
+kwargs['Nout'] = 1000
 #kwargs['window'] = 10
 
 foldername = runfunc.__name__
@@ -59,8 +59,8 @@ for dataset in list(datasets):
             print('random dataset not run. Check out rebound commit db3ae2cea8f3462463d3e0c5788a34625bb49a9c and rerun script if needed')
             continue 
     else:
-        if rebound.__githash__ != '25f856dc2f79e0ad17b2f6bd604225f550593376':
-            print('{0} dataset not run. Check out rebound commit 25f856dc2f79e0ad17b2f6bd604225f550593376 and rerun script if needed'.format(dataset))
+        if rebound.__githash__ != 'b165135deb8c5f2920abaed1637657ef8ce4f087':
+            print('{0} dataset not run. Check out rebound commit b165135deb8c5f2920abaed1637657ef8ce4f087 and rerun script if needed'.format(dataset))
             continue 
 
     safolder = datapath + dataset + '/simulation_archives/runs/'
