@@ -56,11 +56,11 @@ if datasets == 'nonres':
 for dataset in list(datasets):
     if dataset == 'random':
         if rebound.__githash__ != '48feb327f90611a5569682578980b5604aa6102a':
-            print('random dataset not run. Check out rebound commit db3ae2cea8f3462463d3e0c5788a34625bb49a9c and rerun script if needed')
+            print('random dataset not run. Check out rebound commit 48feb327f90611a5569682578980b5604aa6102a and rerun script if needed')
             continue 
     else:
-        if rebound.__githash__ != 'dd5dc543f5138b4ab32471a26230d39f8f2fcd7c':
-            print('{0} dataset not run. Check out rebound commit b165135deb8c5f2920abaed1637657ef8ce4f087 and rerun script if needed'.format(dataset))
+        if rebound.__githash__ != '06c95e2a69d319de3b077d92f2541cdcdf68a8fa':
+            print('{0} dataset not run. Check out rebound commit 06c95e2a69d319de3b077d92f2541cdcdf68a8fa and rerun script if needed'.format(dataset))
             continue 
 
     safolder = datapath + dataset + '/simulation_archives/runs/'

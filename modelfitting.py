@@ -11,15 +11,19 @@ def hasnull(row):
     else:
         return 1
 
-def train_test_split(trainingdatafolder, features=None):
+def train_test_split(trainingdatafolder, features=None, labelname='Stable', filter=True):
     dataset = pd.read_csv(trainingdatafolder+"trainingdata.csv", index_col = 0)
     if features is None:
         features = dataset.columns.values
     dataset['hasnull'] = dataset.apply(hasnull, axis=1)
 
     labels = pd.read_csv(trainingdatafolder+"labels.csv", index_col=0)
-    y = labels[(labels['instability_time'] > 1.e4) & (dataset['hasnull'] == 0)]['Stable']
-    X = dataset[(labels['instability_time'] > 1.e4) & (dataset['hasnull'] == 0)][features]
+    if filter:
+        y = labels[(labels['instability_time'] > 1.e4) & (dataset['hasnull'] == 0)][labelname]
+        X = dataset[(labels['instability_time'] > 1.e4) & (dataset['hasnull'] == 0)][features]
+    else:
+        y = labels[labelname]
+        X = dataset[features]
 
     Nrows = int(0.8*X.shape[0])
     trainX = X.iloc[:Nrows, :]
@@ -28,18 +32,6 @@ def train_test_split(trainingdatafolder, features=None):
     testy = y.iloc[Nrows:]
 
     return trainX, trainy, testX, testy
-
-def test_instability_times(trainingdatafolder, features=None):
-    dataset = pd.read_csv(trainingdatafolder+"trainingdata.csv", index_col = 0)
-    if features is None:
-        features = dataset.columns.values
-    dataset['hasnull'] = dataset.apply(hasnull, axis=1)
-    
-    labels = pd.read_csv(trainingdatafolder+"labels.csv", index_col=0)
-    y = labels[(labels['instability_time'] > 1.e4) & (dataset['hasnull'] == 0)]['instability_time']
-    Nrows = int(0.8*y.shape[0])
-    test_inst_times = y.iloc[Nrows:]
-    return test_inst_times
 
 def ROC_curve(trainingdatafolder, model, features=None):
     trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features)
@@ -84,7 +76,9 @@ def calibration_plot(trainingdatafolder, model, features=None, bins=10):
 def unstable_error_fraction(trainingdatafolder, model, features=None, bins=10):
     trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features)
     preds = model.predict_proba(testX)[:,1]
-    log_inst_times = np.log10(test_instability_times(trainingdatafolder, features))
+    dummy, dummy, dummy, inst_times = train_test_split(trainingdatafolder, features, labelname='instability_time')
+    log_inst_times = np.log10(inst_times)
+    
     unstable = log_inst_times < 8.99
     preds = preds[unstable]
     log_inst_times = log_inst_times[unstable]

@@ -9,7 +9,7 @@ warnings.filterwarnings('ignore') # filter REBOUND warnings about version that I
 datapath = '/mnt/ssd/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/workspace/stability/MLstability/'
 
-if rebound.__githash__ != 'b165135deb8c5f2920abaed1637657ef8ce4f087':
+if rebound.__githash__ != '06c95e2a69d319de3b077d92f2541cdcdf68a8fa':
     print('Should checkout commit above to ensure this runs correctly')
 
 call('cp ' + repopath + 'generate_training_data/inputresonantparams.csv ' + repopath + 'training_data/resonant/', shell=True)
@@ -77,6 +77,12 @@ for dataset in datasets:
 
     df = df.apply(labels, axis=1)
     df.to_csv(pathtotraining+'labels.csv', encoding='ascii')
+    df = pd.DataFrame(df['shadow_instability_time'])
+    call('mkdir ' + pathtotraining + 'shadowtimes', shell=True)
+    call('cp ' + pathtotraining + 'labels.csv ' + pathtotraining + 'shadowtimes/', shell=True)
+    call('cp ' + pathtotraining + 'massratios.csv ' + pathtotraining + 'shadowtimes/', shell=True)
+    call('cp ' + pathtotraining + 'runstrings.csv ' + pathtotraining + 'shadowtimes/', shell=True)
+    df.to_csv(pathtotraining+'shadowtimes/trainingdata.csv', encoding='ascii')
 
     df = pd.read_csv(pathtotraining+'runstrings.csv', index_col=0)
     df['m1'] = -1
