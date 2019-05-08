@@ -6,8 +6,8 @@ import warnings
 warnings.filterwarnings('ignore') # to suppress warnings about REBOUND versions that I've already tested
 from collections import OrderedDict
 
-datapath = '/mnt/ssd/workspace/stability/stabilitydataset/data/'
-repopath = '/mnt/ssd/workspace/stability/MLstability/'
+datapath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/stabilitydataset/data/'
+repopath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/MLstability/'
 sys.path.append(repopath + 'generate_training_data/')
 from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb
 
@@ -25,10 +25,10 @@ for key, val in kwargs.items():
 
 gendatafolder = repopath + 'generate_training_data/'
 
-already_exists = call('mkdir ' + gendatafolder + foldername, shell=True)
+already_exists = call('mkdir "' + gendatafolder + foldername + '"', shell=True)
 if not already_exists: # store a copy of this script in generate_data so we can always regenerate what we had
-    call('cp ' + gendatafolder + '/generate_data.py ' + gendatafolder + foldername, shell=True)
-    call('python ' + gendatafolder + foldername + '/generate_data.py ', shell=True)
+    call('cp "' + gendatafolder + '/generate_data.py" "' + gendatafolder + foldername + '"', shell=True)
+    call('python "' + gendatafolder + foldername + '/generate_data.py"' , shell=True)
     exit()
     # we always run the copied script so that we do the same thing whether we're running for first time or regenerating
 # if it does exist don't overwrite since we don't want to overwrite history
@@ -66,13 +66,13 @@ for dataset in list(datasets):
     safolder = datapath + dataset + '/simulation_archives/runs/'
     trainingdatafolder = repopath + 'training_data/' + dataset + '/'
 
-    already_exists = call('mkdir ' + trainingdatafolder + foldername, shell=True)
+    already_exists = call('mkdir "' + trainingdatafolder + foldername + '"', shell=True)
     if already_exists:
         print('output folder already exists at {0}. Remove it if you want to regenerate'.format(trainingdatafolder+foldername))
         continue
-    call('cp ' + trainingdatafolder + 'labels.csv ' + trainingdatafolder + foldername, shell=True)
-    call('cp ' + trainingdatafolder + 'massratios.csv ' + trainingdatafolder + foldername, shell=True)
-    call('cp ' + trainingdatafolder + 'runstrings.csv ' + trainingdatafolder + foldername, shell=True)
+    call('cp "' + trainingdatafolder + 'labels.csv" "' + trainingdatafolder + foldername + '"', shell=True)
+    call('cp "' + trainingdatafolder + 'massratios.csv" "' + trainingdatafolder + foldername + '"', shell=True)
+    call('cp "' + trainingdatafolder + 'runstrings.csv" "' + trainingdatafolder + foldername + '"', shell=True)
 
     print(trainingdatafolder + foldername)
     gen_training_data(trainingdatafolder + foldername, safolder, runfunc, list(kwargs.values()))

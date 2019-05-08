@@ -43,6 +43,76 @@ def gen_training_data(outputfolder, safolder, runfunc, args):
         # meta autodetect should work for simple functions that return a series
         res.to_csv(outputfolder+'/trainingdata.csv')
 
+from scipy.optimize import brenth
+def F(e,alpha,gamma):
+    """Equation 35 of Laskar & Petit (2017)"""
+    denom = np.sqrt(alpha*(1-e*e)+gamma*gamma*e*e)
+    return alpha*e -1 + alpha + gamma*e / denom
+
+### start AMD functions
+
+def critical_relative_AMD(alpha,gamma):
+    """Equation 29"""
+    e0 = np.min((1,1/alpha-1))
+    ec = brenth(F,0,e0,args=(alpha,gamma))
+    e1c = np.sin(np.arctan(gamma*ec / np.sqrt(alpha*(1-ec*ec))))
+    curlyC = gamma*np.sqrt(alpha) * (1-np.sqrt(1-ec*ec)) + (1 - np.sqrt(1-e1c*e1c))
+    return curlyC
+
+def compute_AMD(sim):
+    pstar = sim.particles[0]
+    Ltot = pstar.m * np.cross(pstar.xyz,pstar.vxyz)
+    ps = sim.particles[1:]
+    Lmbda=np.zeros(len(ps))
+    G = np.zeros(len(ps))
+    Lhat = np.zeros((len(ps),3))
+    for k,p in enumerate(sim.particles[1:]):
+        orb = p.calculate_orbit(primary=pstar)
+        Lmbda[k] = p.m * np.sqrt(p.a)
+        G[k] = Lmbda[k] * np.sqrt(1-p.e*p.e)
+        hvec = np.cross(p.xyz,p.vxyz)
+        Lhat[k] = hvec / np.linalg.norm(hvec)
+        Ltot = Ltot + p.m * hvec
+    cosi = np.array([Lh.dot(Ltot) for Lh in Lhat]) / np.linalg.norm(Ltot)
+    return np.sum(Lmbda) - np.sum(G * cosi)
+
+def AMD_stable_Q(sim):
+    AMD = compute_AMD(sim)
+    pstar = sim.particles[0]
+    ps = sim.particles[1:]
+    for i in range(len(ps)-1):
+        pIn = ps[i]
+        pOut = ps[i+1]
+        orbIn = pIn.calculate_orbit(pstar)
+        orbOut = pOut.calculate_orbit(pstar)
+        alpha = orbIn.a / orbOut.a
+        gamma = pIn.m / pOut.m
+        LmbdaOut = pOut.m * np.sqrt(orbOut.a)
+        Ccrit = critical_relative_AMD(alpha,gamma)
+        C = AMD / LmbdaOut
+        if C>Ccrit:
+            return False
+    return True
+
+def AMD_stability_coefficients(sim):
+    AMD = compute_AMD(sim)
+    pstar = sim.particles[0]
+    ps = sim.particles[1:]
+    coeffs = np.zeros(len(ps)-1)
+    for i in range(len(ps)-1):
+        pIn = ps[i]
+        pOut = ps[i+1]
+        orbIn = pIn.calculate_orbit(pstar)
+        orbOut = pOut.calculate_orbit(pstar)
+        alpha = orbIn.a / orbOut.a
+        gamma = pIn.m / pOut.m
+        LmbdaOut = pOut.m * np.sqrt(orbOut.a)
+        Ccrit = critical_relative_AMD(alpha,gamma)
+        C = AMD / LmbdaOut
+        coeffs[i] = C / Ccrit
+    return coeffs
+
+### end AMD functions
 # write functions to take args and unpack them at top so it's clear what you have to pass in args
 def orbtseries(sim, args):
     Norbits = args[0]
@@ -90,6 +160,12 @@ def orbsummaryfeaturesxgb(sim, args):
     ps = sim.particles
     P0 = ps[1].P
     Nout = len(times)
+        
+    features = OrderedDict()
+    AMDcoeffs = AMD_stability_coefficients(sim)
+    features["C_AMD12"] = AMDcoeffs[0]
+    features["C_AMD23"] = AMDcoeffs[1]
+    features["C_AMD_max"] = np.max(AMDcoeffs)
 
     a = np.zeros((sim.N,Nout))
     e = np.zeros((sim.N,Nout))
@@ -121,7 +197,6 @@ def orbsummaryfeaturesxgb(sim, args):
         except:
             break
     
-    features = OrderedDict()
     features['t_final_short'] = sim.t/P0
     
     for string, feature in [("beta12", beta12), ("beta23", beta23)]:
@@ -167,6 +242,7 @@ def orbsummaryfeaturesxgb(sim, args):
         yy = a[j]/a[j].mean()/features["t_final_short"]
         par = np.polyfit(xx, yy, 1, full=True)
         features['norm_a'+str(j)+'_slope'] = par[0][0]
+
 
     return pd.Series(features, index=list(features.keys()))
 
@@ -230,6 +306,11 @@ def ressummaryfeaturesxgb(sim, args):
     ##############################
 
     features = OrderedDict()
+    AMDcoeffs = AMD_stability_coefficients(sim)
+    features["C_AMD12"] = AMDcoeffs[0]
+    features["C_AMD23"] = AMDcoeffs[1]
+    features["C_AMD_max"] = np.max(AMDcoeffs)
+
     ps = sim.particles
     sim.init_megno()
     
