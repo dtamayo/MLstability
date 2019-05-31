@@ -2,10 +2,10 @@ from subprocess import call
 from collections import OrderedDict
 import sys
 
-datapath = '/mnt/ssd/workspace/stability/MLstability/training_data/'
+datapath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/MLstability/training_data/'
 
-datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = 'ressummaryfeaturesxgb'#'orbtseries'#'orbsummaryfeaturesxgb'
+datasets = 'ttv' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
+runfunc = 'normressummaryfeaturesxgb'#'orbtseries'#'orbsummaryfeaturesxgb'
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
@@ -41,5 +41,5 @@ for dataset in list(datasets):
     #call('rm -f ' + folder + 'labels.csv', shell=True)
     #call('rm -f ' + folder + 'massratios.csv', shell=True)
     #call('rm -f ' + folder + 'runstrings.csv', shell=True)
-    call('rm -rf ' + folder + foldername, shell=True)
-    call('rm -rf ' + foldername, shell=True)
+    call('rm -rf "' + folder + foldername + '"', shell=True)
+    call('rm -rf "' + foldername + '"', shell=True)

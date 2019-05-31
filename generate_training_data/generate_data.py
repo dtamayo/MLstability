@@ -9,10 +9,10 @@ from collections import OrderedDict
 datapath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/MLstability/'
 sys.path.append(repopath + 'generate_training_data/')
-from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb
+from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb
 
-datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = ressummaryfeaturesxgb# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+datasets = 'ttv' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
+runfunc = normressummaryfeaturesxgb# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
@@ -59,7 +59,7 @@ for dataset in list(datasets):
             print('random dataset not run. Check out rebound commit 48feb327f90611a5569682578980b5604aa6102a and rerun script if needed')
             continue 
     else:
-        if rebound.__githash__ != '06c95e2a69d319de3b077d92f2541cdcdf68a8fa':
+        if rebound.__githash__ != '6fb912f615ca542b670ab591375191d1ed914672':
             print('{0} dataset not run. Check out rebound commit 06c95e2a69d319de3b077d92f2541cdcdf68a8fa and rerun script if needed'.format(dataset))
             continue 
 

@@ -246,27 +246,10 @@ def orbsummaryfeaturesxgb(sim, args):
 
     return pd.Series(features, index=list(features.keys()))
 
-def poincare_from_simulation(sim, average=True):
-    ps = sim.particles
-    mjac, Mjac = masses_to_jacobi([p.m for p in ps])
-    pvars = Poincare(sim.G)
-    for i in range(1, sim.N-sim.N_var):
-        M = Mjac[i]
-        m = mjac[i]
-        primary = sim.calculate_com(last=i)
-        primary.m = Mjac[i]-ps[i].m
-        o = ps[i].calculate_orbit(primary=primary)
-        sLambda = np.sqrt(sim.G*M*o.a)
-        sGamma = sLambda*(1.-np.sqrt(1.-o.e**2))
-        pvars.add(m=m, sLambda=sLambda, l=o.l, sGamma=sGamma, gamma=-o.pomega, M=M)
-    if average == True:
-        pvars.average_synodic_terms()
-    return pvars
-    
 def findres(sim, i1, i2):
     delta = 0.03
     maxorder = 2
-    ps = poincare_from_simulation(sim=sim).particles # get averaged mean motions
+    ps = Poincare.from_Simulation(sim=sim).particles # get averaged mean motions
     n1 = ps[i1].n
     n2 = ps[i2].n
     
@@ -296,6 +279,23 @@ def findres(sim, i1, i2):
             
     return j, k, strength
 
+def normressummaryfeaturesxgb(sim, args):
+    ps = sim.particles
+    Mstar = ps[0].m
+    P1 = ps[1].P
+
+    sim2 = rebound.Simulation()
+    sim2.G = 4*np.pi**2
+    sim2.add(m=1.)
+
+    for p in ps[1:]: 
+        sim2.add(m=p.m/Mstar, P=p.P/P1, e=p.e, inc=p.inc, pomega=p.pomega, Omega=p.Omega, theta=p.theta)
+
+    sim2.move_to_com()
+    sim2.integrator="whfast"
+    sim2.dt=sim2.particles[1].P*2.*np.sqrt(3)/100.
+    return ressummaryfeaturesxgb(sim2, args)
+
 def ressummaryfeaturesxgb(sim, args):
     Norbits = args[0]
     Nout = args[1]
@@ -303,6 +303,7 @@ def ressummaryfeaturesxgb(sim, args):
     ###############################
     sim.collision_resolve = collision
     sim.ri_whfast.keep_unsynchronized = 1
+    sim.ri_whfast.safe_mode = 0
     ##############################
 
     features = OrderedDict()
@@ -363,7 +364,7 @@ def ressummaryfeaturesxgb(sim, args):
             i1, i2 = int(i1), int(i2)
             eminus[j, i] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2)
             if js[j] != -1:
-                pvars = poincare_from_simulation(sim)
+                pvars = Poincare.from_Simulation(sim)
                 avars = Andoyer.from_Poincare(pvars, j=js[j], k=ks[j], a10=a0[i1], i1=i1, i2=i2)
                 rebound_Z[j, i] = avars.Z
                 rebound_phi[j, i] = avars.phi
