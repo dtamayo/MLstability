@@ -80,8 +80,6 @@ for dataset in datasets:
     df = pd.DataFrame(df['shadow_instability_time'])
     call('mkdir ' + pathtotraining + 'shadowtimes', shell=True)
     call('cp ' + pathtotraining + 'labels.csv ' + pathtotraining + 'shadowtimes/', shell=True)
-    call('cp ' + pathtotraining + 'massratios.csv ' + pathtotraining + 'shadowtimes/', shell=True)
-    call('cp ' + pathtotraining + 'runstrings.csv ' + pathtotraining + 'shadowtimes/', shell=True)
     df.to_csv(pathtotraining+'shadowtimes/trainingdata.csv', encoding='ascii')
 
     df = pd.read_csv(pathtotraining+'runstrings.csv', index_col=0)
@@ -91,3 +89,6 @@ for dataset in datasets:
 
     df = df.apply(massratios, axis=1)
     df.to_csv(pathtotraining+'massratios.csv', encoding='ascii')
+    call('cp ' + pathtotraining + 'massratios.csv ' + pathtotraining + 'shadowtimes/', shell=True)
+    call('cp ' + pathtotraining + 'runstrings.csv ' + pathtotraining + 'shadowtimes/', shell=True)
+
