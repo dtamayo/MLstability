@@ -4,8 +4,8 @@ import sys
 
 datapath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/MLstability/training_data/'
 
-datasets = 'ttv' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = 'normressummaryfeaturesxgb'#'orbtseries'#'orbsummaryfeaturesxgb'
+datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
+runfunc = 'ressummaryfeaturesxgb2'#'orbtseries'#'orbsummaryfeaturesxgb'
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
