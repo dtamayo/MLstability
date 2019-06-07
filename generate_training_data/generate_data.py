@@ -60,7 +60,7 @@ for dataset in list(datasets):
             continue 
     else:
         if rebound.__githash__ != '6fb912f615ca542b670ab591375191d1ed914672':
-            print('{0} dataset not run. Check out rebound commit 06c95e2a69d319de3b077d92f2541cdcdf68a8fa and rerun script if needed'.format(dataset))
+            print('{0} dataset not run. Check out rebound commit 6fb912f615ca542b670ab591375191d1ed914672 and rerun script if needed'.format(dataset))
             continue 
 
     safolder = datapath + dataset + '/simulation_archives/runs/'
