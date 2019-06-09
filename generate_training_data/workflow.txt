@@ -1,0 +1,5 @@
+- Remove any feature folders in this directory
+- Run generate_data.py - should error
+- Run generate_metadata.py
+- Run generate_data.py
+

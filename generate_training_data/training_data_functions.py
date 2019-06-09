@@ -8,6 +8,7 @@ from celmech import Andoyer, AndoyerHamiltonian
 from celmech.resonances import resonant_period_ratios, resonance_intersections_list, resonance_pratio_span
 from celmech.transformations import masses_to_jacobi
 import itertools
+from icecream import ic
 
 def collision(reb_sim, col):
     reb_sim.contents._status = 5
@@ -24,11 +25,14 @@ def training_data(row, safolder, runfunc, args):
     return runfunc(sim, args)
 
 def gen_training_data(outputfolder, safolder, runfunc, args):
+    ic('loading runstrings')
     df = pd.read_csv(outputfolder+"/runstrings.csv", index_col = 0)
     ddf = dd.from_pandas(df, npartitions=24)
+    ic('done putting into dask')
     sa = rebound.SimulationArchive(safolder+'sa'+df.loc[0]['runstring'])
     testres = runfunc(sa[0], args) # Choose formatting based on selected runfunc return type
     
+    ic('Applying with dask!')
     if isinstance(testres, np.ndarray): # for runfuncs that return an np array of time series
         res = ddf.apply(training_data, axis=1, meta=('f0', 'object'), args=(safolder, runfunc, args)).compute(scheduler='processes') # dask meta autodetect fails. Here we're returning a np.array not Series or DataFrame so meta = object
         Nsys = df.shape[0]
