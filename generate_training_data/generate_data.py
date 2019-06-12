@@ -18,18 +18,18 @@ ic("Doing imports")
 from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb, ressummaryfeaturesxgb2
 
 step_size = 100*1000
-steps = 0
+steps = int(sys.argv[1])
 start = steps * step_size
-cdataset = 'short_resonant_%.12d_bkup' % (start,)
+cdataset = 'short_resonant_%.12d' % (start,)
 datasets = [cdataset] #'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-for runfunc in [orbsummaryfeaturesxgb, orbtseries, ressummaryfeaturesxgb]: # Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+for i, runfunc in enumerate([orbsummaryfeaturesxgb, orbtseries, ressummaryfeaturesxgb]): # Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
     kwargs = OrderedDict()
     kwargs['Norbits'] = 1e4
     kwargs['Nout'] = 1000
     kwargs['window'] = 10
 
-    foldername = runfunc.__name__
+    foldername = ['orbsummaryfeaturesxgb', 'orbtseries', 'ressummaryfeaturesxgb'][i] #runfunc.__name__
     for key, val in kwargs.items():
         foldername += '{0}{1}'.format(key, val)
 
@@ -40,7 +40,7 @@ for runfunc in [orbsummaryfeaturesxgb, orbtseries, ressummaryfeaturesxgb]: # Loo
     if not os.path.isdir(gendatafolder + foldername): # store a copy of this script in generate_data so we can always regenerate what we had
         call('mkdir -p "' + gendatafolder + foldername + '"', shell=True)
         call('cp "' + gendatafolder + '/generate_data.py" "' + gendatafolder + foldername + '"', shell=True)
-        call('python "' + gendatafolder + foldername + '/generate_data.py"' , shell=True)
+        call('python "' + gendatafolder + foldername + '/generate_data.py" ' + ' '.join(sys.argv[1:]), shell=True)
         exit()
         # we always run the copied script so that we do the same thing whether we're running for first time or regenerating
 # if it does exist don't overwrite since we don't want to overwrite history

@@ -2,6 +2,7 @@ import rebound
 import numpy as np
 import pandas as pd
 import os
+import sys
 from subprocess import call
 from dask import dataframe as dd 
 import warnings
@@ -66,9 +67,9 @@ def nonressystems():
 
 
 step_size = 100*1000
-steps = 0
+steps = int(sys.argv[1])
 start = steps * step_size
-cdataset = 'short_resonant_%.12d_bkup' % (start,)
+cdataset = 'short_resonant_%.12d' % (start,)
 ic()
 datasets = [cdataset] #'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
 #datasets = ['resonant', 'random'] + ttvsystems() + nonressystems()

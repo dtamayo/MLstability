@@ -47,6 +47,14 @@ def gen_training_data(outputfolder, safolder, runfunc, args):
         # meta autodetect should work for simple functions that return a series
         res.to_csv(outputfolder+'/trainingdata.csv')
 
+def safe_run_func(runfunc):
+    def new_run_func(*args, **kwargs):
+        try:
+            return runfunc(*args, **kwargs)
+        except RuntimeError:
+            return None
+    return new_run_func
+
 from scipy.optimize import brenth
 def F(e,alpha,gamma):
     """Equation 35 of Laskar & Petit (2017)"""
@@ -63,6 +71,7 @@ def critical_relative_AMD(alpha,gamma):
     curlyC = gamma*np.sqrt(alpha) * (1-np.sqrt(1-ec*ec)) + (1 - np.sqrt(1-e1c*e1c))
     return curlyC
 
+@safe_run_func
 def compute_AMD(sim):
     pstar = sim.particles[0]
     Ltot = pstar.m * np.cross(pstar.xyz,pstar.vxyz)
@@ -80,6 +89,7 @@ def compute_AMD(sim):
     cosi = np.array([Lh.dot(Ltot) for Lh in Lhat]) / np.linalg.norm(Ltot)
     return np.sum(Lmbda) - np.sum(G * cosi)
 
+@safe_run_func
 def AMD_stable_Q(sim):
     AMD = compute_AMD(sim)
     pstar = sim.particles[0]
@@ -98,6 +108,7 @@ def AMD_stable_Q(sim):
             return False
     return True
 
+@safe_run_func
 def AMD_stability_coefficients(sim):
     AMD = compute_AMD(sim)
     pstar = sim.particles[0]
@@ -118,6 +129,7 @@ def AMD_stability_coefficients(sim):
 
 ### end AMD functions
 # write functions to take args and unpack them at top so it's clear what you have to pass in args
+@safe_run_func
 def orbtseries(sim, args):
     Norbits = args[0]
     Nout = args[1]
@@ -149,6 +161,7 @@ def orbtseries(sim, args):
             val[i,6*j+6] = o.M
     return val
 
+@safe_run_func
 def orbsummaryfeaturesxgb(sim, args):
     Norbits = args[0]
     Nout = args[1]
@@ -317,6 +330,7 @@ def findres2(sim, i1, i2):
     return j, k, strength
 
 
+@safe_run_func
 def normressummaryfeaturesxgb(sim, args):
     ps = sim.particles
     Mstar = ps[0].m
@@ -334,6 +348,7 @@ def normressummaryfeaturesxgb(sim, args):
     sim2.dt=sim2.particles[1].P*2.*np.sqrt(3)/100.
     return ressummaryfeaturesxgb(sim2, args)
 
+@safe_run_func
 def ressummaryfeaturesxgb(sim, args):
     Norbits = args[0]
     Nout = args[1]
@@ -502,6 +517,7 @@ def ressummaryfeaturesxgb(sim, args):
     features['megno'] = sim.calculate_megno()
     return pd.Series(features, index=list(features.keys()))
 
+@safe_run_func
 def ressummaryfeaturesxgb2(sim, args):
     Norbits = args[0]
     Nout = args[1]

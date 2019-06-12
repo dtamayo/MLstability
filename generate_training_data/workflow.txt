@@ -3,3 +3,6 @@
 - Run generate_metadata.py
 - Run generate_data.py
 
+
+Run the following command to get matching shadow runs and runs (in case some of the shadow runs blow up).
+X="short_resonant_000000900000"; ls $X/simulation_archives/runs > tmp1.txt; ls $X/simulation_archives/shadowruns > tmp2.txt; for c in $(diff tmp1.txt tmp2.txt | vims -r '<' dd -l 'xx'); do rm $X/simulation_archives/runs/$c; done
