@@ -285,33 +285,29 @@ def findres2(sim, i1, i2):
     ps = Poincare.from_Simulation(sim=sim).particles # get averaged mean motions
     n1 = ps[i1].n
     n2 = ps[i2].n
-    
+
     m1 = ps[i1].m/ps[i1].M
     m2 = ps[i2].m/ps[i2].M
-    
+
     Pratio = n2/n1
     if np.isnan(Pratio): # probably due to close encounter where averaging step doesn't converge 
         return np.nan, np.nan, np.nan
 
     res = resonant_period_ratios(Pratio-delta,Pratio+delta, order=maxorder)
-    
+
     Z = np.sqrt((ps[i1].e*np.cos(ps[i1].pomega) - ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].e*np.sin(ps[i1].pomega) - ps[i2].e*np.sin(ps[i2].pomega))**2)
-    
-    maxstrength = 0
-    j, k, i1, i2, strength = -1, -1, -1, -1, -1
+    Zcross = (ps[i2].a-ps[i1].a)/ps[i1].a
+        
+    j, k, i1, i2, maxstrength = -1, -1, -1, -1, -1
     for a, b in res:
-        s = np.abs(np.sqrt(m1+m2)*Z**((b-a)/2.)/((b*n2 - a*n1)/n1))
+        s = np.abs(np.sqrt(m1+m2)*(Z/Zcross)**((b-a)/2.)/((b*n2 - a*n1)/n1))
         #print('{0}:{1}'.format(b, a), (b*n2 - a*n1), s)
         if s > maxstrength:
             j = b
             k = b-a
-            i1 = 1
-            i2 = 2
-            strength=s
             maxstrength = s
-            
-    return j, k, strength
 
+    return j, k, maxstrength
 
 def normressummaryfeaturesxgb(sim, args):
     ps = sim.particles
