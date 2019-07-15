@@ -7,6 +7,7 @@ from celmech.poincare import Poincare, PoincareHamiltonian
 from celmech import Andoyer, AndoyerHamiltonian
 from celmech.resonances import resonant_period_ratios, resonance_intersections_list, resonance_pratio_span
 from celmech.transformations import masses_to_jacobi
+from celmech.andoyer import get_num_fixed_points
 import itertools
 
 def collision(reb_sim, col):
@@ -111,6 +112,22 @@ def AMD_stability_coefficients(sim):
         C = AMD / LmbdaOut
         coeffs[i] = C / Ccrit
     return coeffs
+
+def AMD_stability_coefficient(sim, i1, i2):
+    AMD = compute_AMD(sim)
+    ps = sim.particles
+    pstar = ps[0]
+    
+    pIn = ps[i1]
+    pOut = ps[i2]
+    orbIn = pIn.calculate_orbit(pstar)
+    orbOut = pOut.calculate_orbit(pstar)
+    alpha = orbIn.a / orbOut.a
+    gamma = pIn.m / pOut.m
+    LmbdaOut = pOut.m * np.sqrt(orbOut.a)
+    Ccrit = critical_relative_AMD(alpha,gamma)
+    C = AMD / LmbdaOut
+    return C / Ccrit
 
 ### end AMD functions
 # write functions to take args and unpack them at top so it's clear what you have to pass in args
@@ -280,7 +297,6 @@ def findres(sim, i1, i2):
     return j, k, strength
 
 def findres2(sim, i1, i2):
-    delta = 0.03
     maxorder = 2
     ps = Poincare.from_Simulation(sim=sim).particles # get averaged mean motions
     n1 = ps[i1].n
@@ -293,8 +309,11 @@ def findres2(sim, i1, i2):
     if np.isnan(Pratio): # probably due to close encounter where averaging step doesn't converge 
         return np.nan, np.nan, np.nan
 
-    res = resonant_period_ratios(Pratio-delta,Pratio+delta, order=maxorder)
-
+    delta = 0.03
+    minperiodratio = max(Pratio-delta, 0.)
+    maxperiodratio = min(Pratio+delta, 0.999) # too many resonances close to 1
+    res = resonant_period_ratios(minperiodratio,maxperiodratio, order=2)
+    
     Z = np.sqrt((ps[i1].e*np.cos(ps[i1].pomega) - ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].e*np.sin(ps[i1].pomega) - ps[i2].e*np.sin(ps[i2].pomega))**2)
     Zcross = (ps[i2].a-ps[i1].a)/ps[i1].a
         
@@ -306,8 +325,11 @@ def findres2(sim, i1, i2):
             j = b
             k = b-a
             maxstrength = s
-
-    return j, k, maxstrength
+    
+    if maxstrength > -1:
+        return j, k, maxstrength
+    else:
+        return np.nan, np.nan, np.nan
 
 def normressummaryfeaturesxgb(sim, args):
     ps = sim.particles
@@ -664,3 +686,159 @@ def ressummaryfeaturesxgb2(sim, args):
     features['tlyap'] = tlyap
     features['megno'] = sim.calculate_megno()
     return pd.Series(features, index=list(features.keys()))
+
+def fillnan(features, pairs):
+    features['tlyap'] = np.nan
+    features['megno'] = np.nan
+    
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['EMmed'+label] = np.nan
+        features['EMmax'+label] = np.nan
+        features['EMdrift'+label] = np.nan
+        features['EMrollingstd'+label] = np.nan
+        features['Zcommed'+label] = np.nan
+        features['Zsepouter'+label] = np.nan
+        features['ZfreeIC'+label] = np.nan
+        features['ZfreeOC'+label] = np.nan
+        features['Zfree'+label] = np.nan
+        features['Zstarmed'+label] = np.nan
+        features['Zstarstd'+label] = np.nan
+        features['Zstarmed'+label] = np.nan
+        features['Zstardrift'+label] = np.nan
+
+def ressummaryfeaturesxgbv3(sim, args):
+    Norbits = args[0]
+    Nout = args[1]
+    
+    ###############################
+    sim.collision_resolve = collision
+    sim.ri_whfast.keep_unsynchronized = 1
+    sim.ri_whfast.safe_mode = 0
+    ##############################
+
+    features = OrderedDict()
+    ps = sim.particles
+    sim.init_megno()
+    N = sim.N - sim.N_var
+    a0 = [0] + [sim.particles[i].a for i in range(1, N)]
+    Npairs = int((N-1)*(N-2)/2)
+    maxj, maxk, maxi1, maxi2, maxpairindex, maxstrength = -1, -1, -1, -1, -1, -1
+    betas = np.zeros(Npairs)
+    #print('pairindex, i1, i2, j, k, strength')
+    for i, [i1, i2] in enumerate(itertools.combinations(np.arange(1, N), 2)):
+        i1 = int(i1); i2 = int(i2)
+        RH = ps[i1].a*((ps[i1].m + ps[i2].m)/ps[0].m)**(1./3.)
+        betas[i] = (ps[i2].a-ps[i1].a)/RH
+        
+    features['betaouter'] = betas[1]
+    if betas[0] < betas[2]:
+        features['nearpair'] = 12 # for visualization and debugging
+        features['betanear'] = betas[0]
+        features['betafar'] = betas[2]
+        pairs = [['near', 1,2], ['far', 2, 3], ['outer', 1, 3]]
+    else:
+        features['nearpair'] = 23
+        features['betanear'] = betas[2]
+        features['betafar'] = betas[0]
+        pairs = [['near', 2, 3], ['far', 1, 2], ['outer', 1, 3]]
+    
+    Zsepinners, Zsepouters, separatrixdist = np.zeros(Npairs), np.zeros(Npairs), np.zeros(Npairs)
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['numfixedpoints'+label] = np.nan
+        features['j'+label], features['k'+label], features['strength'+label] = findres2(sim, i1, i2)
+        features["C_AMD"+label] = AMD_stability_coefficient(sim, i1, i2)
+        features['Zcross'+label] = (ps[int(i2)].a-ps[int(i1)].a)/ps[int(i1)].a
+        if np.isnan(features['strength'+label]) == False:
+            pvars = Poincare.from_Simulation(sim)
+            avars = Andoyer.from_Poincare(pvars, j=features['j'+label], k=features['k'+label], a10=a0[i1], i1=i1, i2=i2)
+            features['numfixedpoints'+label] = get_num_fixed_points(features['k'+label], avars.Phiprime)
+            Zsepinners[i] = avars.Zsep_inner
+            Zsepouters[i] = avars.Zsep_outer
+            separatrixdist[i] = min(Zsepouters[i]-avars.Zstar, avars.Zstar-Zsepinners[i])
+            
+    P0 = ps[1].P
+    times = np.linspace(0, Norbits*P0, Nout)
+    rebound_Z, rebound_phi = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    rebound_Zcom, rebound_phiZcom = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    rebound_Zstar, rebound_dKprime = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    rebound_Zsepinner, rebound_Zsepouter = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    rebound_Zstarnonres, rebound_Zstarunstable = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    eminus = np.zeros((Npairs,Nout))
+    
+    features['unstablein1e4'] = False # Assume not and update if true
+    for i,t in enumerate(times):
+        for j, [label, i1, i2] in enumerate(pairs):
+            #i1 = int(i1); i2 = int(i2)
+            eminus[j, i] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2)
+            if np.isnan(features['strength'+label]) == False:
+                pvars = Poincare.from_Simulation(sim)
+                avars = Andoyer.from_Poincare(pvars, j=features['j'+label], k=features['k'+label], a10=a0[i1], i1=i1, i2=i2)
+            
+                rebound_Z[j, i] = avars.Z
+                rebound_phi[j, i] = avars.phi
+                rebound_Zcom[j, i] = avars.Zcom
+                rebound_phiZcom[j, i] = avars.phiZcom
+                rebound_Zstar[j, i] = avars.Zstar
+                rebound_dKprime[j, i] = avars.dKprime
+                rebound_Zsepinner[j, i] = avars.Zsep_inner
+                rebound_Zsepouter[j, i] = avars.Zsep_outer
+                rebound_Zstarnonres[j, i] = avars.Zstar_nonres
+                rebound_Zstarunstable[j, i] = avars.Zstar_unstable
+        try:
+            sim.integrate(t*P0, exact_finish_time=0)
+        except:
+            features['unstablein1e4'] = True
+            break
+            
+    fillnan(features, pairs)
+    if features['unstablein1e4'] == True:
+        return 
+    
+    # Features with or without resonances:
+    tlyap = 1./np.abs(sim.calculate_lyapunov())/P0
+    if tlyap > Norbits:
+        tlyap = Norbits
+    features['tlyap'] = tlyap
+    features['megno'] = sim.calculate_megno()
+    
+    for i, [label, i1, i2] in enumerate(pairs):
+        Zc = features['Zcross'+label]
+        EM = eminus[i,:]/Zc
+        features['EMmed'+label] = np.median(EM)
+        features['EMmax'+label] = EM.max()
+        try:
+            p = np.poly1d(np.polyfit(times, EM, 3))
+            m = p(times)
+            EMdrift = np.abs((m[-1]-m[0])/m[0])
+            features['EMdrift'+label] = EMdrift
+        except:
+            pass
+        rollstd = pd.Series(EM).rolling(window=10).std()
+        features['EMrollingstd'+label] = rollstd[10:].median()/features['EMmed'+label]
+        
+        if np.isnan(features['strength'+label]) == False:
+            features['Zcommed'+label] = np.median(rebound_Zcom[i,:])
+            features['Zsepouter'+label] = Zsepouters[i]/Zc
+            
+            # try this one generically for variation in constants, since all fixed points seem to follow Zstar closely?
+            if np.median(rebound_Zstar[i,:]) > 0:
+                features['Zstarstd'+label] = rebound_Zstar[i,:].std()/np.median(rebound_Zstar[i,:])
+                
+            if np.median(rebound_Z[i,:]) < Zsepinners[i]:
+                features['ZfreeIC'+label] = rebound_Z[i,:].max()/Zsepinners[i]
+            elif np.median(rebound_Z[i,:]) > Zsepouters[i]:
+                features['ZfreeOC'+label] = rebound_Z[i,:].min()/Zsepouters[i]
+            else:
+                if np.median(rebound_Zstar[i,:]) > 0:
+                    features['Zstarmed'+label] = np.median(rebound_Zstar[i,:])/Zc
+                    try:
+                        p = np.poly1d(np.polyfit(times, rebound_Zstar[i,:], 3))
+                        m = p(times)
+                        Zstardrift = np.abs((m[-1]-m[0])/m[0])
+                        features['Zstardrift'+label] = Zstardrift
+                    except:
+                        pass
+                    features['Zfree'+label] = (rebound_Z[i,:]-rebound_Zstar[i,:]).std()/separatrixdist[i]
+
+    return pd.Series(features, index=list(features.keys()))
+

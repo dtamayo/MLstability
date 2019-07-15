@@ -34,9 +34,13 @@ def train_test_split(trainingdatafolder, features=None, labelname='Stable', filt
     return trainX, trainy, testX, testy
 
 def ROC_curve(trainingdatafolder, model, features=None):
+    print('1')
     trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features)
+    print('2')
     preds = model.predict_proba(testX)[:,1]
+    print('3')
     fpr, tpr, ROCthresholds = roc_curve(testy, preds)
+    print('4')
     roc_auc = metrics.roc_auc_score(testy, preds)
     return roc_auc, fpr, tpr, ROCthresholds
 
