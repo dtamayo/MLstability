@@ -1176,7 +1176,7 @@ def restseriesv5(sim, args): # corresponds to ressummaryfeaturesxgbv5
     for p in ps[1:sim.N-sim.N_var]:
         AMD0 += p.m*np.sqrt(sim.G*ps[0].m*p.a)*(1-np.sqrt(1-p.e**2)*np.cos(p.inc))
 
-    val = np.zeros((Nout, 24))
+    val = np.zeros((Nout, 27))
     for i, time in enumerate(times):
         try:
             sim.integrate(time, exact_finish_time=0)
@@ -1188,7 +1188,7 @@ def restseriesv5(sim, args): # corresponds to ressummaryfeaturesxgbv5
         
         val[i,0] = sim.t  # time
 
-        Ns = 7
+        Ns = 8
         for j, [label, i1, i2] in enumerate(pairs):
             Zcross = features['EMcross'+label]/np.sqrt(2)
             #i1 = int(i1); i2 = int(i2)
@@ -1213,7 +1213,7 @@ def restseriesv5(sim, args): # corresponds to ressummaryfeaturesxgbv5
                     val[i, Ns*j+8]= Zfree# features['reshalfwidth'+label] # free Z around Zstar
                     #For k=1 can always define a Zstar, even w/o separatrix, but here reshalfwidth is nan. So don't  normalize
 
-        val[i,22] = np.abs((AMD-AMD0)/AMD0) # AMDerr
-        val[i,23] = sim.calculate_megno() # megno
+        val[i,25] = np.abs((AMD-AMD0)/AMD0) # AMDerr
+        val[i,26] = sim.calculate_megno() # megno
 
     return val

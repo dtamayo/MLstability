@@ -9,10 +9,10 @@ from collections import OrderedDict
 datapath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/MLstability/'
 sys.path.append(repopath + 'generate_training_data/')
-from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb, ressummaryfeaturesxgb2, ressummaryfeaturesxgbv4
+from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb, ressummaryfeaturesxgb2, ressummaryfeaturesxgbv4, restseriesv5, resparamsv5
 
 datasets = ['resonant'] # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = ressummaryfeaturesxgbv4# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+runfunc = restseriesv5# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
