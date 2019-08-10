@@ -331,6 +331,38 @@ def findres2(sim, i1, i2):
     else:
         return np.nan, np.nan, np.nan
 
+def findresv3(sim, i1, i2):
+    maxorder = 2
+    ps = Poincare.from_Simulation(sim=sim).particles # get averaged mean motions
+    n1 = ps[i1].n
+    n2 = ps[i2].n
+
+    m1 = ps[i1].m/ps[i1].M
+    m2 = ps[i2].m/ps[i2].M
+
+    Pratio = n2/n1
+    if np.isnan(Pratio): # probably due to close encounter where averaging step doesn't converge
+        return np.nan, np.nan, np.nan
+
+    delta = 0.03
+    minperiodratio = max(Pratio-delta, 0.)
+    maxperiodratio = min(Pratio+delta, 0.999) # too many resonances close to 1
+    res = resonant_period_ratios(minperiodratio,maxperiodratio, order=2)
+
+    Z = np.sqrt((ps[i1].e*np.cos(ps[i1].pomega) - ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].e*np.sin(ps[i1].pomega) - ps[i2].e*np.sin(ps[i2].pomega))**2)
+    Zcross = (ps[i2].a-ps[i1].a)/ps[i1].a
+
+    j, k, i1, i2, maxstrength = -1, -1, -1, -1, -1
+    for a, b in res:
+        s = np.abs(np.sqrt(m1+m2)*(Z/Zcross)**((b-a)/2.)/((b*n2 - a*n1)/n1))
+        #print('{0}:{1}'.format(b, a), (b*n2 - a*n1), s)
+        if s > maxstrength:
+            j = b
+            k = b-a
+            maxstrength = s
+
+    return j, k, maxstrength
+
 def normressummaryfeaturesxgb(sim, args):
     ps = sim.particles
     Mstar = ps[0].m
@@ -365,18 +397,18 @@ def ressummaryfeaturesxgb(sim, args):
     features["C_AMD_max"] = np.max(AMDcoeffs)
 
     ps = sim.particles
-    sim.init_megno()
+    sim.init_megno(seed=0)
     
     N = sim.N - sim.N_var
     a0 = [0] + [sim.particles[i].a for i in range(1, N)]
     Npairs = int((N-1)*(N-2)/2)
-    js, ks, strengths = np.zeros(Npairs, dtype=np.int), np.zeros(Npairs, dtype=np.int), np.zeros(Npairs)
+    js, ks, strengths = np.zeros(Npairs), np.zeros(Npairs), np.zeros(Npairs)
     maxj, maxk, maxi1, maxi2, maxpairindex, maxstrength = -1, -1, -1, -1, -1, -1
 
     Zcross = np.zeros(Npairs)
     #print('pairindex, i1, i2, j, k, strength')
     for i, [i1, i2] in enumerate(itertools.combinations(np.arange(1, N), 2)):
-        js[i], ks[i], strengths[i] = findres(sim, i1, i2)
+        js[i], ks[i], strengths[i] = findresv3(sim, i1, i2)
         Zcross[i] = (ps[int(i2)].a-ps[int(i1)].a)/ps[int(i1)].a
         #print(i, i1, i2, js[i], ks[i], strengths[i])
         if strengths[i] > maxstrength:
@@ -392,9 +424,9 @@ def ressummaryfeaturesxgb(sim, args):
     features['maxstrength'] = maxstrength
     
     sortedstrengths = strengths.copy()
-    sortedstrengths.sort()
-    if sortedstrengths[-1] > 0 and sortedstrengths[-2] > 0:
-        features['secondres'] = sortedstrengths[-2]/sortedstrengths[-1]
+    sortedstrengths.sort() # ascending
+    if sortedstrengths[-1] > 0 and sortedstrengths[-2] > 0: # if two strongeest resonances are nonzereo
+        features['secondres'] = sortedstrengths[-2]/sortedstrengths[-1] # ratio of strengths
     else:
         features['secondres'] = -1
         
@@ -417,7 +449,7 @@ def ressummaryfeaturesxgb(sim, args):
             eminus[j, i] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2)
             if js[j] != -1:
                 pvars = Poincare.from_Simulation(sim)
-                avars = Andoyer.from_Poincare(pvars, j=js[j], k=ks[j], a10=a0[i1], i1=i1, i2=i2)
+                avars = Andoyer.from_Poincare(pvars, j=int(js[j]), k=int(ks[j]), a10=a0[i1], i1=i1, i2=i2)
                 rebound_Z[j, i] = avars.Z
                 rebound_phi[j, i] = avars.phi
                 rebound_Zcom[j, i] = avars.Zcom
@@ -512,7 +544,10 @@ def ressummaryfeaturesxgb(sim, args):
             features['Zcosphistd'+s] = -1
             features['medZcosphi'+s] = -1
 
-    features['tlyap'] = 1/sim.calculate_lyapunov()
+    tlyap = 1./np.abs(sim.calculate_lyapunov())
+    if tlyap > Norbits:
+        tlyap = Norbits
+    features['tlyap'] = tlyap
     features['megno'] = sim.calculate_megno()
     return pd.Series(features, index=list(features.keys()))
 
@@ -544,7 +579,7 @@ def ressummaryfeaturesxgb2(sim, args):
     Zcross = np.zeros(Npairs)
     #print('pairindex, i1, i2, j, k, strength')
     for i, [i1, i2] in enumerate(itertools.combinations(np.arange(1, N), 2)):
-        js[i], ks[i], strengths[i] = findres2(sim, i1, i2)
+        js[i], ks[i], strengths[i] = findresv3(sim, i1, i2)
         Zcross[i] = (ps[int(i2)].a-ps[int(i1)].a)/ps[int(i1)].a
         #print(i, i1, i2, js[i], ks[i], strengths[i])
         if strengths[i] > maxstrength:
@@ -690,109 +725,122 @@ def ressummaryfeaturesxgb2(sim, args):
 def fillnan(features, pairs):
     features['tlyap'] = np.nan
     features['megno'] = np.nan
-    
+
     for i, [label, i1, i2] in enumerate(pairs):
         features['EMmed'+label] = np.nan
         features['EMmax'+label] = np.nan
-        features['EMdrift'+label] = np.nan
+        features['EMstd'+label] = np.nan
+        features['EMslope'+label] = np.nan
+        features['cheapEMslope'+label] = np.nan
         features['EMrollingstd'+label] = np.nan
+        features['EPmed'+label] = np.nan
+        features['EPmax'+label] = np.nan
+        features['EPstd'+label] = np.nan
+        features['EPslope'+label] = np.nan
+        features['cheapEPslope'+label] = np.nan
+        features['EProllingstd'+label] = np.nan
+        features['Zstarslope'+label] = np.nan
+        features['Zstarrollingstd'+label] = np.nan
         features['Zcommed'+label] = np.nan
-        features['Zsepouter'+label] = np.nan
-        features['ZfreeIC'+label] = np.nan
-        features['ZfreeOC'+label] = np.nan
         features['Zfree'+label] = np.nan
         features['Zstarmed'+label] = np.nan
         features['Zstarstd'+label] = np.nan
         features['Zstarmed'+label] = np.nan
-        features['Zstardrift'+label] = np.nan
+        features['Zstarslope'+label] = np.nan
+        features['cheapZstarslope'+label] = np.nan
 
-def ressummaryfeaturesxgbv3(sim, args):
+def fillnanv5(features, pairs):
+    features['tlyap'] = np.nan
+    features['megno'] = np.nan
+
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['EMmed'+label] = np.nan
+        features['EMmax'+label] = np.nan
+        features['EMstd'+label] = np.nan
+        features['EMslope'+label] = np.nan
+        features['EMrollingstd'+label] = np.nan
+        features['EPmed'+label] = np.nan
+        features['EPmax'+label] = np.nan
+        features['EPstd'+label] = np.nan
+        features['EPslope'+label] = np.nan
+        features['EProllingstd'+label] = np.nan
+        features['Zstarslope'+label] = np.nan
+        features['Zstarrollingstd'+label] = np.nan
+        features['Zcommed'+label] = np.nan
+        features['Zfree'+label] = np.nan
+        features['Zstarmed'+label] = np.nan
+        features['Zstarstd'+label] = np.nan
+        features['Zstarmed'+label] = np.nan
+        features['Zstarslope'+label] = np.nan
+
+def ressummaryfeaturesxgbv4(sim, args):
     Norbits = args[0]
     Nout = args[1]
-    
     ###############################
     sim.collision_resolve = collision
     sim.ri_whfast.keep_unsynchronized = 1
     sim.ri_whfast.safe_mode = 0
     ##############################
-
-    features = OrderedDict()
     ps = sim.particles
     sim.init_megno()
     N = sim.N - sim.N_var
     a0 = [0] + [sim.particles[i].a for i in range(1, N)]
     Npairs = int((N-1)*(N-2)/2)
-    maxj, maxk, maxi1, maxi2, maxpairindex, maxstrength = -1, -1, -1, -1, -1, -1
-    betas = np.zeros(Npairs)
-    #print('pairindex, i1, i2, j, k, strength')
-    for i, [i1, i2] in enumerate(itertools.combinations(np.arange(1, N), 2)):
-        i1 = int(i1); i2 = int(i2)
-        RH = ps[i1].a*((ps[i1].m + ps[i2].m)/ps[0].m)**(1./3.)
-        betas[i] = (ps[i2].a-ps[i1].a)/RH
-        
-    features['betaouter'] = betas[1]
-    if betas[0] < betas[2]:
-        features['nearpair'] = 12 # for visualization and debugging
-        features['betanear'] = betas[0]
-        features['betafar'] = betas[2]
-        pairs = [['near', 1,2], ['far', 2, 3], ['outer', 1, 3]]
-    else:
-        features['nearpair'] = 23
-        features['betanear'] = betas[2]
-        features['betafar'] = betas[0]
-        pairs = [['near', 2, 3], ['far', 1, 2], ['outer', 1, 3]]
+
+    features = resparams(sim, args)
+    pairs, nearpair = getpairs(sim)
     
-    Zsepinners, Zsepouters, separatrixdist = np.zeros(Npairs), np.zeros(Npairs), np.zeros(Npairs)
-    for i, [label, i1, i2] in enumerate(pairs):
-        features['numfixedpoints'+label] = np.nan
-        features['j'+label], features['k'+label], features['strength'+label] = findres2(sim, i1, i2)
-        features["C_AMD"+label] = AMD_stability_coefficient(sim, i1, i2)
-        features['Zcross'+label] = (ps[int(i2)].a-ps[int(i1)].a)/ps[int(i1)].a
-        if np.isnan(features['strength'+label]) == False:
-            pvars = Poincare.from_Simulation(sim)
-            avars = Andoyer.from_Poincare(pvars, j=features['j'+label], k=features['k'+label], a10=a0[i1], i1=i1, i2=i2)
-            features['numfixedpoints'+label] = get_num_fixed_points(features['k'+label], avars.Phiprime)
-            Zsepinners[i] = avars.Zsep_inner
-            Zsepouters[i] = avars.Zsep_outer
-            separatrixdist[i] = min(Zsepouters[i]-avars.Zstar, avars.Zstar-Zsepinners[i])
-            
     P0 = ps[1].P
     times = np.linspace(0, Norbits*P0, Nout)
-    rebound_Z, rebound_phi = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
-    rebound_Zcom, rebound_phiZcom = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
-    rebound_Zstar, rebound_dKprime = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
-    rebound_Zsepinner, rebound_Zsepouter = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
-    rebound_Zstarnonres, rebound_Zstarunstable = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
-    eminus = np.zeros((Npairs,Nout))
+    Z, phi = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    Zcom, phiZcom = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    Zstar = np.zeros((Npairs,Nout))
+    eminus, eplus = np.zeros((Npairs,Nout)), np.zeros((Npairs, Nout))
     
-    features['unstablein1e4'] = False # Assume not and update if true
+    features['unstableinNorbits'] = False
+    AMD0 = 0
+    for p in ps[1:sim.N-sim.N_var]:
+        AMD0 += p.m*np.sqrt(sim.G*ps[0].m*p.a)*(1-np.sqrt(1-p.e**2)*np.cos(p.inc))
+
+    AMDerr = np.zeros(Nout)
     for i,t in enumerate(times):
-        for j, [label, i1, i2] in enumerate(pairs):
-            #i1 = int(i1); i2 = int(i2)
-            eminus[j, i] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2)
-            if np.isnan(features['strength'+label]) == False:
-                pvars = Poincare.from_Simulation(sim)
-                avars = Andoyer.from_Poincare(pvars, j=features['j'+label], k=features['k'+label], a10=a0[i1], i1=i1, i2=i2)
-            
-                rebound_Z[j, i] = avars.Z
-                rebound_phi[j, i] = avars.phi
-                rebound_Zcom[j, i] = avars.Zcom
-                rebound_phiZcom[j, i] = avars.phiZcom
-                rebound_Zstar[j, i] = avars.Zstar
-                rebound_dKprime[j, i] = avars.dKprime
-                rebound_Zsepinner[j, i] = avars.Zsep_inner
-                rebound_Zsepouter[j, i] = avars.Zsep_outer
-                rebound_Zstarnonres[j, i] = avars.Zstar_nonres
-                rebound_Zstarunstable[j, i] = avars.Zstar_unstable
         try:
             sim.integrate(t*P0, exact_finish_time=0)
         except:
-            features['unstablein1e4'] = True
+            features['unstableinNorbits'] = True
             break
+        AMD = 0
+        for p in ps[1:sim.N-sim.N_var]:
+            AMD += p.m*np.sqrt(sim.G*ps[0].m*p.a)*(1-np.sqrt(1-p.e**2)*np.cos(p.inc))
+        AMDerr[i] = np.abs((AMD-AMD0)/AMD0)
+        
+        for j, [label, i1, i2] in enumerate(pairs):
+            #i1 = int(i1); i2 = int(i2)
+            eminus[j, i] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2) / features['EMcross'+label]
+            eplus[j, i] = np.sqrt((ps[i1].m*ps[i1].e*np.cos(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].m*ps[i1].e*np.sin(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.sin(ps[i2].pomega))**2)/(ps[i1].m+ps[i2].m)
+            if features['strength'+label] > 0:
+                pvars = Poincare.from_Simulation(sim)
+                avars = Andoyer.from_Poincare(pvars, j=int(features['j'+label]), k=int(features['k'+label]), a10=a0[i1], i1=i1, i2=i2)
+            
+                Z[j, i] = avars.Z / features['Zcross'+label]
+                phi[j, i] = avars.phi
+                Zcom[j, i] = avars.Zcom
+                phiZcom[j, i] = avars.phiZcom
+                Zstar[j, i] = avars.Zstar / features['Zcross'+label]
             
     fillnan(features, pairs)
-    if features['unstablein1e4'] == True:
-        return 
+    
+    Nnonzero = int((eminus[0,:] > 0).sum())
+    times = times[:Nnonzero]
+    AMDerr = AMDerr[:Nnonzero]
+    
+    eminus = eminus[:,:Nnonzero]
+    eplus = eplus[:,:Nnonzero]
+    Z = Z[:,:Nnonzero]
+    phi = phi[:,:Nnonzero]
+    Zcom = Zcom[:,:Nnonzero]
+    phiZcom = phiZcom[:,:Nnonzero]
+    Zstar = Zstar[:,:Nnonzero]
     
     # Features with or without resonances:
     tlyap = 1./np.abs(sim.calculate_lyapunov())/P0
@@ -800,45 +848,372 @@ def ressummaryfeaturesxgbv3(sim, args):
         tlyap = Norbits
     features['tlyap'] = tlyap
     features['megno'] = sim.calculate_megno()
+    features['AMDerr'] = AMDerr.max()
     
     for i, [label, i1, i2] in enumerate(pairs):
-        Zc = features['Zcross'+label]
-        EM = eminus[i,:]/Zc
+        EM = eminus[i,:]
+        EP = eplus[i,:]
         features['EMmed'+label] = np.median(EM)
         features['EMmax'+label] = EM.max()
+        features['EMstd'+label] = EM.std()
+        features['EPmed'+label] = np.median(EP)
+        features['EPmax'+label] = EP.max()
+        features['EPstd'+label] = EP.std()
+        
         try:
-            p = np.poly1d(np.polyfit(times, EM, 3))
-            m = p(times)
-            EMdrift = np.abs((m[-1]-m[0])/m[0])
-            features['EMdrift'+label] = EMdrift
+            m,c  = np.linalg.lstsq(np.vstack([times/P0, np.ones(len(times))]).T, EM)[0]
+            features['EMslope'+label] = m # EM/EMcross per orbit so we can compare different length integrations
+            last = np.median(EM[-int(Nout/20):])
+            features['cheapEMslope'+label] = (last - EM.min())/EM.std() # measure of whether final value of EM is much higher than minimum compared to std to test whether we captured long timescale
         except:
             pass
+        
         rollstd = pd.Series(EM).rolling(window=10).std()
         features['EMrollingstd'+label] = rollstd[10:].median()/features['EMmed'+label]
         
-        if np.isnan(features['strength'+label]) == False:
-            features['Zcommed'+label] = np.median(rebound_Zcom[i,:])
-            features['Zsepouter'+label] = Zsepouters[i]/Zc
+        try:
+            m,c  = np.linalg.lstsq(np.vstack([times/P0, np.ones(len(times))]).T, EP)[0]
+            features['EPslope'+label] = m
+            last = np.median(EP[-int(Nout/20):])
+            features['cheapEPslope'+label] = (last - EP.min())/EP.std() # measure of whether final value of EM is much higher than minimum compared to std to test whether we captured long timescale
+        except:
+            pass
             
-            # try this one generically for variation in constants, since all fixed points seem to follow Zstar closely?
-            if np.median(rebound_Zstar[i,:]) > 0:
-                features['Zstarstd'+label] = rebound_Zstar[i,:].std()/np.median(rebound_Zstar[i,:])
+        rollstd = pd.Series(EP).rolling(window=10).std()
+        features['EProllingstd'+label] = rollstd[10:].median()/features['EPmed'+label]
+        
+        if features['strength'+label] > 0:
+            features['Zcommed'+label] = np.median(Zcom[i,:])
+            
                 
-            if np.median(rebound_Z[i,:]) < Zsepinners[i]:
-                features['ZfreeIC'+label] = rebound_Z[i,:].max()/Zsepinners[i]
-            elif np.median(rebound_Z[i,:]) > Zsepouters[i]:
-                features['ZfreeOC'+label] = rebound_Z[i,:].min()/Zsepouters[i]
-            else:
-                if np.median(rebound_Zstar[i,:]) > 0:
-                    features['Zstarmed'+label] = np.median(rebound_Zstar[i,:])/Zc
-                    try:
-                        p = np.poly1d(np.polyfit(times, rebound_Zstar[i,:], 3))
-                        m = p(times)
-                        Zstardrift = np.abs((m[-1]-m[0])/m[0])
-                        features['Zstardrift'+label] = Zstardrift
-                    except:
-                        pass
-                    features['Zfree'+label] = (rebound_Z[i,:]-rebound_Zstar[i,:]).std()/separatrixdist[i]
+            if np.median(Zstar[i,:]) > 0:
+                ZS = Zstar[i,:]
+                features['Zstarmed'+label] = np.median(ZS)
+                # try this one generically for variation in constants, since all fixed points seem to follow Zstar closely?
+                features['Zstarstd'+label] = Zstar[i,:].std()/features['Zstarmed'+label]
+                try:
+                    m,c  = np.linalg.lstsq(np.vstack([times/P0, np.ones(len(times))]).T, ZS)[0]
+                    features['Zstarslope'+label] = m
+                    last = np.median(ZS[-int(Nout/20):])
+                    features['cheapZstarslope'+label] = (last - ZS.min())/ZS.std() # measure of whether final value of EM is much higher than minimum compared to std to test whether we captured long timescale
+                except:
+                    pass
+    
+                rollstd = pd.Series(ZS).rolling(window=10).std()
+                features['Zstarrollingstd'+label] = rollstd[10:].median()/features['Zstarmed'+label]
+               
+                Zx = Z[i,:]*np.cos(phi[i,:])
+                Zy = Z[i,:]*np.sin(phi[i,:]) 
+                Zfree = np.sqrt((Zx+Zstar)**2 + Zy**2) # Zstar at (-Zstar, 0)
+                features['Zfree'+label] = Zfree.std()/features['reshalfwidth'+label] # free Z around Zstar
+                
+    return pd.Series(features, index=list(features.keys())) 
 
-    return pd.Series(features, index=list(features.keys()))
+def ressummaryfeaturesxgbv5(sim, args):
+    Norbits = args[0]
+    Nout = args[1]
+    ###############################
+    sim.collision_resolve = collision
+    sim.ri_whfast.keep_unsynchronized = 1
+    sim.ri_whfast.safe_mode = 0
+    ##############################
+    ps = sim.particles
+    sim.init_megno()
+    N = sim.N - sim.N_var
+    a0 = [0] + [sim.particles[i].a for i in range(1, N)]
+    Npairs = int((N-1)*(N-2)/2)
 
+    features = resparams(sim, args)
+    pairs = getpairsv5(sim)
+    
+    P0 = ps[1].P
+    times = np.linspace(0, Norbits*P0, Nout)
+    Z, phi = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    Zcom, phiZcom = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    Zstar = np.zeros((Npairs,Nout))
+    eminus, eplus = np.zeros((Npairs,Nout)), np.zeros((Npairs, Nout))
+    
+    features['unstableinNorbits'] = False
+    AMD0 = 0
+    for p in ps[1:sim.N-sim.N_var]:
+        AMD0 += p.m*np.sqrt(sim.G*ps[0].m*p.a)*(1-np.sqrt(1-p.e**2)*np.cos(p.inc))
+
+    AMDerr = np.zeros(Nout)
+    for i,t in enumerate(times):
+        try:
+            sim.integrate(t*P0, exact_finish_time=0)
+        except:
+            features['unstableinNorbits'] = True
+            break
+        AMD = 0
+        for p in ps[1:sim.N-sim.N_var]:
+            AMD += p.m*np.sqrt(sim.G*ps[0].m*p.a)*(1-np.sqrt(1-p.e**2)*np.cos(p.inc))
+        AMDerr[i] = np.abs((AMD-AMD0)/AMD0)
+        
+        for j, [label, i1, i2] in enumerate(pairs):
+            Zcross = features['EMcross'+label]/np.sqrt(2) # important factor of sqrt(2)!
+            #i1 = int(i1); i2 = int(i2)
+            eminus[j, i] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2) / features['EMcross'+label]
+            eplus[j, i] = np.sqrt((ps[i1].m*ps[i1].e*np.cos(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].m*ps[i1].e*np.sin(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.sin(ps[i2].pomega))**2)/(ps[i1].m+ps[i2].m)
+            if features['strength'+label] > 0:
+                pvars = Poincare.from_Simulation(sim)
+                avars = Andoyer.from_Poincare(pvars, j=int(features['j'+label]), k=int(features['k'+label]), a10=a0[i1], i1=i1, i2=i2)
+            
+                Z[j, i] = avars.Z / Zcross
+                phi[j, i] = avars.phi
+                Zcom[j, i] = avars.Zcom
+                phiZcom[j, i] = avars.phiZcom
+                Zstar[j, i] = avars.Zstar / Zcross
+            
+    fillnanv5(features, pairs)
+    
+    Nnonzero = int((eminus[0,:] > 0).sum())
+    times = times[:Nnonzero]
+    AMDerr = AMDerr[:Nnonzero]
+    
+    eminus = eminus[:,:Nnonzero]
+    eplus = eplus[:,:Nnonzero]
+    Z = Z[:,:Nnonzero]
+    phi = phi[:,:Nnonzero]
+    Zcom = Zcom[:,:Nnonzero]
+    phiZcom = phiZcom[:,:Nnonzero]
+    Zstar = Zstar[:,:Nnonzero]
+    
+    # Features with or without resonances:
+    tlyap = 1./np.abs(sim.calculate_lyapunov())/P0
+    if tlyap > Norbits:
+        tlyap = Norbits
+    features['tlyap'] = tlyap
+    features['megno'] = sim.calculate_megno()
+    features['AMDerr'] = AMDerr.max()
+    
+    for i, [label, i1, i2] in enumerate(pairs):
+        EM = eminus[i,:]
+        EP = eplus[i,:]
+        features['EMmed'+label] = np.median(EM)
+        features['EMmax'+label] = EM.max()
+        features['EMstd'+label] = EM.std()
+        features['EPmed'+label] = np.median(EP)
+        features['EPmax'+label] = EP.max()
+        features['EPstd'+label] = EP.std()
+        
+        last = np.median(EM[-int(Nout/20):])
+        features['EMslope'+label] = (last - EM.min())/EM.std() # measure of whether final value of EM is much higher than minimum compared to std to test whether we captured long timescale
+        
+        rollstd = pd.Series(EM).rolling(window=10).std()
+        features['EMrollingstd'+label] = rollstd[10:].median()/features['EMmed'+label]
+        
+        last = np.median(EP[-int(Nout/20):])
+        features['EPslope'+label] = (last - EP.min())/EP.std() # measure of whether final value of EM is much higher than minimum compared to std to test whether we captured long timescale
+            
+        rollstd = pd.Series(EP).rolling(window=10).std()
+        features['EProllingstd'+label] = rollstd[10:].median()/features['EPmed'+label]
+        
+        if features['strength'+label] > 0:
+            features['Zcommed'+label] = np.median(Zcom[i,:])
+            
+                
+            if np.median(Zstar[i,:]) > 0:
+                ZS = Zstar[i,:]
+                features['Zstarmed'+label] = np.median(ZS)
+                # try this one generically for variation in constants, since all fixed points seem to follow Zstar closely?
+                features['Zstarstd'+label] = Zstar[i,:].std()/features['Zstarmed'+label]
+                last = np.median(ZS[-int(Nout/20):])
+                features['Zstarslope'+label] = (last - ZS.min())/ZS.std() # measure of whether final value of EM is much higher than minimum compared to std to test whether we captured long timescale
+    
+                rollstd = pd.Series(ZS).rolling(window=10).std()
+                features['Zstarrollingstd'+label] = rollstd[10:].median()/features['Zstarmed'+label]
+               
+                Zx = Z[i,:]*np.cos(phi[i,:])
+                Zy = Z[i,:]*np.sin(phi[i,:]) 
+                Zfree = np.sqrt((Zx+Zstar)**2 + Zy**2) # Zstar at (-Zstar, 0)
+                features['Zfree'+label] = Zfree.std()#/features['reshalfwidth'+label] # free Z around Zstar
+                #For k=1 can always define a Zstar, even w/o separatrix, but here reshalfwidth is nan. So don't  normalize
+                
+    return pd.Series(features, index=list(features.keys())) 
+
+def getpairs(sim):
+    N = sim.N - sim.N_var
+    Npairs = int((N-1)*(N-2)/2)
+    EMcross = np.zeros(Npairs)
+    ps = sim.particles
+    #print('pairindex, i1, i2, j, k, strength')
+    for i, [i1, i2] in enumerate(itertools.combinations(np.arange(1, N), 2)):
+        i1 = int(i1); i2 = int(i2)
+        EMcross[i] = (ps[int(i2)].a-ps[int(i1)].a)/ps[int(i1)].a
+        
+    if EMcross[0] < EMcross[2]: # 0 = '1-2', 2='2-3'
+        nearpair = 12 # for visualization and debugging
+        pairs = [['near', 1,2], ['far', 2, 3], ['outer', 1, 3]]
+    else:
+        nearpair = 23
+        pairs = [['near', 2, 3], ['far', 1, 2], ['outer', 1, 3]]
+
+    return pairs, nearpair 
+
+def getpairsv5(sim):
+    N = sim.N - sim.N_var
+    Npairs = int((N-1)*(N-2)/2)
+    EMcross = np.zeros(Npairs)
+    ps = sim.particles
+    #print('pairindex, i1, i2, j, k, strength')
+    for i, [i1, i2] in enumerate(itertools.combinations(np.arange(1, N), 2)):
+        i1 = int(i1); i2 = int(i2)
+        EMcross[i] = (ps[int(i2)].a-ps[int(i1)].a)/ps[int(i1)].a
+        
+    if EMcross[0] < EMcross[2]: # 0 = '1-2', 2='2-3'
+        pairs = [['near', 1,2], ['far', 2, 3], ['outer', 1, 3]]
+    else:
+        pairs = [['near', 2, 3], ['far', 1, 2], ['outer', 1, 3]]
+
+    return pairs
+
+def resparams(sim, args):
+    Norbits = args[0]
+    Nout = args[1]
+
+    features = OrderedDict()
+    ps = sim.particles
+    N = sim.N - sim.N_var
+    a0 = [0] + [sim.particles[i].a for i in range(1, N)]
+    Npairs = int((N-1)*(N-2)/2)
+
+    pairs, features['nearpair'] = getpairs(sim)
+    maxj, maxk, maxi1, maxi2, maxpairindex, maxstrength = -1, -1, -1, -1, -1, -1
+    for i, [label, i1, i2] in enumerate(pairs):
+        # recalculate with new ordering
+        RH = ps[i1].a*((ps[i1].m + ps[i2].m)/ps[0].m)**(1./3.)
+        features['beta'+label] = (ps[i2].a-ps[i1].a)/RH
+        features['EMcross'+label] = (ps[int(i2)].a-ps[int(i1)].a)/ps[int(i1)].a
+        features['Zcross'+label] = features['EMcross'+label] / np.sqrt(2) # IMPORTANT FACTOR OF SQRT(2)! Z = EM/sqrt(2)
+        
+        features['j'+label], features['k'+label], features['strength'+label] = findresv3(sim, i1, i2) # returns -1s if no res found
+        if features['strength'+label] > maxstrength:
+            maxj, maxk, maxi1, maxi2, maxpairindex, maxstrength = features['j'+label], features['k'+label], i1, i2, i, features['strength'+label]
+        features["C_AMD"+label] = AMD_stability_coefficient(sim, i1, i2)
+        
+        features['reshalfwidth'+label] = np.nan # so we always populate in case there's no  separatrix
+        if features['strength'+label] > 0:
+            pvars = Poincare.from_Simulation(sim)
+            avars = Andoyer.from_Poincare(pvars, j=int(features['j'+label]), k=int(features['k'+label]), a10=a0[i1], i1=i1, i2=i2)
+            Zsepinner = avars.Zsep_inner # always positive, location at (-Zsepinner, 0)
+            Zsepouter = avars.Zsep_outer
+            Zstar = avars.Zstar
+            features['reshalfwidth'+label] = min(Zsepouter-Zstar, Zstar-Zsepinner)
+    
+    features['maxj'] = maxj
+    features['maxk'] = maxk
+    features['maxi1'] = maxi1
+    features['maxi2'] = maxi2
+    features['maxstrength'] = maxstrength
+    sortedstrengths = np.array([features['strength'+label] for label in ['near', 'far', 'outer']])
+    sortedstrengths.sort() # ascending
+    
+    if sortedstrengths[-1] > 0 and sortedstrengths[-2] > 0: # if two strongeest resonances are nonzereo
+        features['secondres'] = sortedstrengths[-2]/sortedstrengths[-1] # ratio of second largest strength to largest
+    else:
+        features['secondres'] = -1
+            
+    return pd.Series(features, index=list(features.keys())) 
+
+def resparamsv5(sim, args):
+    Norbits = args[0]
+    Nout = args[1]
+
+    features = OrderedDict()
+    ps = sim.particles
+    N = sim.N - sim.N_var
+    a0 = [0] + [sim.particles[i].a for i in range(1, N)]
+    Npairs = int((N-1)*(N-2)/2)
+
+    pairs = getpairsv5(sim)
+    for i, [label, i1, i2] in enumerate(pairs):
+        # recalculate with new ordering
+        RH = ps[i1].a*((ps[i1].m + ps[i2].m)/ps[0].m)**(1./3.)
+        features['beta'+label] = (ps[i2].a-ps[i1].a)/RH
+        features['EMcross'+label] = (ps[int(i2)].a-ps[int(i1)].a)/ps[int(i1)].a
+        features['j'+label], features['k'+label], features['strength'+label] = findresv3(sim, i1, i2) # returns -1s if no res found
+        features["C_AMD"+label] = AMD_stability_coefficient(sim, i1, i2)
+        features['reshalfwidth'+label] = np.nan # so we always populate in case there's no  separatrix
+        if features['strength'+label] > 0:
+            pvars = Poincare.from_Simulation(sim)
+            avars = Andoyer.from_Poincare(pvars, j=int(features['j'+label]), k=int(features['k'+label]), a10=a0[i1], i1=i1, i2=i2)
+            Zsepinner = avars.Zsep_inner # always positive, location at (-Zsepinner, 0)
+            Zsepouter = avars.Zsep_outer
+            Zstar = avars.Zstar
+            features['reshalfwidth'+label] = min(Zsepouter-Zstar, Zstar-Zsepinner)
+    
+    sortedstrengths = np.array([features['strength'+label] for label in ['near', 'far', 'outer']])
+    sortedstrengths.sort() # ascending
+    
+    if sortedstrengths[-1] > 0 and sortedstrengths[-2] > 0: # if two strongeest resonances are nonzereo
+        features['secondres'] = sortedstrengths[-2]/sortedstrengths[-1] # ratio of second largest strength to largest
+    else:
+        features['secondres'] = -1
+            
+    return pd.Series(features, index=list(features.keys())) 
+
+def restseriesv5(sim, args): # corresponds to ressummaryfeaturesxgbv5
+    Norbits = args[0]
+    Nout = args[1]
+    ###############################
+    sim.collision_resolve = collision
+    sim.ri_whfast.keep_unsynchronized = 1
+    sim.ri_whfast.safe_mode = 0
+    ##############################
+    ps = sim.particles
+    sim.init_megno()
+    
+    P0 = ps[1].P
+    times = np.linspace(0, Norbits*P0, Nout)
+   
+    features = resparamsv5(sim, args)
+    pairs = getpairsv5(sim)
+
+    AMD0 = 0
+    N = sim.N - sim.N_var
+    a0 = [0] + [ps[i].a for i in range(1, N)]
+    for p in ps[1:sim.N-sim.N_var]:
+        AMD0 += p.m*np.sqrt(sim.G*ps[0].m*p.a)*(1-np.sqrt(1-p.e**2)*np.cos(p.inc))
+
+    val = np.zeros((Nout, 24))
+    for i, time in enumerate(times):
+        try:
+            sim.integrate(time, exact_finish_time=0)
+        except:
+            break
+        AMD = 0
+        for p in ps[1:sim.N-sim.N_var]:
+            AMD += p.m*np.sqrt(sim.G*ps[0].m*p.a)*(1-np.sqrt(1-p.e**2)*np.cos(p.inc))
+        
+        val[i,0] = sim.t  # time
+
+        Ns = 7
+        for j, [label, i1, i2] in enumerate(pairs):
+            Zcross = features['EMcross'+label]/np.sqrt(2)
+            #i1 = int(i1); i2 = int(i2)
+            val[i,Ns*j+1] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2) / features['EMcross'+label]# eminus
+            val[i,Ns*j+2] = np.sqrt((ps[i1].m*ps[i1].e*np.cos(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].m*ps[i1].e*np.sin(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.sin(ps[i2].pomega))**2)/(ps[i1].m+ps[i2].m) # eeplus
+            if features['strength'+label] > 0:
+                pvars = Poincare.from_Simulation(sim)
+                avars = Andoyer.from_Poincare(pvars, j=int(features['j'+label]), k=int(features['k'+label]), a10=a0[i1], i1=i1, i2=i2)
+           
+                Z = avars.Z
+                phi = avars.phi
+                Zstar = avars.Zstar
+                val[i, Ns*j+3] = Z/Zcross
+                val[i, Ns*j+4] = phi
+                val[i, Ns*j+5] = avars.Zcom
+                val[i, Ns*j+6] = avars.phiZcom
+                val[i, Ns*j+7] = Zstar/Zcross
+                if not np.isnan(Zstar):
+                    Zx = Z*np.cos(phi)
+                    Zy = Z*np.sin(phi) 
+                    Zfree = np.sqrt((Zx+Zstar)**2 + Zy**2) # Zstar at (-Zstar, 0)
+                    val[i, Ns*j+8]= Zfree# features['reshalfwidth'+label] # free Z around Zstar
+                    #For k=1 can always define a Zstar, even w/o separatrix, but here reshalfwidth is nan. So don't  normalize
+
+        val[i,22] = np.abs((AMD-AMD0)/AMD0) # AMDerr
+        val[i,23] = sim.calculate_megno() # megno
+
+    return val
