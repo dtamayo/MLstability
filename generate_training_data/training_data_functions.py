@@ -923,7 +923,7 @@ def ressummaryfeaturesxgbv5(sim, args):
     a0 = [0] + [sim.particles[i].a for i in range(1, N)]
     Npairs = int((N-1)*(N-2)/2)
 
-    features = resparams(sim, args)
+    features = resparamsv5(sim, args)
     pairs = getpairsv5(sim)
     
     P0 = ps[1].P
@@ -980,8 +980,8 @@ def ressummaryfeaturesxgbv5(sim, args):
     Zstar = Zstar[:,:Nnonzero]
     
     # Features with or without resonances:
-    tlyap = 1./np.abs(sim.calculate_lyapunov())/P0
-    if tlyap > Norbits:
+    tlyap = 1./sim.calculate_lyapunov()/P0
+    if tlyap < 0 or tlyap > Norbits:
         tlyap = Norbits
     features['tlyap'] = tlyap
     features['megno'] = sim.calculate_megno()
