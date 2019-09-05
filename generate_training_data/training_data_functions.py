@@ -1217,3 +1217,110 @@ def restseriesv5(sim, args): # corresponds to ressummaryfeaturesxgbv5
         val[i,26] = sim.calculate_megno() # megno
 
     return val
+
+def fillnanv6(features, pairs):
+    features['tlyap'] = np.nan
+    features['megno'] = np.nan
+
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['EMmed'+label] = np.nan
+        features['EMmax'+label] = np.nan
+        features['EMstd'+label] = np.nan
+        features['EMslope'+label] = np.nan
+        features['EMrollingstd'+label] = np.nan
+        features['EPmed'+label] = np.nan
+        features['EPmax'+label] = np.nan
+        features['EPstd'+label] = np.nan
+        features['EPslope'+label] = np.nan
+        features['EProllingstd'+label] = np.nan
+
+def ressummaryfeaturesxgbv6(sim, args): # don't use features that require transform to res variables in tseries
+    Norbits = args[0]
+    Nout = args[1]
+    if sim.integrator != "whfast":
+        sim.integrator = "whfast"
+        sim.dt = 2*np.sqrt(3)/100.
+    ###############################
+    sim.collision_resolve = collision
+    sim.ri_whfast.keep_unsynchronized = 1
+    sim.ri_whfast.safe_mode = 0
+    ##############################
+    ps = sim.particles
+    sim.init_megno()
+    N = sim.N - sim.N_var
+    a0 = [0] + [sim.particles[i].a for i in range(1, N)]
+    Npairs = int((N-1)*(N-2)/2)
+
+    features = resparamsv5(sim, args)
+    pairs = getpairsv5(sim)
+    
+    P0 = ps[1].P
+    times = np.linspace(0, Norbits*P0, Nout)
+    Z, phi = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    Zcom, phiZcom = np.zeros((Npairs,Nout)), np.zeros((Npairs,Nout))
+    Zstar = np.zeros((Npairs,Nout))
+    eminus, eplus = np.zeros((Npairs,Nout)), np.zeros((Npairs, Nout))
+    
+    features['unstableinNorbits'] = False
+    AMD0 = 0
+    for p in ps[1:sim.N-sim.N_var]:
+        AMD0 += p.m*np.sqrt(sim.G*ps[0].m*p.a)*(1-np.sqrt(1-p.e**2)*np.cos(p.inc))
+
+    AMDerr = np.zeros(Nout)
+    for i,t in enumerate(times):
+        try:
+            sim.integrate(t*P0, exact_finish_time=0)
+        except:
+            features['unstableinNorbits'] = True
+            break
+        AMD = 0
+        for p in ps[1:sim.N-sim.N_var]:
+            AMD += p.m*np.sqrt(sim.G*ps[0].m*p.a)*(1-np.sqrt(1-p.e**2)*np.cos(p.inc))
+        AMDerr[i] = np.abs((AMD-AMD0)/AMD0)
+        
+        for j, [label, i1, i2] in enumerate(pairs):
+            eminus[j, i] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2) / features['EMcross'+label]
+            eplus[j, i] = np.sqrt((ps[i1].m*ps[i1].e*np.cos(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].m*ps[i1].e*np.sin(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.sin(ps[i2].pomega))**2)/(ps[i1].m+ps[i2].m)
+            
+    fillnanv6(features, pairs)
+    
+    Nnonzero = int((eminus[0,:] > 0).sum())
+    times = times[:Nnonzero]
+    AMDerr = AMDerr[:Nnonzero]
+    
+    eminus = eminus[:,:Nnonzero]
+    eplus = eplus[:,:Nnonzero]
+    
+    # Features with or without resonances:
+    tlyap = 1./sim.calculate_lyapunov()/P0
+    if tlyap < 0 or tlyap > Norbits:
+        tlyap = Norbits
+    features['tlyap'] = tlyap
+    features['megno'] = sim.calculate_megno()
+    features['AMDerr'] = AMDerr.max()
+    
+    for i, [label, i1, i2] in enumerate(pairs):
+        EM = eminus[i,:]
+        EP = eplus[i,:]
+        features['EMmed'+label] = np.median(EM)
+        features['EMmax'+label] = EM.max()
+        features['EMstd'+label] = EM.std()
+        features['EPmed'+label] = np.median(EP)
+        features['EPmax'+label] = EP.max()
+        features['EPstd'+label] = EP.std()
+        
+        last = np.median(EM[-int(Nout/20):])
+        features['EMslope'+label] = (last - EM.min())/EM.std() # measure of whether final value of EM is much higher than minimum compared to std to test whether we captured long timescale
+        
+        rollstd = pd.Series(EM).rolling(window=10).std()
+        features['EMrollingstd'+label] = rollstd[10:].median()/features['EMmed'+label]
+        
+        last = np.median(EP[-int(Nout/20):])
+        features['EPslope'+label] = (last - EP.min())/EP.std() # measure of whether final value of EM is much higher than minimum compared to std to test whether we captured long timescale
+            
+        rollstd = pd.Series(EP).rolling(window=10).std()
+        features['EProllingstd'+label] = rollstd[10:].median()/features['EPmed'+label]
+        
+    return pd.Series(features, index=list(features.keys())) 
+
+

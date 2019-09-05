@@ -11,7 +11,7 @@ def hasnull(row):
     else:
         return 1
 
-def train_test_split(trainingdatafolder, features=None, labelname='Stable', filter=True):
+def train_test_split(trainingdatafolder, features=None, labelname='Stable', filter=False):
     dataset = pd.read_csv(trainingdatafolder+"trainingdata.csv", index_col = 0)
     if features is None:
         features = dataset.columns.values
@@ -33,28 +33,28 @@ def train_test_split(trainingdatafolder, features=None, labelname='Stable', filt
 
     return trainX, trainy, testX, testy
 
-def ROC_curve(trainingdatafolder, model, features=None, filter=True):
+def ROC_curve(trainingdatafolder, model, features=None, filter=False):
     trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features, filter=filter)
     preds = model.predict_proba(testX)[:,1]
     fpr, tpr, ROCthresholds = roc_curve(testy, preds)
     roc_auc = metrics.roc_auc_score(testy, preds)
     return roc_auc, fpr, tpr, ROCthresholds
 
-def PR_curve(trainingdatafolder, model, features=None, filter=True):
+def PR_curve(trainingdatafolder, model, features=None, filter=False):
     trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features, filter=filter)
     preds = model.predict_proba(testX)[:,1]
     precision, recall, PRthresholds = precision_recall_curve(testy, preds)
     pr_auc = metrics.auc(recall, precision)
     return pr_auc, precision, recall, PRthresholds
 
-def stable_unstable_hist(trainingdatafolder, model, features=None, filter=True):
+def stable_unstable_hist(trainingdatafolder, model, features=None, filter=False):
     trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features, filter=filter)
     preds = model.predict_proba(testX)[:,1]
     stablepreds = preds[np.where(testy==1)]
     unstablepreds = preds[np.where(testy==0)]
     return stablepreds, unstablepreds 
 
-def calibration_plot(trainingdatafolder, model, features=None, bins=10, filter=True):
+def calibration_plot(trainingdatafolder, model, features=None, bins=10, filter=False):
     trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features, filter=filter)
     preds = model.predict_proba(testX)[:,1]
 
@@ -73,7 +73,7 @@ def calibration_plot(trainingdatafolder, model, features=None, bins=10, filter=T
 
     return np.array(bincenters), np.array(fracstable), np.array(errorbars)
 
-def unstable_error_fraction(trainingdatafolder, model, features=None, bins=10, filter=True):
+def unstable_error_fraction(trainingdatafolder, model, features=None, bins=10, filter=False):
     trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features, filter=filter)
     preds = model.predict_proba(testX)[:,1]
     dummy, dummy, dummy, inst_times = train_test_split(trainingdatafolder, features, labelname='instability_time', filter=filter)
