@@ -55,8 +55,8 @@ if datasets == 'nonres':
 
 for dataset in list(datasets):
     if dataset == 'random':
-        if rebound.__githash__ != '48feb327f90611a5569682578980b5604aa6102a':
-            print('random dataset not run. Check out rebound commit 48feb327f90611a5569682578980b5604aa6102a and rerun script if needed')
+        if rebound.__githash__ != '361adacb48ff55ea8331adbf37a943e63ca02984':
+            print('random dataset not run. Check out rebound commit 361adacb48ff55ea8331adbf37a943e63ca02984 and rerun script if needed')
             continue 
     else:
         if rebound.__githash__ != '6fb912f615ca542b670ab591375191d1ed914672':
