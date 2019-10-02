@@ -1322,5 +1322,3 @@ def ressummaryfeaturesxgbv6(sim, args): # don't use features that require transf
         features['EProllingstd'+label] = rollstd[10:].median()/features['EPmed'+label]
         
     return pd.Series(features, index=list(features.keys())) 
-
-

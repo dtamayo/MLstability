@@ -9,10 +9,10 @@ from collections import OrderedDict
 datapath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/MLstability/'
 sys.path.append(repopath + 'generate_training_data/')
-from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb, ressummaryfeaturesxgb2, ressummaryfeaturesxgbv4, restseriesv5, resparamsv5, ressummaryfeaturesxgbv5
+from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb, ressummaryfeaturesxgb2, ressummaryfeaturesxgbv4, restseriesv5, resparamsv5, ressummaryfeaturesxgbv5, ressummaryfeaturesxgbv6
 
-datasets = ['resonant'] # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = ressummaryfeaturesxgbv5# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
+runfunc = ressummaryfeaturesxgbv6# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
@@ -55,8 +55,8 @@ if datasets == 'nonres':
 
 for dataset in list(datasets):
     if dataset == 'random':
-        if rebound.__githash__ != '361adacb48ff55ea8331adbf37a943e63ca02984':
-            print('random dataset not run. Check out rebound commit 361adacb48ff55ea8331adbf37a943e63ca02984 and rerun script if needed')
+        if rebound.__githash__ != '4992313d213b0be717a0b82002e0b89a143c9828':
+            print('random dataset not run. Check out rebound commit 4992313d213b0be717a0b82002e0b89a143c9828 and rerun script if needed')
             continue 
     else:
         if rebound.__githash__ != '6fb912f615ca542b670ab591375191d1ed914672':
