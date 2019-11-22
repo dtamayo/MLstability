@@ -15,7 +15,7 @@ datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) 
 runfunc = ressummaryfeaturesxgbv6# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
-kwargs['Norbits'] = 1e4
+kwargs['Norbits'] = 1e3
 kwargs['Nout'] = 1000
 #kwargs['window'] = 10
 

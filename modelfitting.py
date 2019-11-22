@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.metrics import precision_recall_curve
-from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_curve, confusion_matrix, auc
 from sklearn import metrics
 import numpy as np
 
@@ -46,6 +46,21 @@ def PR_curve(trainingdatafolder, model, features=None, filter=False):
     precision, recall, PRthresholds = precision_recall_curve(testy, preds)
     pr_auc = metrics.auc(recall, precision)
     return pr_auc, precision, recall, PRthresholds
+
+def tnr_npv_curve(trainingdatafolder, model, features=None, filter=False, N=1000):
+    trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features, filter=filter)
+    preds = model.predict_proba(testX)[:,1]
+    npv, tnr = np.zeros(N), np.zeros(N)
+    thresholds = np.linspace(0, 1, N)
+    for i, thresh in enumerate(thresholds):
+        predy = (preds >= thresh)
+        tn, fp, fn, tp = confusion_matrix(testy, predy).ravel()
+        npv[i] = tn/(tn+fn)
+        tnr[i] = tn/(tn+fp)
+    # When thresh is 0, we don't predict any negs, so npv is nan
+    npv[np.isnan(npv)] = 1
+    aucval = auc(tnr, npv)
+    return aucval, npv, tnr, thresholds
 
 def stable_unstable_hist(trainingdatafolder, model, features=None, filter=False):
     trainX, trainy, testX, testy = train_test_split(trainingdatafolder, features, filter=filter)
