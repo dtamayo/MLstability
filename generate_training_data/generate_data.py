@@ -9,13 +9,13 @@ from collections import OrderedDict
 datapath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/MLstability/'
 sys.path.append(repopath + 'generate_training_data/')
-from training_data_functions import gen_training_data, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb, ressummaryfeaturesxgb2, ressummaryfeaturesxgbv4, restseriesv5, resparamsv5, ressummaryfeaturesxgbv5, ressummaryfeaturesxgbv6
+from training_data_functions import gen_training_data, spock_features, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb, ressummaryfeaturesxgb2, ressummaryfeaturesxgbv4, restseriesv5, resparamsv5, ressummaryfeaturesxgbv5, ressummaryfeaturesxgbv6
 
 datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = ressummaryfeaturesxgbv6# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+runfunc = spock_features# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
-kwargs['Norbits'] = 1e3
+kwargs['Norbits'] = 1e4
 kwargs['Nout'] = 1000
 #kwargs['window'] = 10
 

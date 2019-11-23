@@ -52,6 +52,18 @@ def F(e,alpha,gamma):
 
 ### start AMD functions
 
+def AMD_crit(sim, i1, i2): # assumes i1.a < i2.a
+    ps = sim.particles
+    if ps[i1].m == 0. or ps[i2].m == 0:
+        return 0 # if one particle is massless, any amount of AMD can take it to e=1, so AMDcrit = 0 (always AMD unstable)
+
+    mu = sim.G*ps[0].m
+    alpha = ps[i1].a / ps[i2].a
+    gamma = ps[i1].m / ps[i2].m
+    LambdaPrime = ps[i2].m * np.sqrt(mu*ps[i2].a)
+    curlyC = critical_relative_AMD(alpha,gamma)
+    AMD_crit = curlyC * LmbdaOut # Eq 29 C = curlyC*Lambda'
+
 def critical_relative_AMD(alpha,gamma):
     """Equation 29"""
     e0 = np.min((1,1/alpha-1))
@@ -1322,3 +1334,304 @@ def ressummaryfeaturesxgbv6(sim, args): # don't use features that require transf
         features['EProllingstd'+label] = rollstd[10:].median()/features['EPmed'+label]
         
     return pd.Series(features, index=list(features.keys())) 
+
+def spock_features_test(sim, args): # final cut down list
+    Norbits = args[0]
+    Nout = args[1]
+    i1 = 1
+    i2 = 2
+    i3 = 3
+    ps  = sim.particles
+
+    spock_error_check(sim, Norbits, Nout,  i1, i2, i3)
+    features = OrderedDict()
+    pairs = spock_3p_pairs(sim, [i1, i2, i3])
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['EMstd'+label] = np.nan
+        features['EPstd'+label] = np.nan
+        features['AMDcrit'+label] = np.nan
+        features['EMcross'+label] = np.nan
+        features['MMRhalfwidth'+label] = np.nan
+        features['MMRstrength'+label] = np.nan
+    features['MEGNOmed'] = np.nan
+    features['MEGNOstd'] = np.nan
+    features['AMDmed'] = np.nan
+    features['AMDstd'] = np.nan
+    features['MMRstrengthratio'] = np.nan
+    features['unstableinshortintegration'] = 0
+
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['EMcross'+label] = (ps[i2].a-ps[i1].a)/ps[i1].a
+        features["AMDcrit"+label] = spock_AMD_crit(sim, i1, i2)
+        
+        j, k, features['MMRstrength'+label] = spock_find_strongest_MMR(sim, i1, i2) 
+        if not np.isnan(j): # a resonance  was  found. If no strong res nearby, MMRhalfwidth will be nan
+            pvars = Poincare.from_Simulation(sim)
+            avars = Andoyer.from_Poincare(pvars, j=j, k=k, a10=ps[i1].a, i1=i1, i2=i2)
+            features['MMRhalfwidth'+label] = (avars.Zsep_outer-avars.Zstar)*np.sqrt(2) # Want EM half width. Z approx EM/sqrt(2)
+  
+    if features['MMRstrengthnear'] > 0:
+        features['MMRstrengthratio'] = features['MMRstrengthfar']/features['MMRstrengthnear']
+    
+    tseries = spock_3p_tseries(sim, args)
+    if np.isnan(tseries[0,0]) == True:
+        features['unstableinshortintegration'] = 1
+        return # particles collided in short integration, return all nan
+
+    EMnear = tseries[:, 1]
+    EPnear = tseries[:, 2]
+    EMfar = tseries[:, 3]
+    EPfar = tseries[:, 4]
+    AMD = tseries[:, 5]
+    MEGNO = tseries[:, 6]
+
+    features['MEGNOmed'] = np.median(MEGNO)
+    features['MEGNOstd'] = MEGNO.std()
+    features['AMDmed'] = np.median(AMD)
+    features['AMDstd'] = AMD.std()
+    features['EMstdnear'] = EMnear.std() 
+    features['EPstdnear'] = EPnear.std() 
+    features['EMstdfar'] = EMfar.std() 
+    features['EPstdfar'] = EPfar.std() 
+
+    return pd.Series(features, index=list(features.keys())) 
+
+
+def spock_AMD_crit(sim, i1, i2): # assumes i1.a < i2.a
+    ps = sim.particles
+    if ps[i1].m == 0. or ps[i2].m == 0:
+        return 0 # if one particle is massless, any amount of AMD can take it to e=1, so AMDcrit = 0 (always AMD unstable)
+
+    mu = sim.G*ps[0].m
+    alpha = ps[i1].a / ps[i2].a
+    gamma = ps[i1].m / ps[i2].m
+    LambdaPrime = ps[i2].m * np.sqrt(mu*ps[i2].a)
+    curlyC = critical_relative_AMD(alpha,gamma)
+    AMD_crit = curlyC * LambdaPrime # Eq 29 AMD_crit = C = curlyC*Lambda'
+
+    return AMD_crit
+
+def spock_relative_AMD_crit(alpha,gamma):
+    """Equation 29"""
+    e0 = np.min((1,1/alpha-1))
+    ec = brenth(F,0,e0,args=(alpha,gamma))
+    e1c = np.sin(np.arctan(gamma*ec / np.sqrt(alpha*(1-ec*ec))))
+    curlyC = gamma*np.sqrt(alpha) * (1-np.sqrt(1-ec*ec)) + (1 - np.sqrt(1-e1c*e1c))
+    return curlyC
+
+def spock_AMD(sim): 
+    ps = sim.particles
+    Lx, Ly, Lz = sim.calculate_angular_momentum()
+    L = np.sqrt(Lx**2 + Ly**2 + Lz**2)
+    Lcirc = 0
+    Mint = ps[0].m
+    for p in ps[1:sim.N_real]: # the exact choice of which a and masses to use doesn't matter for closely packed systems (only hierarchical)
+        mred = p.m*Mint/(p.m+Mint)
+        Lcirc += mred * np.sqrt(sim.G*(p.m + Mint)*p.a)
+        Mint += p.m
+    return Lcirc - L
+
+# sorts out which pair of planets has a smaller EMcross, labels that pair inner, other adjacent pair outer
+# returns a list of two lists, with [label (near or far), i1, i2], where i1 and i2 are the indices, with i1 
+# having the smaller semimajor axis
+def spock_3p_pairs(sim, indices):
+    ps = sim.particles
+    sortedindices = sorted(indices, key=lambda i: ps[i].a) # sort from inner to outer
+    EMcrossInner = (ps[sortedindices[1]].a-ps[sortedindices[0]].a)/ps[sortedindices[0]].a
+    EMcrossOuter = (ps[sortedindices[2]].a-ps[sortedindices[1]].a)/ps[sortedindices[1]].a
+
+    if EMcrossInner < EMcrossOuter:
+        return [['near', sortedindices[0], sortedindices[1]], ['far', sortedindices[1], sortedindices[2]]]
+    else:
+        return [['near', sortedindices[1], sortedindices[2]], ['far', sortedindices[0], sortedindices[1]]]
+
+def spock_find_strongest_MMR(sim, i1, i2):
+    maxorder = 2
+    ps = Poincare.from_Simulation(sim=sim).particles # get averaged mean motions
+    n1 = ps[i1].n
+    n2 = ps[i2].n
+
+    m1 = ps[i1].m/ps[i1].M
+    m2 = ps[i2].m/ps[i2].M
+
+    Pratio = n2/n1
+    if np.isnan(Pratio): # probably due to close encounter where averaging step doesn't converge
+        return np.nan, np.nan, np.nan
+
+    delta = 0.03
+    minperiodratio = max(Pratio-delta, 0.)
+    maxperiodratio = min(Pratio+delta, 0.999) # too many resonances close to 1
+    res = resonant_period_ratios(minperiodratio,maxperiodratio, order=2)
+
+    Z = np.sqrt((ps[i1].e*np.cos(ps[i1].pomega) - ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].e*np.sin(ps[i1].pomega) - ps[i2].e*np.sin(ps[i2].pomega))**2)
+    Zcross = (ps[i2].a-ps[i1].a)/ps[i1].a
+
+    j, k, maxstrength = np.nan, np.nan, 0 
+    for a, b in res:
+        s = np.abs(np.sqrt(m1+m2)*(Z/Zcross)**((b-a)/2.)/((b*n2 - a*n1)/n1))
+        if s > maxstrength:
+            j = b
+            k = b-a
+            maxstrength = s
+    if maxstrength == 0:
+        maxstrength = np.nan
+
+    return j, k, maxstrength
+
+def spock_error_check(sim, Norbits, Nout, i1, i2, i3):
+    if not isinstance(i1, int) or not isinstance(i2, int) or not isinstance(i3, int):
+        raise AttributeError("SPOCK  Error: Particle indices passed to spock_features were not integers")
+    ps = sim.particles
+    if ps[0].m < 0 or ps[1].m < 0 or ps[2].m < 0 or ps[3].m < 0: 
+        raise AttributeError("SPOCK Error: Particles in sim passed to spock_features had negative masses")
+
+    if ps[1].r == 0 or ps[2].r == 0 or ps[3].r == 0.:
+        for  p in ps[1:]:
+            rH = p.a*(p.m/3./ps[0].m)**(1./3.)
+            p.r = rH
+    return
+
+# First value in each time series will be np.nan if planets collide within the first Norbits
+def spock_3p_tseries(sim, args):
+    Norbits = args[0]
+    Nout = args[1]
+    i1 = 1
+    i2 = 2
+    i3 = 3
+
+    # AMD calculation is easiest in canonical heliocentric coordiantes, so velocities need to be in barycentric frame
+    # Don't want to move_to_com() unless we have to so that we get same chaotic trajectory as user passes
+    com = sim.calculate_com()
+    if com.x**2 + com.y**2 + com.z**2 + com.vx**2 + com.vy**2 + com.vz**2 > 1.e-16:
+        sim.move_to_com()
+    
+    ###############################
+    try:
+        sim.collision = 'line' # use line if using newer version of REBOUND
+    except:
+        sim.collision = 'direct'# fall back for older versions
+    sim.collision_resolve = collision
+    sim.ri_whfast.keep_unsynchronized = 1
+    sim.ri_whfast.safe_mode = 0
+    ##############################
+    ps = sim.particles
+    sim.init_megno()
+    
+    P0 = ps[1].P
+    times = np.linspace(0, Norbits*P0, Nout)
+    
+    if sim.integrator != "whfast":
+        sim.integrator = "whfast"
+        sim.dt = 2*np.sqrt(3)/100.*P0
+   
+    pairs = spock_3p_pairs(sim, [i1, i2, i3])
+
+    val = np.zeros((Nout, 7))
+    for i, time in enumerate(times):
+        try:
+            sim.integrate(time, exact_finish_time=0)
+        except:
+            val[0,0] = np.nan
+            return val
+
+        val[i,0] = sim.t/P0  # time
+
+        Ns = 2
+        for j, [label, i1, i2] in enumerate(pairs):
+            val[i,Ns*j+1] = np.sqrt((ps[i2].e*np.cos(ps[i2].pomega)-ps[i1].e*np.cos(ps[i1].pomega))**2 + (ps[i2].e*np.sin(ps[i2].pomega)-ps[i1].e*np.sin(ps[i1].pomega))**2) # eminus
+            val[i,Ns*j+2] = np.sqrt((ps[i1].m*ps[i1].e*np.cos(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.cos(ps[i2].pomega))**2 + (ps[i1].m*ps[i1].e*np.sin(ps[i1].pomega) + ps[i2].m*ps[i2].e*np.sin(ps[i2].pomega))**2)/(ps[i1].m+ps[i2].m) # eplus
+
+        val[i,5] = spock_AMD(sim)
+        val[i,6] = sim.calculate_megno() # megno
+
+    return val
+
+def spock_features(sim, args): # final cut down list
+    Norbits = args[0]
+    Nout = args[1]
+    i1 = 1
+    i2 = 2
+    i3 = 3
+    ps  = sim.particles
+
+    spock_error_check(sim, Norbits, Nout,  i1, i2, i3)
+    features = OrderedDict()
+    pairs = spock_3p_pairs(sim, [i1, i2, i3])
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['EMfracstd'+label] = np.nan
+        features['EPstd'+label] = np.nan
+        features['EMfreestd'+label] = np.nan
+        features['AMDcrit'+label] = np.nan
+        features['AMDfrac'+label] = np.nan
+        features['AMDstd'+label] = np.nan
+        features['EMcross'+label] = np.nan
+        features['MMRhalfwidth'+label] = np.nan
+        features['MMRstrength'+label] = np.nan
+    features['MEGNOmed'] = np.nan
+    features['MEGNOstd'] = np.nan
+    features['unstableinshortintegration'] = 0.
+
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['EMcross'+label] = (ps[i2].a-ps[i1].a)/ps[i1].a
+        features["AMDcrit"+label] = spock_AMD_crit(sim, i1, i2)
+        
+        j, k, features['MMRstrength'+label] = spock_find_strongest_MMR(sim, i1, i2) 
+        if not np.isnan(j): # a resonance  was  found. If no strong res nearby, MMRhalfwidth will be nan
+            pvars = Poincare.from_Simulation(sim)
+            avars = Andoyer.from_Poincare(pvars, j=j, k=k, a10=ps[i1].a, i1=i1, i2=i2)
+            features['MMRhalfwidth'+label] = (avars.Zsep_outer-avars.Zstar)*np.sqrt(2) # Want EM half width. Z approx EM/sqrt(2)
+  
+    tseries = spock_3p_tseries(sim, args)
+    if np.isnan(tseries[0,0]) == True:
+        features['unstableinshortintegration'] = 1.
+        return pd.Series(features, index=list(features.keys())) # particles collided in short integration, return all nan
+
+    EMnear = tseries[:, 1]
+    EPnear = tseries[:, 2]
+    EMfar = tseries[:, 3]
+    EPfar = tseries[:, 4]
+    AMD = tseries[:, 5]
+    MEGNO = tseries[:, 6]
+
+    features['MEGNOmed'] = np.median(MEGNO)
+    features['MEGNOstd'] = MEGNO.std()
+    features['AMDfracnear'] = np.median(AMD) / features['AMDcritnear']
+    features['AMDfracfar'] = np.median(AMD) / features['AMDcritfar']
+    features['AMDstdnear'] = AMD.std() / features['AMDcritnear']
+    features['AMDstdfar'] = AMD.std() / features['AMDcritfar']
+    features['EMfracstdnear'] = EMnear.std() / features['EMcrossnear']
+    features['EMfracstdfar'] = EMfar.std() / features['EMcrossfar']
+    features['EMfreestdnear'] = EMnear.std() / features['MMRhalfwidthnear']
+    features['EMfreestdfar'] = EMnear.std() / features['MMRhalfwidthfar']
+    features['EPstdnear'] = EPnear.std() 
+    features['EPstdfar'] = EPfar.std() 
+
+    return pd.Series(features, index=list(features.keys())) 
+
+def spock_regressor_tseries(sim, args): # final cut down list
+    Norbits = args[0]
+    Nout = args[1]
+    i1 = 1
+    i2 = 2
+    i3 = 3
+    ps  = sim.particles
+
+    spock_error_check(sim, Norbits, Nout,  i1, i2, i3)
+    features = OrderedDict()
+    pairs = spock_3p_pairs(sim, [i1, i2, i3])
+
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['EMcross'+label] = (ps[i2].a-ps[i1].a)/ps[i1].a
+        features["AMDcrit"+label] = spock_AMD_crit(sim, i1, i2)
+
+    tseries = spock_3p_tseries(sim, args)
+    if np.isnan(tseries[0,0]) is True:
+        features['unstableinshortintegration'] = 1
+        return tseries
+
+    tseries[:, 1] /= features['EMcrossnear'] # EMnear
+    tseries[:, 3] /= features['EMcrossfar'] # EMfar
+    tseries[:, 5] /= features['AMDcritnear'] # AMD
+    MEGNO = tseries[:, 6]
+
+    return tseries
