@@ -27,8 +27,10 @@ def training_data(row, safolder, runfunc, args):
     except:
         print('{0} failed'.format(row['runstring']))
         return None
-
-    return ret
+    try:
+        return ret[0]
+    except:
+        return ret
 
 def gen_training_data(outputfolder, safolder, runfunc, args):
     df = pd.read_csv(outputfolder+"/runstrings.csv", index_col = 0)
@@ -46,6 +48,12 @@ def gen_training_data(outputfolder, safolder, runfunc, args):
 
     if isinstance(testres, pd.Series):
         metadf = pd.DataFrame([testres]) # make single row dataframe to autodetect meta
+        res = ddf.apply(training_data, axis=1, meta=metadf, args=(safolder, runfunc, args)).compute(scheduler='processes')
+        # meta autodetect should work for simple functions that return a series
+        res.to_csv(outputfolder+'/trainingdata.csv')
+
+    if isinstance(testres, list):
+        metadf = pd.DataFrame([testres[0]]) # make single row dataframe to autodetect meta
         res = ddf.apply(training_data, axis=1, meta=metadf, args=(safolder, runfunc, args)).compute(scheduler='processes')
         # meta autodetect should work for simple functions that return a series
         res.to_csv(outputfolder+'/trainingdata.csv')
@@ -1894,4 +1902,147 @@ def spock_regressor_tseries(sim, args): # final cut down list
 
     return tseries
 
+def spock_3p_tseriesv3(sim, args):
+    Norbits = args[0]
+    Nout = args[1]
+    i1 = args[2] 
+    i2 = args[3] 
+    i3 = args[4] 
 
+    # AMD calculation is easiest in canonical heliocentric coordiantes, so velocities need to be in barycentric frame
+    # Don't want to move_to_com() unless we have to so that we get same chaotic trajectory as user passes
+    com = sim.calculate_com()
+    if com.x**2 + com.y**2 + com.z**2 + com.vx**2 + com.vy**2 + com.vz**2 > 1.e-16:
+        sim.move_to_com()
+    
+    ###############################
+    try:
+        sim.collision = 'line' # use line if using newer version of REBOUND
+    except:
+        sim.collision = 'direct'# fall back for older versions
+    sim.collision_resolve = collision
+    sim.ri_whfast.keep_unsynchronized = 1
+    sim.ri_whfast.safe_mode = 0
+    ##############################
+    ps = sim.particles
+    sim.init_megno()
+    
+    P0 = ps[1].P
+    times = np.linspace(0, Norbits*P0, Nout)
+    
+    if sim.integrator != "whfast":
+        sim.integrator = "whfast"
+        sim.dt = 2*np.sqrt(3)/100.*P0
+   
+    pairs = spock_3p_pairs(sim, [i1, i2, i3])
+    jk = {}
+    a10 = {}
+    for [label, i1, i2] in pairs:
+        j, k, _ = spock_find_strongest_MMR(sim, i1, i2) 
+        if np.isnan(j) == False:
+            jk[label] = (j,k)
+            a10[label] = ps[i1].a
+
+    val = np.zeros((Nout, 15))
+    for i, time in enumerate(times):
+        try:
+            sim.integrate(time, exact_finish_time=0)
+        except:
+            val[0,0] = np.nan
+            return val
+
+        val[i,0] = sim.t/P0  # time
+
+        Ns = 4
+        for q, [label, i1, i2] in enumerate(pairs):
+            e1x, e1y = ps[i1].e*np.cos(ps[i1].pomega), -ps[i1].e*np.sin(ps[i1].pomega)
+            e2x, e2y = ps[i2].e*np.cos(ps[i2].pomega), -ps[i2].e*np.sin(ps[i2].pomega)
+            try: # it's unlikely but possible for bodies to land nearly on top of  each other midtimestep and get a big kick that doesn't get caught by collisions  post timestep. All these cases are unstable, so flag them as above
+                try:
+                    j,k = jk[label]
+                    # average only affects a (Lambda) Z and I think  Zcom  don't depend on a. Zsep and Zstar slightly, but several sig figs in even when close at conjunction
+                    avars = Andoyer.from_Simulation(sim, a10=a10[label], j=j, k=k, i1=i1, i2=i2, average=False)
+                    val[i,Ns*q+1] = avars.Z*np.sqrt(2) # EM = Z*sqrt(2)
+                    val[i,Ns*q+2] = avars.Zcom # no sqrt(2) factor
+                    val[i,Ns*q+3] = (avars.Zsep_outer-avars.Zstar)*np.sqrt(2)
+                except: # no nearby resonance, use EM and ecom
+                    val[i,Ns*q+1] = np.sqrt((e2x-e1x)**2 + (e2y-e1y)**2)
+                    val[i,Ns*q+2] = np.sqrt((ps[i1].m*e1x + ps[i2].m*e2x)**2 + (ps[i1].m*e1y + ps[i2].m*e2y)**2)/(ps[i1].m+ps[i2].m)
+                    val[i,Ns*q+3] = np.nan
+                j, k, val[i,Ns*q+4] = spock_find_strongest_MMR(sim, i1, i2)
+            except:
+                val[0,0] = np.nan
+                return val
+
+        val[i,9] = spock_AMD(sim)
+        val[i,10] = sim.calculate_megno() # megno
+    
+    return val
+    
+def spock_featuresv3(sim, args): # final cut down list
+    Norbits = args[0]
+    Nout = args[1]
+    i1 = args[2] 
+    i2 = args[3] 
+    i3 = args[4] 
+    ps  = sim.particles
+
+    spock_error_check(sim, Norbits, Nout,  i1, i2, i3)
+    features = OrderedDict()
+    pairs = spock_3p_pairs(sim, [i1, i2, i3])
+    for i, [label, i1, i2] in enumerate(pairs):
+        features['EMfracstd'+label] = np.nan
+        features['EMfracstdE'+label] = np.nan  # E = exact (celmech)
+        features['EPstdE'+label] = np.nan
+        features['EMfreestdEmed'+label] = np.nan
+        features['AMDcrit'+label] = np.nan
+        features['AMDfrac'+label] = np.nan
+        features['AMDstd'+label] = np.nan
+        features['EMcross'+label] = np.nan
+        features['MMRhalfwidthmed'+label] = np.nan
+        features['MMRstrengthmed'+label] = np.nan
+        features['j'+label] = np.nan
+        features['k'+label] = np.nan
+
+    features['MEGNO'] = np.nan
+    features['MEGNOstd'] = np.nan
+    features['unstableinshortintegration'] = 0.
+
+    for i, [label, i1, i2] in enumerate(pairs):
+        features["AMDcrit"+label] = spock_AMD_crit(sim, i1, i2)
+        features["EMcross"+label] = (ps[i2].a-ps[i1].a)/ps[i1].a       
+        features["j"+label], features["k"+label], _ = spock_find_strongest_MMR(sim, i1, i2)
+
+    tseries = spock_3p_tseriesv3(sim, args)
+    if np.isnan(tseries[0,0]) == True:
+        features['unstableinshortintegration'] = 1.
+        return pd.Series(features, index=list(features.keys())) # particles collided in short integration, return all nan
+
+    EMnearE = tseries[:, 1]
+    EPnearE = tseries[:, 2]
+    MMRhalfwidthnear = tseries[:,3]
+    MMRstrengthnear = tseries[:,4]
+    EMfarE = tseries[:, 5]
+    EPfarE = tseries[:, 6]
+    MMRhalfwidthfar = tseries[:,7]
+    MMRstrengthfar = tseries[:,8]
+    AMD = tseries[:, 9]
+    MEGNO = tseries[:, 10]
+
+    features['MEGNO'] = MEGNO[-1]
+    features['MEGNOstd'] = MEGNO.std()
+    features['AMDfracnear'] = np.median(AMD) / features['AMDcritnear']
+    features['AMDfracfar'] = np.median(AMD) / features['AMDcritfar']
+    features['AMDstdnear'] = AMD.std() / features['AMDcritnear']
+    features['AMDstdfar'] = AMD.std() / features['AMDcritfar']
+    features['MMRstrengthmednear'] = np.median(MMRstrengthnear)
+    features['MMRhalfwidthmednear'] = np.median(MMRhalfwidthnear)
+    
+    features['EMfracstdEnear'] = EMnearE.std() / features['EMcrossnear']
+    features['EMfracstdEfar'] = EMfarE.std() / features['EMcrossfar']
+    features['EMfreestdEmednear'] = EMnearE.std() / features['MMRhalfwidthmednear']
+    features['EMfreestdEmedfar'] = EMnearE.std() / features['MMRhalfwidthmedfar']
+    features['EPstdEnear'] = EPnearE.std() 
+    features['EPstdEfar'] = EPfarE.std() 
+    
+    return pd.Series(features, index=list(features.keys())) 

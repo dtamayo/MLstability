@@ -9,19 +9,25 @@ from collections import OrderedDict
 datapath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/stabilitydataset/data/'
 repopath = '/mnt/ssd/Dropbox/Dropbox (Princeton)/workspace/stability/MLstability/'
 sys.path.append(repopath + 'generate_training_data/')
-from training_data_functions import gen_training_data, spock_featuresv2, spock_features, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb, ressummaryfeaturesxgb2, ressummaryfeaturesxgbv4, restseriesv5, resparamsv5, ressummaryfeaturesxgbv5, ressummaryfeaturesxgbv6
+from training_data_functions import gen_training_data, spock_featuresv2, orbtseries, orbsummaryfeaturesxgb, ressummaryfeaturesxgb, normressummaryfeaturesxgb, ressummaryfeaturesxgb2, ressummaryfeaturesxgbv4, restseriesv5, resparamsv5, ressummaryfeaturesxgbv5, ressummaryfeaturesxgbv6
 
-datasets = 'all' # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
-runfunc = spock_featuresv2# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
+from training_data_spock import spock_features_clean
+
+datasets = ['resonant'] # either a list of folders ([resonant, TTVsystems/Kepler-431]) or 'all' or 'ttv' to expand
+runfunc = spock_features_clean# Look at top of func to use in training_data_functions.py to figure out what kwargs we have to set
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
 kwargs['Nout'] = 1000
+kwargs['trio'] = [[1,2,3]]
 #kwargs['window'] = 10
 
 foldername = runfunc.__name__
 for key, val in kwargs.items():
-    foldername += '{0}{1}'.format(key, val)
+    if key == 'trio':
+        foldername += 'trio'
+    else:
+        foldername += '{0}{1}'.format(key, val)
 
 gendatafolder = repopath + 'generate_training_data/'
 

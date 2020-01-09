@@ -10,11 +10,15 @@ runfunc = 'spock_features'#'orbtseries'#'orbsummaryfeaturesxgb'
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
 kwargs['Nout'] = 1000
+kwargs['trio'] = [[1,2,3]]
 #kwargs['window'] = 10
 
 foldername = runfunc
 for key, val in kwargs.items():
-    foldername += '{0}{1}'.format(key, val)
+    if key == 'trio':
+        foldername += 'trio'
+    else:
+        foldername += '{0}{1}'.format(key, val)
 
 def allsystems():
     return ['random', 'resonant'] + ttvsystems() + nonressystems()
