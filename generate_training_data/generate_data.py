@@ -18,7 +18,7 @@ runfunc = spock_features_clean# Look at top of func to use in training_data_func
 
 kwargs = OrderedDict()
 kwargs['Norbits'] = 1e4
-kwargs['Nout'] = 1000
+kwargs['Nout'] = 951
 kwargs['trio'] = [[1,2,3]]
 #kwargs['window'] = 10
 
